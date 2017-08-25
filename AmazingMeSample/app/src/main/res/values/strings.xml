@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Welcome To Amazing Me!</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+
+    <string-array name="menu_options">
+        <item>setting 1</item>
+        <item>setting 2</item>
+        <item>setting 3</item>
+        <item>setting 4</item>
+        <item>setting 5</item>
+        <item>setting 6</item>
+        <item>setting 7</item>
+        <item>setting 8</item>
+        <item>setting 9</item>
+        <item>setting 10</item>
+        <item>setting 11</item>
+        <item>setting 12</item>
+        <item>setting 13</item>
+        <item>setting 14</item>
+        <item>setting 15</item>
+        <item>setting 16</item>
+        <item>setting 17</item>
+        <item>setting 18</item>
+        <item>setting 19</item>
+        <item>setting 20</item>
+        <item>setting 21</item>
+        <item>setting 22</item>
+        <item>setting 23</item>
+    </string-array>
+
+</resources>
