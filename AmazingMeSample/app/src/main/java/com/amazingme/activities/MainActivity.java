@@ -1,9 +1,10 @@
-package com.amazingme.amazingmesample;
+package com.amazingme.activities;
 
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -41,6 +42,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        System.out.println("creating db");
+        amazingme.database.FireBase db = new amazingme.database.FireBase();
+
     }
 
     @Override

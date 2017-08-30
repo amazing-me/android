@@ -1,4 +1,4 @@
-package com.amazingme.amazingmesample;
+package com.amazingme.activities;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
