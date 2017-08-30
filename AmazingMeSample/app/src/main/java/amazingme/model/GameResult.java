@@ -1,7 +1,5 @@
 package amazingme.model;
 
-import java.util.Arrays;
-
 public class GameResult {
 
     private int score;

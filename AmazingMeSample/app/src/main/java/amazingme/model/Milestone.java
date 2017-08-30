@@ -2,7 +2,7 @@ package amazingme.model;
 
 public enum Milestone {
 
-    FOLLOWS_INSTRUCTIONS("milestone 1 descriptioin", 2, 4),
+    FOLLOWS_INSTRUCTIONS("milestone 1 description", 2, 4),
     MILESTONE_2;
 
     int appropriateAgeMinimum;
