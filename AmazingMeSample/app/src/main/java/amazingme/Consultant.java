@@ -16,6 +16,15 @@ public class Consultant {
     private User currentChildPlayer;
     private List<Game> availableGames; // shouldn't change unless the app is downloaded... fine to keep as array
 
+    public void loadInformation() {
+        if(informationNotLoaded()) {
+            this.learn();
+        }
+        else {
+            //do some stuff. 
+        }
+    }
+
     public void setCurrentChildPlayers(int index) {
         currentChildPlayer = children.get(index);
     }
@@ -34,6 +43,11 @@ public class Consultant {
 
     public void learn() {
         Loader.load(this);
+    }
+
+    private boolean informationNotLoaded() {
+        boolean notLoaded = false;
+
     }
 
 }
