@@ -1,13 +1,7 @@
 package amazingme.database;
 
-import android.util.Log;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-/**
- * Created by zacharyhalaby on 8/29/17.
- */
 
 public class FireBase {
 

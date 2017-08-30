@@ -1,13 +1,17 @@
 package amazingme.model;
 
-/**
- * Created by zacharyhalaby on 8/29/17.
- */
+import android.support.v7.app.AppCompatActivity;
 
-interface Game {
+public interface Game /*extends AppCompatActivity implements some kind of view, i believe*/ {
 
-    void takeover();
+    void takeover(); // should allow the game to take-over control... basically another activity
 
-    int resign();
+    GameResult resign(); // should return control to the main activity (or the last activity to have been active)
+
+    int score(); //should have a good way to score each interaction
+
+    Problem[] problemAreas(); //should implement finding problem areas that decreased score in each interaction
+
+    Milestone[] relatedMilestones();
 
 }
