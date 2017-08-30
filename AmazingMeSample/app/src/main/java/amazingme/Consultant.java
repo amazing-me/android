@@ -21,7 +21,7 @@ public class Consultant {
             this.learn();
         }
         else {
-            //do some stuff. 
+            //do some stuff.
         }
     }
 
@@ -47,7 +47,7 @@ public class Consultant {
 
     private boolean informationNotLoaded() {
         boolean notLoaded = false;
-
+        return notLoaded;
     }
 
 }
