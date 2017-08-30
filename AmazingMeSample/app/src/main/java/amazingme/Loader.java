@@ -5,15 +5,19 @@ import java.util.ArrayList;
 import java.lang.reflect.Constructor;
 
 import amazingme.games.GameList;
+import amazingme.games.ThreeTouchGame;
 import amazingme.model.Game;
 
 public class Loader {
 
     public Loader(){}
 
-    public static void LoadInitialData(Babysitter babysitter) {
+
+    public static void load(Consultant consultant) {
         //load data from the database and populate the babysitter info
         //can also load settings like which child was playing last or something
+        //FIXME make sure this will load game classes correctly later... not completely sure at this moement.
+        consultant.setAvailableGames(loadGames());
     }
 
     private static List<Game> loadGames() {
@@ -22,6 +26,7 @@ public class Loader {
         java.util.List<Game> games = new ArrayList<>();
         try {
             for (String className : classNames) {
+                System.out.println("loading class " + className);
                 Class<?> c = Class.forName(className);
                 Constructor<?> cons = c.getConstructor();
                 Object object = cons.newInstance();
@@ -31,6 +36,12 @@ public class Loader {
             System.out.println("Fix exception handling later");
         }
         return games;
+    }
+
+    private static List<Game> safeLoadGames() {
+        List<Game> safeLoadList = new ArrayList<>();
+        safeLoadList.add(new ThreeTouchGame());
+        return safeLoadList;
     }
 
     private static List<String> retrieveActiveGameNames() {

@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import amazingme.Consultant;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity
 
         System.out.println("creating db");
         amazingme.database.FireBase db = new amazingme.database.FireBase();
+        Consultant consultant = new Consultant();
+        consultant.learn();
 
     }
 

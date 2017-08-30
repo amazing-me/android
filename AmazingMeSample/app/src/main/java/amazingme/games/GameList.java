@@ -6,17 +6,19 @@ public enum GameList {
 
     private String classname;
     private boolean isActive;
+    private final String PACKAGE_NAME = "amazingme.games.";
 
     GameList(String className, boolean isActive) {
-        this.classname = className;
+        this.classname = PACKAGE_NAME + className;
         this.isActive = isActive;
     }
 
     public static java.util.List<String> asStringList() {
         java.util.List<String> list = new java.util.ArrayList<>();
         for(GameList game : GameList.values()) {
-            if(game.isActive)
-            list.add(game.getClass().getName() + game.classname);
+            if(game.isActive) { //don't worry about non-active games... unless maybe for beta users??
+                list.add(game.classname);
+            }
         }
         return list;
     }
