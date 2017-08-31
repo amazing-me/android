@@ -1,6 +1,8 @@
 package amazingme.model;
 
-public class GameResult {
+import java.io.Serializable;
+
+public class GameResult implements Serializable {
 
     private int score;
     private Problem[] problemAreas;

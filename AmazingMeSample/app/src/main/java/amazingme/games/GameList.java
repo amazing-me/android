@@ -1,5 +1,7 @@
 package amazingme.games;
 
+import amazingme.model.EnumeratedActivity;
+
 public enum GameList {
 
     THREE_TOUCH_GAME("ThreeTouchGame", true);
@@ -7,6 +9,7 @@ public enum GameList {
     private String classname;
     private boolean isActive;
     private final String PACKAGE_NAME = "amazingme.games.";
+    private EnumeratedActivity enumeratedActivity;
 
     GameList(String className, boolean isActive) {
         this.classname = PACKAGE_NAME + className;
@@ -26,5 +29,9 @@ public enum GameList {
     @Override
     public String toString() {
         return this.classname;
+    }
+
+    public EnumeratedActivity getActivityName() {
+        return this.enumeratedActivity;
     }
 }

@@ -1,7 +1,6 @@
 package com.amazingme.activities;
 
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -9,26 +8,21 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import amazingme.model.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
+import amazingme.model.EnumeratedActivity;
 
-public class MainActivity extends AmazingMeAppCompatActivity
+public class MainMenu extends AmazingMeAppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-        public EnumeratedActivity activityName() {
-            return EnumeratedActivity.MAIN_MENU;
-        }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("onCreate MainActivity, before super");
         super.onCreate(savedInstanceState);
-        System.out.println("onCreate MainActivity, after super");
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,11 +41,8 @@ public class MainActivity extends AmazingMeAppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //navigationView.setNavigationItemSelectedListener(this);
-
-        System.out.println("creating db");
-        amazingme.database.FireBase db = new amazingme.database.FireBase();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -67,7 +58,7 @@ public class MainActivity extends AmazingMeAppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
@@ -88,28 +79,21 @@ public class MainActivity extends AmazingMeAppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    //TODO -> rename these everywhere since they don't mean those things
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        ConstraintLayout mainLayout = (ConstraintLayout) findViewById(R.id.content_main);
-        ConstraintLayout menuLayout = (ConstraintLayout) findViewById(R.id.content_menu);
-
-
-        /*if (id == R.id.nav_camera) {
+        if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else*/ if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
-            mainLayout.setVisibility(View.VISIBLE);
-            menuLayout.setVisibility(View.GONE);
+
         } else if (id == R.id.nav_manage) {
-            mainLayout.setVisibility(View.GONE);
-            menuLayout.setVisibility(View.VISIBLE);
+
         } else if (id == R.id.nav_share) {
 
-        //} else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_send) {
 
         }
 
@@ -118,4 +102,8 @@ public class MainActivity extends AmazingMeAppCompatActivity
         return true;
     }
 
+    @Override
+    public EnumeratedActivity activityName() {
+        return EnumeratedActivity.MAIN_MENU;
+    }
 }
