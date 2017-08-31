@@ -21,10 +21,38 @@ public class ThreeTouchGame implements Game{
     }
 
     @Override
-    public GameResult resign() {
+    public GameResult resign(boolean gameWasCompleted) {
         //end activity you have (or clear data or whatever you need) and hand control back to the activity
         //you took control from
-        return null;
+
+        //TODO -> END THE ACTIVITY AND GIVE BACK CONTROL
+
+        if(gameWasCompleted) {
+            return new GameResult(this.score(), this.problemAreas());
+        } else {
+            //if they didn't finish the game, return results that indicate that so we can either keep track or ignore them.
+            return new GameResult(0, new Problem[] {Problem.DID_NOT_FINISH});
+        }
+    }
+
+    @Override
+    public void pause() {
+        //this will stop the timer and make the screen stop changing (if it's changing);
+    }
+
+    @Override
+    public void resume() {
+        //resume the timer and make the game continue
+    }
+
+    @Override
+    public void exitIncompleteGame() {
+        this.resign(false);
+    }
+
+    @Override
+    public void exitCompletedGame() {
+        this.resign(true);
     }
 
     @Override

@@ -6,7 +6,15 @@ public interface Game /*extends AppCompatActivity implements some kind of view, 
 
     void takeover(); // should allow the game to take-over control... basically another activity
 
-    GameResult resign(); // should return control to the main activity (or the last activity to have been active)
+    GameResult resign(boolean gameWasCompleted); // should return control to the main activity (or the last activity to have been active)
+
+    void pause();
+
+    void resume();
+
+    void exitIncompleteGame();
+
+    void exitCompletedGame();
 
     int score(); //should have a good way to score each interaction
 
