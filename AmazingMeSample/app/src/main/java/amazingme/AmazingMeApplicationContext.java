@@ -1,78 +1,62 @@
 package amazingme;
 
-import android.app.Application;
-import android.content.Context;
-
-import com.amazingme.activities.MainActivity;
+import org.json.JSONObject;
 
 import java.util.List;
 
 import amazingme.model.Child;
 import amazingme.model.AmazingMeGame;
-import amazingme.model.EnumeratedActivity;
 import amazingme.model.Parent;
 import amazingme.model.User;
 
 
-public class AmazingMeApplicationContext extends Application {
+public class AmazingMeApplicationContext {
 
-    public static ActivityManager activityManager;
+    private static User parentUser;
+    private static List<Child> children;
+    private static Child currentChildUser;
 
-    private static Context amazingMeAndroidContext;
+    private static List<AmazingMeGame> availableGames;
 
-    public static Context getAmazingMeAndroidContext() {
-        return amazingMeAndroidContext;
+    public static void loadContext(int parentId) {
+        JSONObject jsonObject = loadAmazingMeContextFromDatabase(parentId);
+        setParentUser(loadParentUserInformationFromContext(jsonObject));
+        setChildrenUsers(loadChildrenUserInformationFromContext(jsonObject));
+        setAvailableGames(loadAvailableGames(currentChildUser));
+        setCurrentChildPlayer(0);
     }
 
-    @Override
-    public void onCreate() {
-        System.out.println("Initializing Application Context");
-        activityManager = ActivityManager.getInstance();
-        amazingMeAndroidContext = getApplicationContext();
-        super.onCreate();
-        //activityManager.goTo(MainActivity.class);
-        System.out.println("\n\nFINISHED CONTEXT\n\n");
+    private static void setCurrentChildPlayer(int index) {
+        currentChildUser = children.get(index);
     }
 
-//    private User parentUser;
-//    private List<? extends User> children;
-//
-//    private User currentChildPlayer;
-//    private List<AmazingMeGame> availableGames; // shouldn't change unless the app is downloaded... fine to keep as array
-    /*public void loadInformation() {
-        if(informationNotLoaded()) {
-            this.learn();
-        }
-        else {
-            //do some stuff.
-        }
-    }*/
+    private static void setParentUser(Parent parent) {
+        parentUser = parent;
+    }
 
-//    public void setCurrentChildPlayers(int index) {
-//        currentChildPlayer = children.get(index);
-//    }
-//
-//    public ActivityManager getActivityManager() {return activityManager;}
-//
-//    public void setParentUser(Parent parent) {
-//        parentUser = parent;
-//    }
-//
-//    public void setChildren(List<Child> childList) {
-//        children = childList;
-//    }
-//
-//    public void setAvailableGames(List<AmazingMeGame> games) {
-//        availableGames = games;
-//    }
+    private static void setChildrenUsers(List<Child> childList) {
+        children = childList;
+    }
 
-    /*public void learn() {
-        Loader.load(this);
-    }*/
-
-//    private boolean informationNotLoaded() {
-//        boolean notLoaded = false;
-//        return notLoaded;
-//    }
+    private static void setAvailableGames(List<AmazingMeGame> games) {
+        availableGames = games;
+    }
+    //TODO -> implement
+    private static JSONObject loadAmazingMeContextFromDatabase(int parentId) {
+        return null;
+    }
+    //TODO -> implement
+    private static Parent loadParentUserInformationFromContext(JSONObject context) {
+        return null;
+    }
+    //TODO -> implement
+    private static List<Child> loadChildrenUserInformationFromContext(JSONObject context) {
+        return null;
+    }
+    //TODO -> implement
+    private static List<AmazingMeGame> loadAvailableGames(Child currentChildUser) {
+        //passing the child so we know how to filter.
+        return null;
+    }
 
 }

@@ -15,6 +15,4 @@ public abstract class User {
         this.userId = userId;
     }
 
-    public abstract void updateDatabase();
-
 }

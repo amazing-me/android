@@ -10,6 +10,7 @@ import java.util.List;
 
 import amazingme.games.ThreeTouchGame;
 
+//TODO -> clean this up... surely there is a way to format it better
 public enum EnumeratedActivity {
     //LOGIN,
     MAIN_MENU(MainMenu.class),

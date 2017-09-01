@@ -3,6 +3,7 @@ package amazingme.model;
 import android.support.v7.app.AppCompatActivity;
 
 import amazingme.ActivityManager;
+import amazingme.AmazingMeApplicationContext;
 
 public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
 

@@ -6,9 +6,4 @@ public class Parent extends User {
         super("", "", 0, 0);
     }
 
-
-    @Override
-    public void updateDatabase() {
-
-    }
 }

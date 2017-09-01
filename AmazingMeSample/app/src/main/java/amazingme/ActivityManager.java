@@ -1,10 +1,9 @@
 package amazingme;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
-import com.amazingme.activities.MainActivity;
 
 import java.util.HashMap;
 
@@ -27,25 +26,25 @@ public class ActivityManager extends AppCompatActivity {
         return instance;
     }
 
-    public void goTo(EnumeratedActivity enumeratedActivity, Bundle b) {
+    public void goTo(Context context, EnumeratedActivity enumeratedActivity, Bundle b) {
         if(!this.activityMap.containsKey(enumeratedActivity)) {
             this.addActivity(enumeratedActivity, enumeratedActivity.getAppCompatActivity());
         }
-        Intent switchActivity = new Intent(AmazingMeApplicationContext.getAmazingMeAndroidContext(), this.activityMap.get(enumeratedActivity));
+        Intent switchActivity = new Intent(context, this.activityMap.get(enumeratedActivity));
         switchActivity.putExtras(b);
         startActivity(switchActivity);
     }
 
-    public void goTo(EnumeratedActivity enumeratedActivity) {
+    public void goTo(Context context, EnumeratedActivity enumeratedActivity) {
         if(!this.activityMap.containsKey(enumeratedActivity)) {
             this.addActivity(enumeratedActivity, enumeratedActivity.getAppCompatActivity());
         }
-        Intent switchActivity = new Intent(AmazingMeApplicationContext.getAmazingMeAndroidContext(), this.activityMap.get(enumeratedActivity));
+        Intent switchActivity = new Intent(context, this.activityMap.get(enumeratedActivity));
         startActivity(switchActivity);
     }
 
-    public void goTo(Class<? extends AmazingMeAppCompatActivity> activity) {
-        Intent switchIntent = new Intent(AmazingMeApplicationContext.getAmazingMeAndroidContext(), activity);
+    public void goTo(Context context, Class<? extends AmazingMeAppCompatActivity> activity) {
+        Intent switchIntent = new Intent(context, activity);
         startActivity(switchIntent);
     }
 

@@ -5,9 +5,4 @@ public class Child extends User {
         super("", "", 0, 0);
     }
 
-
-    @Override
-    public void updateDatabase() {
-
-    }
 }
