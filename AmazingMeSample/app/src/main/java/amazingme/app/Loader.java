@@ -1,4 +1,4 @@
-package amazingme;
+package amazingme.app;
 
 public class Loader {
 

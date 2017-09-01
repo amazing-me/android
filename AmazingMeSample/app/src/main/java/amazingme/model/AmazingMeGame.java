@@ -3,11 +3,9 @@ package amazingme.model;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.amazingme.activities.MainMenu;
+import amazingme.activities.app.MainMenu;
 
-import amazingme.ActivityManager;
-
-public abstract class AmazingMeGame extends AmazingMeAppCompatActivity implements AmazingMeGameCompatible {
+public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
 
     public final void resign(boolean gameWasCompleted) {
         Bundle gameResultsBundle = new Bundle();

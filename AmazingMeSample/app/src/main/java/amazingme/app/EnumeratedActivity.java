@@ -1,14 +1,12 @@
-package amazingme.model;
+package amazingme.app;
 
-import android.support.v7.app.AppCompatActivity;
-
-import com.amazingme.activities.MainActivity;
-import com.amazingme.activities.MainMenu;
+import amazingme.activities.app.MainMenu;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import amazingme.games.ThreeTouchGame;
+import amazingme.activities.games.ThreeTouchGame;
+import amazingme.model.AmazingMeAppCompatActivity;
 
 //TODO -> clean this up... surely there is a way to format it better
 public enum EnumeratedActivity {

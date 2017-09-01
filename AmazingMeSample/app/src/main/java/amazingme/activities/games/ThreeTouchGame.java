@@ -1,8 +1,8 @@
-package amazingme.games;
+package amazingme.activities.games;
 
 import android.os.Bundle;
 
-import amazingme.model.EnumeratedActivity;
+import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeGame;
 import amazingme.model.GameResult;
 import amazingme.model.Milestone;

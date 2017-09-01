@@ -1,15 +1,13 @@
-package com.amazingme.activities;
+package amazingme.activities.app;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.amazingme.activities.R;
 
-import amazingme.AmazingMeApplicationContext;
+import amazingme.app.AmazingMeApplicationContext;
 import amazingme.model.AmazingMeAppCompatActivity;
-import amazingme.model.EnumeratedActivity;
+import amazingme.app.EnumeratedActivity;
 
 public class LandingPage extends AmazingMeAppCompatActivity {
 

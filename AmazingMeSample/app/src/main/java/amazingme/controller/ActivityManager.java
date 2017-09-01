@@ -1,4 +1,4 @@
-package amazingme;
+package amazingme.controller;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.util.HashMap;
 
-import amazingme.model.EnumeratedActivity;
+import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
 
 public class ActivityManager extends AppCompatActivity {

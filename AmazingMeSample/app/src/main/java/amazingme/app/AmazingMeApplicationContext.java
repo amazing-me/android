@@ -1,4 +1,4 @@
-package amazingme;
+package amazingme.app;
 
 import org.json.JSONObject;
 
