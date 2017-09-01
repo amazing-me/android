@@ -19,11 +19,11 @@ public class AmazingMeApplicationContext {
     private static List<AmazingMeGame> availableGames;
 
     public static void loadContext(int parentId) {
-        JSONObject jsonObject = loadAmazingMeContextFromDatabase(parentId);
+        /*JSONObject jsonObject = loadAmazingMeContextFromDatabase(parentId);
         setParentUser(loadParentUserInformationFromContext(jsonObject));
         setChildrenUsers(loadChildrenUserInformationFromContext(jsonObject));
         setAvailableGames(loadAvailableGames(currentChildUser));
-        setCurrentChildPlayer(0);
+        setCurrentChildPlayer(0);*/
     }
 
     private static void setCurrentChildPlayer(int index) {
