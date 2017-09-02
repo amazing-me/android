@@ -27,9 +27,7 @@ public class MainActivity extends AmazingMeAppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("onCreate MainActivity, before super");
         super.onCreate(savedInstanceState);
-        System.out.println("onCreate MainActivity, after super");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -52,7 +50,6 @@ public class MainActivity extends AmazingMeAppCompatActivity
         //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
 
-        System.out.println("creating db");
         amazingme.database.FireBase db = new amazingme.database.FireBase();
     }
 
