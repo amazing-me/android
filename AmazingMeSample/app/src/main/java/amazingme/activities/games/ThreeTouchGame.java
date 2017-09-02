@@ -12,6 +12,10 @@ import amazingme.model.Milestone;
 
 public class ThreeTouchGame extends AmazingMeGame {
 
+    public ThreeTouchGame() {
+        this.relatedMilestones = new Milestone[] {Milestone.FOLLOWS_INSTRUCTIONS};
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +32,4 @@ public class ThreeTouchGame extends AmazingMeGame {
         return EnumeratedActivity.THREE_TOUCH_GAME;
     }
 
-
-    private Milestone[] relatedMilestones = {
-            Milestone.FOLLOWS_INSTRUCTIONS
-    };
 }

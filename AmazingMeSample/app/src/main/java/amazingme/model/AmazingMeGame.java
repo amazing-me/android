@@ -7,6 +7,8 @@ import amazingme.activities.app.MainMenu;
 
 public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
 
+    protected Milestone[] relatedMilestones;
+
     public final void resign(boolean gameWasCompleted) {
         Bundle gameResultsBundle = new Bundle();
         if(gameWasCompleted) {
