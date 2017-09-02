@@ -1,5 +1,7 @@
 package amazingme.app;
 
+import com.google.firebase.database.DataSnapshot;
+
 import org.json.JSONObject;
 
 import java.util.List;
@@ -24,6 +26,8 @@ public class AmazingMeApplicationContext {
         setChildrenUsers(loadChildrenUserInformationFromContext(jsonObject));
         setAvailableGames(loadAvailableGames(currentChildUser));
         setCurrentChildPlayer(0);*/
+        //TODO -> probably need to make this happen with the loader... that way this class doesn't concern itself with HOW it does it, it just knows it happens.
+        //TODO -> we can do that when we've saved/loaded a datasnapshot to play around with... but then changes only happen in loader, not every class that needs loading of data
     }
 
     private static void setCurrentChildPlayer(int index) {
@@ -42,15 +46,15 @@ public class AmazingMeApplicationContext {
         availableGames = games;
     }
     //TODO -> implement
-    private static JSONObject loadAmazingMeContextFromDatabase(int parentId) {
+    private static DataSnapshot loadAmazingMeContextFromDatabase(int parentId) {
         return null;
     }
     //TODO -> implement
-    private static Parent loadParentUserInformationFromContext(JSONObject context) {
+    private static Parent loadParentUserInformationFromContext(DataSnapshot context) {
         return null;
     }
     //TODO -> implement
-    private static List<Child> loadChildrenUserInformationFromContext(JSONObject context) {
+    private static List<Child> loadChildrenUserInformationFromContext(DataSnapshot context) {
         return null;
     }
     //TODO -> implement
