@@ -1,4 +1,4 @@
-package com.amazingme.amazingmesample;
+package com.amazingme.activities;
 
 import org.junit.Test;
 

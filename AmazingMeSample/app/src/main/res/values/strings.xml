@@ -32,5 +32,6 @@
         <item>setting 22</item>
         <item>setting 23</item>
     </string-array>
+    <string name="title_activity_main_menu">MainMenu</string>
 
 </resources>

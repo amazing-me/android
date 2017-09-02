@@ -1,4 +1,4 @@
-package com.amazingme.amazingmesample;
+package amazingme.activities.app;
 
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -9,13 +9,21 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
+import com.amazingme.activities.R;
+
+import amazingme.app.EnumeratedActivity;
+import amazingme.model.AmazingMeAppCompatActivity;
+
+public class MainActivity extends AmazingMeAppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+        public EnumeratedActivity activityName() {
+            return EnumeratedActivity.MAIN_MENU;
+        }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +47,10 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //navigationView.setNavigationItemSelectedListener(this);
+
+        amazingme.database.FireBase db = new amazingme.database.FireBase();
     }
 
     @Override
