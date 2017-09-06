@@ -1,0 +1,4 @@
+#Wed Sep 06 02:22:06 EDT 2017
+base.0=/Users/zacharyhalaby/School/imp/amazing-me/app/build/intermediates/transforms/dex/release/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/Users/zacharyhalaby/School/imp/amazing-me/app/build/intermediates/transforms/dex/release/folders/1000/1f/main/classes.dex

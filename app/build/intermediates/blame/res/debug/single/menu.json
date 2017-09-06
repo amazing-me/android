@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/zacharyhalaby/School/imp/amazing-me/app/build/intermediates/res/merged/debug/menu/activity_main_drawer.xml",
+        "source": "/Users/zacharyhalaby/School/imp/amazing-me/app/src/main/res/menu/activity_main_drawer.xml"
+    },
+    {
+        "merged": "/Users/zacharyhalaby/School/imp/amazing-me/app/build/intermediates/res/merged/debug/menu/main_menu.xml",
+        "source": "/Users/zacharyhalaby/School/imp/amazing-me/app/src/main/res/menu/main_menu.xml"
+    },
+    {
+        "merged": "/Users/zacharyhalaby/School/imp/amazing-me/app/build/intermediates/res/merged/debug/menu/activity_main_menu_drawer.xml",
+        "source": "/Users/zacharyhalaby/School/imp/amazing-me/app/src/main/res/menu/activity_main_menu_drawer.xml"
+    },
+    {
+        "merged": "/Users/zacharyhalaby/School/imp/amazing-me/app/build/intermediates/res/merged/debug/menu/main.xml",
+        "source": "/Users/zacharyhalaby/School/imp/amazing-me/app/src/main/res/menu/main.xml"
+    }
+]

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/zacharyhalaby/School/imp/amazing-me/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/ic_launcher_round.png",
+        "source": "/Users/zacharyhalaby/School/imp/amazing-me/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/zacharyhalaby/School/imp/amazing-me/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/ic_launcher.png",
+        "source": "/Users/zacharyhalaby/School/imp/amazing-me/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    }
+]
