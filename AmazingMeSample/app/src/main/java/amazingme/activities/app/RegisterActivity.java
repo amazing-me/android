@@ -12,10 +12,6 @@ import amazingme.app.EnumeratedActivity;
 import amazingme.database.FirebaseHelper;
 import amazingme.model.AmazingMeAppCompatActivity;
 
-/**
- * Created by yudawinata on 8/31/17.
- */
-
 public class RegisterActivity extends AmazingMeAppCompatActivity {
     private EditText firstNameEditText, lastNameEditText, emailEditText, passwordEditText;
     private Button registerBtn, backBtn;

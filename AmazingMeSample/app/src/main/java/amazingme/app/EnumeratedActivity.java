@@ -1,5 +1,6 @@
 package amazingme.app;
 
+import amazingme.activities.app.LoginActivity;
 import amazingme.activities.app.MainMenu;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import amazingme.model.AmazingMeAppCompatActivity;
 
 //TODO -> clean this up... surely there is a way to format it better
 public enum EnumeratedActivity {
-    //LOGIN,
+    LOGIN(LoginActivity.class),
     MAIN_MENU(MainMenu.class),
     REGISTRATION(RegisterActivity.class),
     //GAME_SELECTION,

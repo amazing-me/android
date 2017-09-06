@@ -18,10 +18,6 @@ import amazingme.app.EnumeratedActivity;
 import amazingme.database.FirebaseHelper;
 import amazingme.model.AmazingMeAppCompatActivity;
 
-/**
- * Created by yudawinata on 8/31/17.
- */
-
 public class LoginActivity extends AmazingMeAppCompatActivity {
     private EditText emailEditText, passwordEditText;
     private Button loginBtn, registerBtn;
