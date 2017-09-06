@@ -1,5 +1,6 @@
 package amazingme.activities.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,7 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.amazingme.activities.R;
+import com.google.firebase.auth.FirebaseUser;
 
+import amazingme.database.FirebaseHelper;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.app.EnumeratedActivity;
 
@@ -22,6 +25,8 @@ public class MainMenu extends AmazingMeAppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        redirectIfNotSignedIn();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -96,6 +101,10 @@ public class MainMenu extends AmazingMeAppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.logout) {
+            FirebaseHelper.signOut();
+            final Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(loginIntent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -106,5 +115,15 @@ public class MainMenu extends AmazingMeAppCompatActivity
     @Override
     public EnumeratedActivity activityName() {
         return EnumeratedActivity.MAIN_MENU;
+    }
+
+    private void redirectIfNotSignedIn() {
+        final FirebaseUser firebaseUser = FirebaseHelper.getFirebaseUser();
+        final boolean isUserSignedIn = firebaseUser != null;
+        if (!isUserSignedIn) {
+            Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(loginIntent);
+        }
+
     }
 }

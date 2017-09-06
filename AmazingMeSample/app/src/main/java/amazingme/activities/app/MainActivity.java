@@ -49,8 +49,6 @@ public class MainActivity extends AmazingMeAppCompatActivity
 
         //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
-
-        amazingme.database.FireBase db = new amazingme.database.FireBase();
     }
 
     @Override
