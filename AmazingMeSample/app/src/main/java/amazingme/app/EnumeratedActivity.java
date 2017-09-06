@@ -1,17 +1,20 @@
 package amazingme.app;
 
+import amazingme.activities.app.LoginActivity;
 import amazingme.activities.app.MainMenu;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import amazingme.activities.app.RegisterActivity;
 import amazingme.activities.games.ThreeTouchGame;
 import amazingme.model.AmazingMeAppCompatActivity;
 
 //TODO -> clean this up... surely there is a way to format it better
 public enum EnumeratedActivity {
-    //LOGIN,
+    LOGIN(LoginActivity.class),
     MAIN_MENU(MainMenu.class),
+    REGISTRATION(RegisterActivity.class),
     //GAME_SELECTION,
     THREE_TOUCH_GAME("ThreeTouchGame", true, true, ThreeTouchGame.class);
 

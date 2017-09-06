@@ -21,6 +21,8 @@
         </activity>
         <activity android:name="amazingme.activities.games.ThreeTouchGame" />
         <activity android:name="amazingme.activities.app.MainActivity" />
+        <activity android:name="amazingme.activities.app.RegisterActivity" />
+        <activity android:name="amazingme.activities.app.LoginActivity" />
         <activity
             android:name="amazingme.activities.app.MainMenu"
             android:label="@string/title_activity_main_menu"
