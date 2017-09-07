@@ -27,7 +27,7 @@ public class LoginActivity extends AmazingMeAppCompatActivity {
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
         loginBtn = (Button) findViewById(R.id.loginBtn);
-        registerBtn = (Button) findViewById(R.id.registerBtn);
+        registerBtn = (Button) findViewById(R.id.nextBtn);
         forgotpasswordTextBtn = (TextView) findViewById(R.id.forgotpasswordBtn);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {

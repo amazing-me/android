@@ -14,7 +14,7 @@ import amazingme.model.AmazingMeAppCompatActivity;
 
 public class RegisterActivity extends AmazingMeAppCompatActivity {
     private EditText firstNameEditText, lastNameEditText, emailEditText, passwordEditText, doctorEmailEditText;
-    private Button registerBtn, backBtn;
+    private Button registerBtn, backBtn, nextBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +26,11 @@ public class RegisterActivity extends AmazingMeAppCompatActivity {
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
         doctorEmailEditText = (EditText) findViewById(R.id.doctorEmailEditText);
-        registerBtn = (Button) findViewById(R.id.registerBtn);
+        //registerBtn = (Button) findViewById(R.id.nextBtn);
         backBtn = (Button) findViewById(R.id.backBtn);
+        nextBtn = (Button) findViewById((R.id.nextBtn));
 
-        registerBtn.setOnClickListener(new View.OnClickListener() {
+        nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String firstName = firstNameEditText.getText().toString();
@@ -40,6 +41,14 @@ public class RegisterActivity extends AmazingMeAppCompatActivity {
                 FirebaseHelper.createNewUser(firstName, lastName, email, password, getApplicationContext());
             }
         });
+
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View view) {
+                                           final Intent backIntent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                                           startActivity(backIntent);
+                                       }
+                                   });
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
