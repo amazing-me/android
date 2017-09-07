@@ -13,12 +13,16 @@
         <!--android:layout_width="700dip"-->
         <!--android:layout_height="70dip" />-->
 
-    <TextView android:text = "Login" android:layout_width="wrap_content"
-        android:layout_height = "wrap_content"
-        android:id = "@+id/textview"
-        android:textSize = "35dp"
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="Amazing Me"
+        android:textColor="@color/amazing_me_blue"
+        android:textSize="35dp"
+        android:textStyle="bold" />
 
 
     <EditText

@@ -13,7 +13,7 @@ import amazingme.database.FirebaseHelper;
 import amazingme.model.AmazingMeAppCompatActivity;
 
 public class RegisterActivity extends AmazingMeAppCompatActivity {
-    private EditText firstNameEditText, lastNameEditText, emailEditText, passwordEditText;
+    private EditText firstNameEditText, lastNameEditText, emailEditText, passwordEditText, doctorEmailEditText;
     private Button registerBtn, backBtn;
 
     @Override
@@ -25,9 +25,9 @@ public class RegisterActivity extends AmazingMeAppCompatActivity {
         lastNameEditText = (EditText) findViewById(R.id.lastNameEditText);
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+        doctorEmailEditText = (EditText) findViewById(R.id.doctorEmailEditText);
         registerBtn = (Button) findViewById(R.id.registerBtn);
         backBtn = (Button) findViewById(R.id.backBtn);
-
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +36,7 @@ public class RegisterActivity extends AmazingMeAppCompatActivity {
                 String lastName = lastNameEditText.getText().toString();
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
+                // String doctoremail = doctorEmailEditText.getText().toString();
                 FirebaseHelper.createNewUser(firstName, lastName, email, password, getApplicationContext());
             }
         });
