@@ -89,11 +89,13 @@
         android:id="@+id/forgotpasswordBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Forgot Password?"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/passwordEditText"
         android:clickable="true"
         android:onClick="Forgot "
-        android:layout_below="@+id/passwordEditText"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="Forgot Password?"
+        android:textColor="@color/amazing_me_red"
+        android:textStyle="italic" />
 
 </RelativeLayout>
