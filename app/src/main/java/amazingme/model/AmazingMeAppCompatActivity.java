@@ -10,12 +10,11 @@ public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
     public abstract EnumeratedActivity activityName();
 
     public AmazingMeAppCompatActivity() {
-        this.registerWithActivityManager();
         System.out.println("creating: " + this.getClass().getName());
     }
 
-    public final void registerWithActivityManager() {
-        ActivityManager.getInstance().addActivity(activityName(), this.getClass());
+    public final void goTo(EnumeratedActivity activity) {
+        ActivityManager.getInstance().goTo(AmazingMeAppCompatActivity.this, activity);
     }
 
 }
