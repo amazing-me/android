@@ -1,4 +1,3 @@
-
 apply plugin: 'com.google.gms.google-services' // This line needs to be at the top
 apply plugin: 'com.android.application'
 
