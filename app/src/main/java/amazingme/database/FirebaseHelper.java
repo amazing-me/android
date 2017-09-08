@@ -18,8 +18,8 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
-import amazingme.activities.app.MainMenu;
 import amazingme.activities.util.DialogHelper;
+import amazingme.app.EnumeratedActivity;
 import amazingme.controller.ActivityManager;
 
 public class FirebaseHelper {
@@ -32,9 +32,7 @@ public class FirebaseHelper {
         return getFirebaseAuthInstance().getCurrentUser();
     }
 
-    public static void createNewUser(final String firstName,
-                                     final String lastName,
-                                     final String email,
+    public static void createNewUser(final String email,
                                      final String password,
                                      final Activity activity) {
         final FirebaseAuth mAuth = getFirebaseAuthInstance();
@@ -73,7 +71,7 @@ public class FirebaseHelper {
         final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(activity, registrationFailed);
 
         if (task.isSuccessful()) {
-            activityManager.goTo(activity, MainMenu.class);
+            activityManager.goTo(activity, EnumeratedActivity.MAIN_MENU);
         } else {
             String exceptionMessage;
             try {
@@ -103,7 +101,7 @@ public class FirebaseHelper {
         final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(activity, loginFailed);
 
         if (task.isSuccessful()) {
-            activityManager.goTo(activity, MainMenu.class);
+            activityManager.goTo(activity, EnumeratedActivity.MAIN_MENU);
         } else {
             String exceptionMessage;
             try {

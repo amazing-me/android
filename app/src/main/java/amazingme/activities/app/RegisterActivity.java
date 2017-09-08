@@ -9,11 +9,12 @@ import android.widget.EditText;
 import com.amazingme.activities.R;
 
 import amazingme.app.EnumeratedActivity;
+import amazingme.controller.ActivityManager;
 import amazingme.database.FirebaseHelper;
 import amazingme.model.AmazingMeAppCompatActivity;
 
 public class RegisterActivity extends AmazingMeAppCompatActivity {
-    private EditText firstNameEditText, lastNameEditText, emailEditText, passwordEditText;
+    private EditText emailEditText, passwordEditText;
     private Button registerBtn, backBtn;
 
     @Override
@@ -21,30 +22,26 @@ public class RegisterActivity extends AmazingMeAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        firstNameEditText = (EditText) findViewById(R.id.firstNameEditText);
-        lastNameEditText = (EditText) findViewById(R.id.lastNameEditText);
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
         registerBtn = (Button) findViewById(R.id.registerBtn);
         backBtn = (Button) findViewById(R.id.backBtn);
-
+        //nextBtn = (Button) findViewById((R.id.nextBtn));
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String firstName = firstNameEditText.getText().toString();
-                String lastName = lastNameEditText.getText().toString();
-                String email = emailEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-                FirebaseHelper.createNewUser(firstName, lastName, email, password, RegisterActivity.this);
+                final String email = emailEditText.getText().toString();
+                final String password = passwordEditText.getText().toString();
+                FirebaseHelper.createNewUser(email, password, RegisterActivity.this);
             }
         });
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent backIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(backIntent);
+                final ActivityManager activityManager = ActivityManager.getInstance();
+                activityManager.goTo(RegisterActivity.this, EnumeratedActivity.LOGIN);
             }
         });
     }
