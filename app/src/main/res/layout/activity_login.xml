@@ -60,14 +60,15 @@
         android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/passwordEditText"
         android:layout_marginLeft="61dp"
         android:layout_marginStart="61dp"
         android:layout_marginTop="27dp"
-        android:text="Login"
         android:backgroundTint="@color/amazing_me_blue"
-        android:layout_below="@+id/passwordEditText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="Login"
+        android:textColor="@color/amazing_me_white" />
 
     <Button
         android:id="@+id/nextBtn"
@@ -78,7 +79,9 @@
         android:layout_alignParentRight="true"
         android:layout_marginEnd="49dp"
         android:layout_marginRight="49dp"
-        android:text="Register" />
+        android:backgroundTint="@color/amazing_me_blue"
+        android:text="Register"
+        android:textColor="@color/amazing_me_white" />
 
     <ImageView
         android:id="@+id/imageView2"
