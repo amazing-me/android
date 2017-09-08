@@ -19,5 +19,4 @@ public class ActivityManager {
     public void goTo(final Activity context, final EnumeratedActivity endingActivity) {
         context.startActivity(new Intent(context, endingActivity.getAppCompatActivity()));
     }
-
 }

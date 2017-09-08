@@ -36,7 +36,7 @@ public class RegisterActivity extends AmazingMeAppCompatActivity {
                 String lastName = lastNameEditText.getText().toString();
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                FirebaseHelper.createNewUser(firstName, lastName, email, password, getApplicationContext());
+                FirebaseHelper.createNewUser(firstName, lastName, email, password, RegisterActivity.this);
             }
         });
 

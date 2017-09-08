@@ -2,19 +2,14 @@ package amazingme.activities.app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.amazingme.activities.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
 import amazingme.app.EnumeratedActivity;
+import amazingme.controller.ActivityManager;
 import amazingme.database.FirebaseHelper;
 import amazingme.model.AmazingMeAppCompatActivity;
 
@@ -46,13 +41,22 @@ public class LoginActivity extends AmazingMeAppCompatActivity {
                 final String email = emailEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
 
-                FirebaseHelper.loginUser(email, password, getApplicationContext());
+                FirebaseHelper.loginUser(email, password, LoginActivity.this);
             }
         });
     }
 
     @Override
     public EnumeratedActivity activityName() {
-        return EnumeratedActivity.REGISTRATION;
+        return EnumeratedActivity.LOGIN;
+    }
+
+    public void loginSuccessHandler() {
+        final ActivityManager activityManager = ActivityManager.getInstance();
+        activityManager.goTo(this, MainMenu.class);
+    }
+
+    public void loginFailureHandler() {
+
     }
 }

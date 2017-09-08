@@ -34,4 +34,37 @@
     </string-array>
     <string name="title_activity_main_menu">MainMenu</string>
 
+    <!-- Login/Registration -->
+    <string name="tag_login">
+        Login
+    </string>
+    <string name="dialog_login_failed">
+        Login failed.
+    </string>
+
+    <string name="tag_registration">
+        Login
+    </string>
+    <string name="dialog_registration_failed">
+        Login failed.
+    </string>
+
+    <string name="error_weak_password">
+        The given password is invalid. Please choose another password.
+    </string>
+    <string name="error_invalid_credentials">
+        Your username or password is incorrect. Please try again, or click "forgot password" to reset your password.
+    </string>
+    <string name="error_invalid_email">
+        This email is invalid. Please register with a valid email address (e.g. name@domain.com).
+    </string>
+    <string name="error_user_exists">
+        This email is already registered. Please login or reset your password .
+    </string>
+    <string name="error_unknown">
+        Unknown error encountered. Please try again later.
+    </string>
+
+
+
 </resources>
