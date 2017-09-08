@@ -1,14 +1,30 @@
-package amazingme.app;
+package amazingme.util;
+
+import com.google.firebase.database.DataSnapshot;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import amazingme.app.UserContext;
+import amazingme.model.AmazingMeGame;
 
 public class Loader {
 
     public Loader(){}
 
+    public static UserContext loadUserContextUsingDatabaseSnapshot(DataSnapshot databaseSnapshot) {
+        return databaseSnapshot.getValue(UserContext.class);
+    }
 
-    /*public static void load(AmazingMeApplicationContext amazingMeApplicationContext) {
-        //load data from the database and populate the babysitter info
-        //can also load settings like which child was playing last or something
-        //FIXME make sure this will load game classes correctly later... not completely sure at this moement.
+    public static Set<AmazingMeGame> loadAvailableGamesUsingUserContext(UserContext userContext) {
+        return new HashSet<>();
+    }
+
+
+    /*public static void loadAvailableGamesUsingUserContext(AmazingMeApplicationContext amazingMeApplicationContext) {
+        //loadAvailableGamesUsingUserContext data from the database and populate the babysitter info
+        //can also loadAvailableGamesUsingUserContext settings like which child was playing last or something
+        //FIXME make sure this will loadAvailableGamesUsingUserContext game classes correctly later... not completely sure at this moement.
         amazingMeApplicationContext.setAvailableGames(loadGames());
     }
 

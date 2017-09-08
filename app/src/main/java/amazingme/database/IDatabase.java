@@ -12,4 +12,6 @@ public interface IDatabase {
 
     DataSnapshot get(); //TODO -> I don't like this being hard coded..... but do it for now.
 
+    DataSnapshot getUserContext();
+
 }

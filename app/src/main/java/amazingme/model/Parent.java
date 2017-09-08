@@ -11,7 +11,7 @@ public class Parent extends User {
         startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null))); TODO -> this might be useful later and it'll be referenced here so i'm leaving it here.
     }*/
 
-    public Parent(String firstName, String lastName, String email, String pcpEmail, String pcpPhone, int userId) {
+    public Parent(String firstName, String lastName, String email, String pcpEmail, String pcpPhone, String userId) {
         //TODO -> do we need a check here...??
         super(firstName, lastName, userId);
         this.email = email;

@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import com.amazingme.activities.R;
 import com.google.firebase.auth.FirebaseUser;
 
+import amazingme.app.AmazingMeApplicationContext;
 import amazingme.database.FirebaseHelper;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.app.EnumeratedActivity;
@@ -102,9 +103,8 @@ public class MainMenu extends AmazingMeAppCompatActivity
         } else if (id == R.id.nav_send) {
 
         } else if (id == R.id.logout) {
-            FirebaseHelper.signOut();
-            final Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(loginIntent);
+            AmazingMeApplicationContext.session().end();
+            goTo(EnumeratedActivity.LOGIN);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -118,12 +118,15 @@ public class MainMenu extends AmazingMeAppCompatActivity
     }
 
     private void redirectIfNotSignedIn() {
-        final FirebaseUser firebaseUser = FirebaseHelper.getFirebaseUser();
+        if (!AmazingMeApplicationContext.session().isActive()) {
+            goTo(EnumeratedActivity.LOGIN);
+        }
+        /*final FirebaseUser firebaseUser = FirebaseHelper.getFirebaseUser();
         final boolean isUserSignedIn = firebaseUser != null;
         if (!isUserSignedIn) {
             Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(loginIntent);
-        }
+        }*/
 
     }
 }

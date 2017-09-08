@@ -8,7 +8,7 @@ public class Child extends User {
     private final int age;
     private final List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities;
 
-    public Child(String firstName, String lastName, Sex sex, int age, List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities, int userId) {
+    public Child(String firstName, String lastName, Sex sex, int age, List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities, String userId) {
         //TODO -> do we need a check here...??
         super(firstName, lastName, userId);
         this.sex = sex;
