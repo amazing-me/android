@@ -15,15 +15,15 @@ import amazingme.activities.app.MainMenu;
 
 public class FirebaseHelper {
 
-    public static FirebaseAuth getFirebaseAuthInstance() {
+    public FirebaseAuth getFirebaseAuthInstance() {
         return FirebaseAuth.getInstance();
     }
 
-    public static FirebaseUser getFirebaseUser() {
+    public FirebaseUser getFirebaseUser() {
         return getFirebaseAuthInstance().getCurrentUser();
     }
 
-    public static void createNewUser(final String firstName,
+    public void createNewUser(final String firstName,
                                      final String lastName,
                                      final String email,
                                      final String password,
@@ -49,7 +49,7 @@ public class FirebaseHelper {
                         });
     }
 
-    public static void loginUser(final String email, final String password, final Context context) {
+    public void loginUser(final String email, final String password, final Context context) {
         final FirebaseAuth mAuth = getFirebaseAuthInstance();
         // TODO: UI Feedback (dialog box?) for success/failure. Also would this function ever get called outside of LoginActivity?
         mAuth.signInWithEmailAndPassword(email, password)
@@ -70,7 +70,7 @@ public class FirebaseHelper {
                 });
     }
 
-    public static void signOut() {
+    public void signOut() {
         getFirebaseAuthInstance().signOut();
     }
 

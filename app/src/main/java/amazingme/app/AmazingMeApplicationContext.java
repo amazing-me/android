@@ -20,8 +20,8 @@ public class AmazingMeApplicationContext extends Application {
     private static List<AmazingMeGame> availableGames;
 
     AmazingMeApplicationContext() {
-        //session = AmazingMeFirebase.getInstance();
-        //database = AmazingMeFirebase.getInstance(); // once again, redundant now but could be very useful.
+        session = AmazingMeFirebase.getInstance();
+        database = AmazingMeFirebase.getInstance(); // once again, redundant now but could be very useful.
     }
 
 }
