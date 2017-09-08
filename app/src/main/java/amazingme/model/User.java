@@ -3,15 +3,13 @@ package amazingme.model;
 
 public abstract class User {
 
-    private int userId;
-    private int age;
-    private String firstName;
-    private String lastName;
+    private final int userId;
+    private final String firstName;
+    private final String lastName;
 
-    public User(String firstName, String lastName, int age, int userId) {
+    public User(String firstName, String lastName, int userId) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
         this.userId = userId;
     }
 
