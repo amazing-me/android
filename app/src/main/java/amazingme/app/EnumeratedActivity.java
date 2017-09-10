@@ -1,12 +1,12 @@
 package amazingme.app;
 
-import amazingme.activities.app.LoginActivity;
-import amazingme.activities.app.MainMenu;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import amazingme.activities.app.LoginActivity;
+import amazingme.activities.app.MainMenu;
 import amazingme.activities.app.RegisterActivity;
+import amazingme.activities.app.UserProfileActivity;
 import amazingme.activities.games.ThreeTouchGame;
 import amazingme.model.AmazingMeAppCompatActivity;
 
@@ -15,6 +15,7 @@ public enum EnumeratedActivity {
     LOGIN(LoginActivity.class),
     MAIN_MENU(MainMenu.class),
     REGISTRATION(RegisterActivity.class),
+    USERPROFILE(UserProfileActivity.class),
     //GAME_SELECTION,
     THREE_TOUCH_GAME("ThreeTouchGame", true, true, ThreeTouchGame.class);
 
