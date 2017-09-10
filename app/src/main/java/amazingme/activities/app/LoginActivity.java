@@ -16,7 +16,7 @@ import amazingme.model.AmazingMeAppCompatActivity;
 public class LoginActivity extends AmazingMeAppCompatActivity {
     private EditText emailEditText, passwordEditText;
     private Button loginBtn, registerBtn;
-    private TextView forgotpasswordTextBtn;
+    private TextView forgotPasswordTextBtn;
 
 
     @Override
@@ -28,7 +28,7 @@ public class LoginActivity extends AmazingMeAppCompatActivity {
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
         loginBtn = (Button) findViewById(R.id.loginBtn);
         registerBtn = (Button) findViewById(R.id.registerBtn);
-        forgotpasswordTextBtn = (TextView) findViewById(R.id.forgotpasswordBtn);
+        forgotPasswordTextBtn = (TextView) findViewById(R.id.forgotpasswordBtn);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +48,7 @@ public class LoginActivity extends AmazingMeAppCompatActivity {
             }
         });
 
-        forgotpasswordTextBtn.setOnClickListener(new View.OnClickListener() {
+        forgotPasswordTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Intent registerIntent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
