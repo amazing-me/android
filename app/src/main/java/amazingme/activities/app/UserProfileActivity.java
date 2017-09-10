@@ -8,18 +8,20 @@ import android.widget.Button;
 
 import com.amazingme.activities.R;
 
+import static com.amazingme.activities.R.id.backToRegisterBtn;
+
 public class UserProfileActivity extends AppCompatActivity {
 
-    private Button backtoRBtn;
+    private Button backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        backtoRBtn = (Button) findViewById(R.id.backtoRBtn);
+        backBtn = (Button) findViewById(backToRegisterBtn);
 
-        backtoRBtn.setOnClickListener(new View.OnClickListener() {
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Intent backIntent = new Intent(getApplicationContext(), RegisterActivity.class);
