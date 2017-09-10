@@ -2,13 +2,15 @@ package amazingme.activities.app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
 import com.amazingme.activities.R;
 
-public class ForgotPasswordActivity extends AppCompatActivity {
+import amazingme.app.EnumeratedActivity;
+import amazingme.model.AmazingMeAppCompatActivity;
+
+public class ForgotPasswordActivity extends AmazingMeAppCompatActivity {
 
     private Button backFPBtn, sendPBtn;
 
@@ -36,5 +38,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public EnumeratedActivity activityName() {
+        return EnumeratedActivity.FORGOTPASSWORD;
     }
 }
