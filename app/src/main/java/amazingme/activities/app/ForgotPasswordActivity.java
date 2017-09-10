@@ -10,19 +10,22 @@ import com.amazingme.activities.R;
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
 
+import static com.amazingme.activities.R.id.backFPBtn;
+import static com.amazingme.activities.R.id.sendPBtn;
+
 public class ForgotPasswordActivity extends AmazingMeAppCompatActivity {
 
-    private Button backFPBtn, sendPBtn;
+    private Button backBtn, sendBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        backFPBtn = (Button) findViewById(R.id.backFPBtn);
-        sendPBtn = (Button) findViewById(R.id.sendPBtn);
+        backBtn = (Button) findViewById(backFPBtn);
+        sendBtn = (Button) findViewById(sendPBtn);
 
-        backFPBtn.setOnClickListener(new View.OnClickListener() {
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Intent backIntent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -30,7 +33,7 @@ public class ForgotPasswordActivity extends AmazingMeAppCompatActivity {
             }
         });
 
-        sendPBtn.setOnClickListener(new View.OnClickListener() {
+        sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Intent backIntent = new Intent(getApplicationContext(), LoginActivity.class);
