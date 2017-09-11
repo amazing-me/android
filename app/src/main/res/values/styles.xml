@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"> //Dark instead of No
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/amazing_me_blue</item>
         <item name="colorPrimaryDark">@color/amazing_me_blue_and_white</item>
