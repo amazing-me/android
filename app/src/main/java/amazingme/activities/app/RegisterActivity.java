@@ -40,8 +40,7 @@ public class RegisterActivity extends AmazingMeAppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final ActivityManager activityManager = ActivityManager.getInstance();
-                activityManager.goTo(RegisterActivity.this, EnumeratedActivity.LOGIN);
+                ActivityManager.getInstance().goTo(RegisterActivity.this, EnumeratedActivity.LOGIN);
             }
         });
     }

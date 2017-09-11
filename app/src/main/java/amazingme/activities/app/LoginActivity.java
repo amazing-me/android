@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.amazingme.activities.R;
 
 import amazingme.app.EnumeratedActivity;
+import amazingme.controller.ActivityManager;
 import amazingme.database.FirebaseHelper;
 import amazingme.model.AmazingMeAppCompatActivity;
 
@@ -51,8 +52,7 @@ public class LoginActivity extends AmazingMeAppCompatActivity {
         forgotPasswordTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent registerIntent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
-                startActivity(registerIntent);
+                ActivityManager.getInstance().goTo(LoginActivity.this, EnumeratedActivity.FORGOTPASSWORD);
             }
         });
     }

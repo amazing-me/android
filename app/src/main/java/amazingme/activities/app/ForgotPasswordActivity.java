@@ -8,6 +8,7 @@ import android.widget.Button;
 import com.amazingme.activities.R;
 
 import amazingme.app.EnumeratedActivity;
+import amazingme.controller.ActivityManager;
 import amazingme.model.AmazingMeAppCompatActivity;
 
 import static com.amazingme.activities.R.id.backFPBtn;
@@ -28,16 +29,14 @@ public class ForgotPasswordActivity extends AmazingMeAppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent backIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(backIntent);
+                ActivityManager.getInstance().goTo(ForgotPasswordActivity.this, EnumeratedActivity.LOGIN);
             }
         });
 
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent backIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(backIntent);
+                // TODO: Implement Forgot Password Functionality
             }
         });
 

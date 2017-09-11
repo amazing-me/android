@@ -62,62 +62,76 @@ public class FirebaseHelper {
         getFirebaseAuthInstance().signOut();
     }
 
+
+
+
     private static void onCompleteRegistrationHandler(final Activity activity, final Task<AuthResult> task) {
-        final ActivityManager activityManager = ActivityManager.getInstance();
         final Resources res = activity.getResources();
 
         final String registrationFailed = res.getString(R.string.dialog_registration_failed);
-        final String registrationTag = res.getString(R.string.tag_registration);
         final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(activity, registrationFailed);
 
         if (task.isSuccessful()) {
-            activityManager.goTo(activity, EnumeratedActivity.MAIN_MENU);
+            ActivityManager.getInstance().goTo(activity, EnumeratedActivity.MAIN_MENU);
         } else {
-            String exceptionMessage;
-            try {
-                throw task.getException();
-            } catch (FirebaseAuthEmailException e) {
-                exceptionMessage = res.getString(R.string.error_invalid_email);
-            } catch (FirebaseAuthUserCollisionException e) {
-                exceptionMessage = res.getString(R.string.error_user_exists);
-            } catch (FirebaseAuthWeakPasswordException e) {
-                exceptionMessage = res.getString(R.string.error_weak_password);
-            } catch (Exception e) {
-                Log.e(registrationTag, e.getMessage());
-                exceptionMessage = res.getString(R.string.error_unknown);
-            }
+            final String exceptionMessage = getRegistrationExceptionMessage(task.getException(), res);
 
             alertDialog.setMessage(exceptionMessage);
             alertDialog.show();
         }
     }
 
+    private static String getRegistrationExceptionMessage(final Exception exception, final Resources res) {
+        final String registrationTag = res.getString(R.string.tag_registration);
+        String exceptionMessage;
+
+        try {
+            throw exception;
+        } catch (FirebaseAuthEmailException e) {
+            exceptionMessage = res.getString(R.string.error_invalid_email);
+        } catch (FirebaseAuthUserCollisionException e) {
+            exceptionMessage = res.getString(R.string.error_user_exists);
+        } catch (FirebaseAuthWeakPasswordException e) {
+            exceptionMessage = res.getString(R.string.error_weak_password);
+        } catch (Exception e) {
+            Log.e(registrationTag, e.getMessage());
+            exceptionMessage = res.getString(R.string.error_unknown);
+        }
+        return exceptionMessage;
+    }
+
     private static void onCompleteLoginHandler(final Activity activity, final Task<AuthResult> task) {
-        final ActivityManager activityManager = ActivityManager.getInstance();
         final Resources res = activity.getResources();
 
         final String loginFailed = res.getString(R.string.dialog_login_failed);
-        final String loginTag = res.getString(R.string.tag_login);
         final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(activity, loginFailed);
 
         if (task.isSuccessful()) {
-            activityManager.goTo(activity, EnumeratedActivity.MAIN_MENU);
+            ActivityManager.getInstance().goTo(activity, EnumeratedActivity.MAIN_MENU);
         } else {
-            String exceptionMessage;
-            try {
-                throw task.getException();
-            } catch (FirebaseAuthInvalidCredentialsException
-                    | FirebaseAuthEmailException
-                    | FirebaseAuthInvalidUserException e) {
-                exceptionMessage = res.getString(R.string.error_invalid_credentials);
-            } catch (Exception e) {
-                Log.e(loginTag, e.getMessage());
-                exceptionMessage = res.getString(R.string.error_unknown);
-            }
+            final String exceptionMessage = getLoginExceptionMessage(task.getException(), res);
 
             alertDialog.setMessage(exceptionMessage);
             alertDialog.show();
         }
+    }
+
+    private static String getLoginExceptionMessage(final Exception exception, final Resources res) {
+        final String loginTag = res.getString(R.string.tag_login);
+        String exceptionMessage;
+
+        try {
+            throw exception;
+        } catch (FirebaseAuthInvalidCredentialsException
+                | FirebaseAuthEmailException
+                | FirebaseAuthInvalidUserException e) {
+            exceptionMessage = res.getString(R.string.error_invalid_credentials);
+        } catch (Exception e) {
+            Log.e(loginTag, e.getMessage());
+            exceptionMessage = res.getString(R.string.error_unknown);
+        }
+
+        return exceptionMessage;
     }
 
 }
