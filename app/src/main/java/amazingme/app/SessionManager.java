@@ -1,15 +1,15 @@
 package amazingme.app;
 
-import android.app.Activity;
-import android.content.Context;
+import amazingme.controller.LoginHandlingActivity;
+import amazingme.controller.RegistrationHandlingActivity;
 
 public interface SessionManager {
 
-    boolean load(String email, String password, Context context);
+    void load(final String email, final String password, final LoginHandlingActivity handler);
 
-    boolean end();
+    void end();
 
-    boolean create(String email, String password, Context context);
+    void create(final String email, final String password, final RegistrationHandlingActivity handler);
 
     boolean isActive();
 }

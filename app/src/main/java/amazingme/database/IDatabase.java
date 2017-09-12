@@ -2,9 +2,11 @@ package amazingme.database;
 
 import com.google.firebase.database.DataSnapshot;
 
+import amazingme.app.UserContext;
+
 public interface IDatabase {
 
-    void set();
+    void set(UserContext input);
 
     void update();
 

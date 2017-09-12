@@ -13,7 +13,7 @@ import amazingme.model.Milestone;
 public class ThreeTouchGame extends AmazingMeGame {
 
     public ThreeTouchGame() {
-        this.relatedMilestones = new Milestone[] {Milestone.FOLLOWS_INSTRUCTIONS};
+        this.relatedMilestones = new Milestone[] {Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_OR_UNDER};
     }
 
     @Override

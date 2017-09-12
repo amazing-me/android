@@ -103,7 +103,7 @@ public class MainMenu extends AmazingMeAppCompatActivity
         } else if (id == R.id.nav_send) {
 
         } else if (id == R.id.logout) {
-            AmazingMeApplicationContext.session().end();
+            AmazingMeApplicationContext.endSession();
             goTo(EnumeratedActivity.LOGIN);
         }
 
@@ -118,15 +118,8 @@ public class MainMenu extends AmazingMeAppCompatActivity
     }
 
     private void redirectIfNotSignedIn() {
-        if (!AmazingMeApplicationContext.session().isActive()) {
+        if (!AmazingMeApplicationContext.hasActiveSession()) {
             goTo(EnumeratedActivity.LOGIN);
         }
-        /*final FirebaseUser firebaseUser = FirebaseHelper.getFirebaseUser();
-        final boolean isUserSignedIn = firebaseUser != null;
-        if (!isUserSignedIn) {
-            Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(loginIntent);
-        }*/
-
     }
 }

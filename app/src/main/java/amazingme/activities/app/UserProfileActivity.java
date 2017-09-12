@@ -26,8 +26,7 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent backIntent = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(backIntent);
+                goTo(EnumeratedActivity.REGISTRATION);
             }
         });
     }
