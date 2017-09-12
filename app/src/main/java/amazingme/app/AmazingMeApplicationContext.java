@@ -4,6 +4,7 @@ import android.app.Application;
 
 import java.util.Set;
 
+import amazingme.controller.ActivityManager;
 import amazingme.controller.LoginHandlingActivity;
 import amazingme.controller.RegistrationHandlingActivity;
 import amazingme.database.FirebaseHelper;
@@ -20,6 +21,11 @@ public class AmazingMeApplicationContext extends Application {
     private static final SessionManager session;
     private static final IDatabase database; //for us, session and database are the same object (the firebase helper) but i want the option to possible let them be different.
     private static Set<AmazingMeGame> availableGames;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 
     static {
         session = FirebaseHelper.getInstance();
