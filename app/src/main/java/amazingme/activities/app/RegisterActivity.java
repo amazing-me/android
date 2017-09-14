@@ -37,10 +37,10 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
 
     @Override
     public void bindToUserInterface() {
-        emailEditText = (EditText) findViewById(R.id.emailEditText);
-        passwordEditText = (EditText) findViewById(R.id.passwordEditText);
-        registerBtn = (Button) findViewById(R.id.registerBtn);
-        backBtn = (Button) findViewById(R.id.backBtn);
+        emailEditText = (EditText) findViewById(R.id.login_activity_email_edit_text);
+        passwordEditText = (EditText) findViewById(R.id.register_activity_password_edit_text);
+        registerBtn = (Button) findViewById(R.id.register_activity_register_button);
+        backBtn = (Button) findViewById(R.id.register_activity_back_button);
         //nextBtn = (Button) findViewById((R.id.nextBtn));
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
@@ -48,19 +48,19 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
             public void onClick(View v) {
                 final String email = emailEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
-
-                AmazingMeApplicationContext.createNewSession(email, password, RegisterActivity.this);
-
-                UserContext testUserContext = new UserContext();
-                testUserContext.currentChildUser = 0;
-                testUserContext.parent = new Parent("PARENT FIRST NAME", "PARENT LAST NAME", "allybmall@gmail.com", "", "");
-                Child child1 = new Child("CHILD 1 FIRST NAME", "CHILD 1 LAST NAME", Child.Sex.MALE, 3, null);
-                Child child2 = new Child("CHILD 2 FIRST NAME", "CHILD 2 LAST NAME", Child.Sex.FEMALE, 4, null);
-                testUserContext.children.put(0, child1);
-                testUserContext.children.put(1, child2);
-                testUserContext.gameResults.add(0, new GameResult(94, new Problem[] {Problem.DID_NOT_FINISH}));
-                AmazingMeApplicationContext.setUserContext(testUserContext);
-                AmazingMeApplicationContext.saveContext();
+//
+//                AmazingMeApplicationContext.createNewSession(email, password, RegisterActivity.this);
+//
+//                UserContext testUserContext = new UserContext();
+//                testUserContext.currentChildUser = 0;
+//                testUserContext.parent = new Parent("PARENT FIRST NAME", "PARENT LAST NAME", "allybmall@gmail.com", "", "");
+//                Child child1 = new Child("CHILD 1 FIRST NAME", "CHILD 1 LAST NAME", Child.Sex.MALE, 3, null);
+//                Child child2 = new Child("CHILD 2 FIRST NAME", "CHILD 2 LAST NAME", Child.Sex.FEMALE, 4, null);
+//                testUserContext.children.put(0, child1);
+//                testUserContext.children.put(1, child2);
+//                testUserContext.gameResults.add(0, new GameResult(94, new Problem[] {Problem.DID_NOT_FINISH}));
+//                AmazingMeApplicationContext.setUserContext(testUserContext);
+//                AmazingMeApplicationContext.saveContext();
 
             }
         });

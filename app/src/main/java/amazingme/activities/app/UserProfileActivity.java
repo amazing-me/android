@@ -1,7 +1,5 @@
 package amazingme.activities.app;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
@@ -9,8 +7,6 @@ import com.amazingme.activities.R;
 
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
-
-import static com.amazingme.activities.R.id.backToRegisterBtn;
 
 public class UserProfileActivity extends AmazingMeAppCompatActivity {
 
@@ -25,7 +21,7 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
 
     @Override
     public void bindToUserInterface() {
-        backBtn = (Button) findViewById(backToRegisterBtn);
+        backBtn = (Button) findViewById(R.id.user_profile_back_button);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
