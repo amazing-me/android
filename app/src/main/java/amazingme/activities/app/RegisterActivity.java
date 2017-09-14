@@ -2,33 +2,26 @@ package amazingme.activities.app;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.amazingme.activities.R;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
-import java.util.HashMap;
-
-import amazingme.activities.games.ThreeTouchGame;
 import amazingme.activities.util.DialogHelper;
-import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
-import amazingme.app.UserContext;
-import amazingme.controller.RegistrationHandlingActivity;
+import amazingme.database.ISession;
 import amazingme.model.AmazingMeAppCompatActivity;
-import amazingme.model.Child;
-import amazingme.model.GameResult;
-import amazingme.model.Parent;
-import amazingme.model.Problem;
 
-public class RegisterActivity extends AmazingMeAppCompatActivity implements RegistrationHandlingActivity {
+public class RegisterActivity extends AmazingMeAppCompatActivity {
+
     private EditText emailEditText, passwordEditText;
     private Button registerBtn, backBtn;
 
@@ -46,21 +39,38 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email = emailEditText.getText().toString();
-                final String password = passwordEditText.getText().toString();
+            final String email = emailEditText.getText().toString();
+            final String password = passwordEditText.getText().toString();
 
-                AmazingMeApplicationContext.createNewSession(email, password, RegisterActivity.this);
+            getContext().getSessionManager().registerSession(email, password, "First Last")
+            .addOnSuccessListener(new OnSuccessListener<ISession>() {
+                @Override
+                public void onSuccess(ISession iSession) {
+                    goTo(EnumeratedActivity.MAIN_MENU);
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    final String registrationFailed = RegisterActivity.this.getResources().getString(R.string.dialog_registration_failed);
+                    final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(RegisterActivity.this, registrationFailed);
+                    final String exceptionMessage = getRegistrationExceptionMessage(e);
 
-                UserContext testUserContext = new UserContext();
-                testUserContext.currentChildUser = 0;
-                testUserContext.parent = new Parent("PARENT FIRST NAME", "PARENT LAST NAME", "allybmall@gmail.com", "", "");
-                Child child1 = new Child("CHILD 1 FIRST NAME", "CHILD 1 LAST NAME", Child.Sex.MALE, 3, null);
-                Child child2 = new Child("CHILD 2 FIRST NAME", "CHILD 2 LAST NAME", Child.Sex.FEMALE, 4, null);
-                testUserContext.children.put(0, child1);
-                testUserContext.children.put(1, child2);
-                testUserContext.gameResults.add(0, new GameResult(94, new Problem[] {Problem.DID_NOT_FINISH}));
-                AmazingMeApplicationContext.setUserContext(testUserContext);
-                AmazingMeApplicationContext.saveContext();
+                    alertDialog.setMessage(exceptionMessage);
+                    alertDialog.show();
+                }
+            });
+
+//                UserContext testUserContext = new UserContext();
+//                testUserContext.currentChildUser = 0;
+//                testUserContext.parent = new Parent("PARENT FIRST NAME", "PARENT LAST NAME", "allybmall@gmail.com", "", "");
+//                Child child1 = new Child("CHILD 1 FIRST NAME", "CHILD 1 LAST NAME", Child.Sex.MALE, 3, null);
+//                Child child2 = new Child("CHILD 2 FIRST NAME", "CHILD 2 LAST NAME", Child.Sex.FEMALE, 4, null);
+//                testUserContext.children.put(0, child1);
+//                testUserContext.children.put(1, child2);
+//                testUserContext.gameResults.add(0, new GameResult(94, new Problem[] {Problem.DID_NOT_FINISH}));
+//                AmazingMeApplicationContext.setUserContext(testUserContext);
+//                AmazingMeApplicationContext.saveContext();
 
             }
         });
@@ -76,21 +86,6 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
     @Override
     public EnumeratedActivity activityName() {
         return EnumeratedActivity.REGISTRATION;
-    }
-
-    @Override
-    public void handle(Task<AuthResult> task) {
-        final String registrationFailed = this.getResources().getString(R.string.dialog_registration_failed);
-        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(this, registrationFailed);
-
-        if (task.isSuccessful()) {
-            goTo(EnumeratedActivity.MAIN_MENU);
-        } else {
-            final String exceptionMessage = getRegistrationExceptionMessage(task.getException());
-
-            alertDialog.setMessage(exceptionMessage);
-            alertDialog.show();
-        }
     }
 
     private String getRegistrationExceptionMessage(final Exception exception) {
