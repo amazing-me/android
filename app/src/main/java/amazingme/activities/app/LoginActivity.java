@@ -1,9 +1,6 @@
 package amazingme.activities.app;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.res.Resources;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import amazingme.activities.util.DialogHelper;
 import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
-import amazingme.controller.ActivityManager;
 import amazingme.controller.LoginHandlingActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
 
@@ -30,16 +26,20 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements LoginHa
     private TextView forgotPasswordTextBtn;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    public LoginActivity() { super(R.layout.activity_login); }
 
-        emailEditText = (EditText) findViewById(R.id.emailEditText);
-        passwordEditText = (EditText) findViewById(R.id.passwordEditText);
-        loginBtn = (Button) findViewById(R.id.loginBtn);
-        registerBtn = (Button) findViewById(R.id.registerBtn);
-        forgotPasswordTextBtn = (TextView) findViewById(R.id.forgotpasswordBtn);
+    @Override
+    public EnumeratedActivity activityName() {
+        return EnumeratedActivity.LOGIN;
+    }
+
+    @Override
+    public void bindToUserInterface() {
+        emailEditText = (EditText) findViewById(R.id.login_activity_email_edit_text);
+        passwordEditText = (EditText) findViewById(R.id.login_activity_password_edit_text);
+        loginBtn = (Button) findViewById(R.id.login_activity_login_button);
+        registerBtn = (Button) findViewById(R.id.login_activity_register_button);
+        forgotPasswordTextBtn = (TextView) findViewById(R.id.login_activity_forgot_password_button);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,15 +61,9 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements LoginHa
         forgotPasswordTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goTo(EnumeratedActivity.FORGOTPASSWORD);
+                goTo(EnumeratedActivity.FORGOT_PASSWORD);
             }
         });
-
-    }
-
-    @Override
-    public EnumeratedActivity activityName() {
-        return EnumeratedActivity.LOGIN;
     }
 
     @Override

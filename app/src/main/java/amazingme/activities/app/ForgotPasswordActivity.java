@@ -1,6 +1,5 @@
 package amazingme.activities.app;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,11 +12,17 @@ public class ForgotPasswordActivity extends AmazingMeAppCompatActivity {
 
     private Button backBtn, sendBtn;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password);
+    public ForgotPasswordActivity() {
+        super(R.layout.activity_forgot_password);
+    }
 
+    @Override
+    public EnumeratedActivity activityName() {
+        return EnumeratedActivity.FORGOT_PASSWORD;
+    }
+
+    @Override
+    public void bindToUserInterface() {
         backBtn = (Button) findViewById(R.id.forgot_password_back_button);
         sendBtn = (Button) findViewById(R.id.forgot_password_send_button);
 
@@ -35,10 +40,5 @@ public class ForgotPasswordActivity extends AmazingMeAppCompatActivity {
             }
         });
 
-    }
-
-    @Override
-    public EnumeratedActivity activityName() {
-        return EnumeratedActivity.FORGOTPASSWORD;
     }
 }

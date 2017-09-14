@@ -17,7 +17,7 @@ public enum EnumeratedActivity {
     MAIN_MENU(MainMenu.class),
     REGISTRATION(RegisterActivity.class),
     USERPROFILE(UserProfileActivity.class),
-    FORGOTPASSWORD(ForgotPasswordActivity.class),
+    FORGOT_PASSWORD(ForgotPasswordActivity.class),
     //GAME_SELECTION,
     THREE_TOUCH_GAME("ThreeTouchGame", true, true, ThreeTouchGame.class);
 
