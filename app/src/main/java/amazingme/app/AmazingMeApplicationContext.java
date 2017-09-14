@@ -24,13 +24,6 @@ public class AmazingMeApplicationContext extends Application {
 
     private static AmazingMeApplicationContext instance;
 
-    public static AmazingMeApplicationContext getInstance() {
-        if (instance == null) {
-            instance = new AmazingMeApplicationContext();
-        }
-        return instance;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();

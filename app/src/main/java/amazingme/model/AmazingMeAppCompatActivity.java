@@ -32,8 +32,4 @@ public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
         ActivityManager.getInstance().goTo(AmazingMeAppCompatActivity.this, activity);
     }
 
-    public final AmazingMeApplicationContext context() {
-        return AmazingMeApplicationContext.getInstance();
-    }
-
 }
