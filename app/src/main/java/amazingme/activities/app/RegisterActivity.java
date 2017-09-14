@@ -37,7 +37,7 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
 
     @Override
     public void bindToUserInterface() {
-        emailEditText = (EditText) findViewById(R.id.login_activity_email_edit_text);
+        emailEditText = (EditText) findViewById(R.id.register_activity_email_edit_text);
         passwordEditText = (EditText) findViewById(R.id.register_activity_password_edit_text);
         registerBtn = (Button) findViewById(R.id.register_activity_register_button);
         backBtn = (Button) findViewById(R.id.register_activity_back_button);
