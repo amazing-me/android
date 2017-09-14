@@ -16,11 +16,15 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
 
     private Button backBtn;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+    public UserProfileActivity() { super(R.layout.activity_user_profile); }
 
+    @Override
+    public EnumeratedActivity activityName() {
+        return EnumeratedActivity.USERPROFILE;
+    }
+
+    @Override
+    public void bindToUserInterface() {
         backBtn = (Button) findViewById(backToRegisterBtn);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -29,10 +33,5 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
                 goTo(EnumeratedActivity.REGISTRATION);
             }
         });
-    }
-
-    @Override
-    public EnumeratedActivity activityName() {
-        return EnumeratedActivity.USERPROFILE;
     }
 }

@@ -1,7 +1,6 @@
 package amazingme.activities.app;
 
 import android.app.AlertDialog;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +13,6 @@ import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
-import java.util.HashMap;
-
-import amazingme.activities.games.ThreeTouchGame;
 import amazingme.activities.util.DialogHelper;
 import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
@@ -32,11 +28,15 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
     private EditText emailEditText, passwordEditText;
     private Button registerBtn, backBtn;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+    public RegisterActivity() { super(R.layout.activity_register); }
 
+    @Override
+    public EnumeratedActivity activityName() {
+        return EnumeratedActivity.REGISTRATION;
+    }
+
+    @Override
+    public void bindToUserInterface() {
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
         registerBtn = (Button) findViewById(R.id.registerBtn);
@@ -71,11 +71,6 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
                 goTo(EnumeratedActivity.LOGIN);
             }
         });
-    }
-
-    @Override
-    public EnumeratedActivity activityName() {
-        return EnumeratedActivity.REGISTRATION;
     }
 
     @Override
