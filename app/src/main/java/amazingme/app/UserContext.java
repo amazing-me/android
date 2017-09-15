@@ -1,5 +1,6 @@
 package amazingme.app;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import amazingme.model.Child;
@@ -14,7 +15,7 @@ public class UserContext {
     private int currentChildUser;
 
     public UserContext() {
-        //this(null, new LinkedHashMap<Integer, Child>(), new LinkedList<GameResult>());
+        this(new Parent(), new LinkedList<Child>(), new LinkedList<GameResult>());
     }
 
     public UserContext(Parent parent, List<Child> children, List<GameResult> gameResults) {

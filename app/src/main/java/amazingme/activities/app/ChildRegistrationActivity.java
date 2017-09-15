@@ -6,7 +6,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.amazingme.activities.R;
 
@@ -39,11 +38,19 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         initDaySpinner();
         initYearSpinner();
         initDoneButton();
+        backBtn = (Button) findViewById(R.id.child_registration_add_another_button);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void initDoneButton() {
         //todo -> save the date of birth and calculate age (child can calculate)
         //todo -> actually get some arguments for the sex
+        doneBtn = (Button) findViewById(R.id.child_registration_done_button);
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +58,7 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
                 String lastName = ((EditText) findViewById(R.id.child_registration_last_name)).getText().toString();
                 AmazingMeApplicationContext.addChild(new Child(firstName, lastName, Child.Sex.MALE, 3, new LinkedList<KnownDevelopmentalDisabilities>()));
                 AmazingMeApplicationContext.saveContext();
-                goTo(EnumeratedActivity.THREE_TOUCH_GAME);
+                goTo(EnumeratedActivity.LANDING_PAGE);
             }
         });
     }
@@ -65,7 +72,7 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, categories);
         //adapter should be able to be set by constants here
         birthMonth.setAdapter(dataAdapter);
-        birthDay.setOnItemSelectedListener(new MonthSpinnerListener());
+        birthMonth.setOnItemSelectedListener(new MonthSpinnerListener());
     }
 
     private void initDaySpinner() {
@@ -89,10 +96,9 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, categories);
         birthYear.setAdapter(dataAdapter);
         birthYear.setOnItemSelectedListener(new YearSpinnerListener());
-
     }
 
-    private class MonthSpinnerListener implements AdapterView.OnItemSelectedListener {
+    private class MonthSpinnerListener extends ChildRegistrationActivity implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             month = parent.getItemAtPosition(position).toString();

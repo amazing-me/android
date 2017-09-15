@@ -56,7 +56,7 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
 
     @Override
     public void handleRegistrationSuccess() {
-            goTo(EnumeratedActivity.USERPROFILE);
+            goTo(EnumeratedActivity.USER_PROFILE);
     }
 
     @Override

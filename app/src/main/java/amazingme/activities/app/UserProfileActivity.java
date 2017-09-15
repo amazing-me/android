@@ -19,7 +19,7 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
 
     @Override
     public EnumeratedActivity activityName() {
-        return EnumeratedActivity.USERPROFILE;
+        return EnumeratedActivity.USER_PROFILE;
     }
 
     @Override

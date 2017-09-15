@@ -32,7 +32,7 @@ public class PrimaryCarePhysicianInformationActivity extends AmazingMeAppCompatA
         backBtn = (Button) findViewById(R.id.pcp_information_back_button);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {goTo(EnumeratedActivity.USERPROFILE); }
+            public void onClick(View v) {goTo(EnumeratedActivity.USER_PROFILE); }
         });
         this.setNextFunctionality();
     }
