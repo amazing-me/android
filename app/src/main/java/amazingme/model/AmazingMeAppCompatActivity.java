@@ -32,4 +32,11 @@ public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
         ActivityManager.getInstance().goTo(AmazingMeAppCompatActivity.this, activity);
     }
 
+    public final void goTo(EnumeratedActivity activity, Bundle bundle) {
+        ActivityManager.getInstance().goTo(AmazingMeAppCompatActivity.this, activity, bundle);
+    }
+
+    public final Object getBundleValue(final String key) {
+        return getIntent().getExtras().get(key);
+    }
 }

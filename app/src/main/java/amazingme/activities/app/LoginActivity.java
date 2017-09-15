@@ -8,8 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.amazingme.activities.R;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
@@ -67,18 +65,19 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements LoginHa
     }
 
     @Override
-    public void handle(Task<AuthResult> task) {
+    public void handleLoginSuccess() {
+        goTo(EnumeratedActivity.MAIN_MENU);
+    }
+
+    @Override
+    public void handleLoginFailure(Exception e) {
         final String loginFailed = this.getResources().getString(R.string.dialog_login_failed);
         final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(this, loginFailed);
 
-        if (task.isSuccessful()) {
-            goTo(EnumeratedActivity.MAIN_MENU);
-        } else {
-            final String exceptionMessage = getLoginExceptionMessage(task.getException());
+        final String exceptionMessage = getLoginExceptionMessage(e);
 
-            alertDialog.setMessage(exceptionMessage);
-            alertDialog.show();
-        }
+        alertDialog.setMessage(exceptionMessage);
+        alertDialog.show();
     }
 
     private String getLoginExceptionMessage(final Exception exception) {

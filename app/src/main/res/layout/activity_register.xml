@@ -52,11 +52,10 @@
         android:backgroundTint="@color/amazing_me_blue"
         android:text="Register"
         android:textColor="@color/amazing_me_white"
+        android:layout_alignBaseline="@+id/register_activity_back_button"
         android:layout_alignBottom="@+id/register_activity_back_button"
         android:layout_alignRight="@+id/register_activity_password_edit_text"
-        android:layout_alignEnd="@+id/register_activity_password_edit_text"
-        android:layout_marginRight="13dp"
-        android:layout_marginEnd="13dp" />
+        android:layout_alignEnd="@+id/register_activity_password_edit_text" />
 
     <Button
         android:id="@+id/register_activity_back_button"

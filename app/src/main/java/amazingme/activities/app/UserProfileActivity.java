@@ -6,6 +6,7 @@ import android.widget.EditText;
 
 import com.amazingme.activities.R;
 
+import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
 
@@ -39,8 +40,11 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                // TODO: This is how you save to database
+                // AmazingMeApplicationContext.setUserContext(userContext);
                 goTo(EnumeratedActivity.PCP_INFORMATION);
             }
         });
     }
+
 }
