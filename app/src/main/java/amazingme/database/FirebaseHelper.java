@@ -85,7 +85,7 @@ public class FirebaseHelper implements IDatabase, SessionManager {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        handler.handle(task);
+                        handler.handleRegistrationSuccess();
                     }
                 });
     }
