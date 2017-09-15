@@ -8,6 +8,7 @@ import android.widget.ToggleButton;
 
 import com.amazingme.activities.R;
 
+import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
 
@@ -31,7 +32,7 @@ public class PrimaryCarePhysicianInformationActivity extends AmazingMeAppCompatA
         backBtn = (Button) findViewById(R.id.pcp_information_back_button);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {goTo(EnumeratedActivity.USERPROFILE); }
+            public void onClick(View v) {goTo(EnumeratedActivity.USER_PROFILE); }
         });
         this.setNextFunctionality();
     }
@@ -44,10 +45,9 @@ public class PrimaryCarePhysicianInformationActivity extends AmazingMeAppCompatA
                 if (hasPCPInformation) {
                     String email = ((EditText)findViewById(R.id.pcp_information_email_edit_text)).getText().toString();
                     String phoneNumber = ((EditText)findViewById(R.id.pcp_information_phone_number_edit_text)).getText().toString();
-                    //TODO -> put the user information in the user context
+                    AmazingMeApplicationContext.setPrimaryCareEmailAndPhoneNumber(email, phoneNumber);
                 }
-                // TODO -> why isn't this made??
-                // goTo(EnumeratedActivity.CHILD_PROFILE_PAGE);
+                goTo(EnumeratedActivity.CHILD_REGISTRATION);
             }
         });
     }

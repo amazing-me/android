@@ -42,7 +42,6 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
             public void onClick(View v) {
                 final String email = emailEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
-
                 AmazingMeApplicationContext.createNewUser(email, password, RegisterActivity.this);
             }
         });
@@ -57,7 +56,7 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
 
     @Override
     public void handleRegistrationSuccess() {
-            goTo(EnumeratedActivity.USERPROFILE);
+            goTo(EnumeratedActivity.USER_PROFILE);
     }
 
     @Override

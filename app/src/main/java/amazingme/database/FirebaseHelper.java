@@ -1,6 +1,7 @@
 package amazingme.database;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -87,12 +88,14 @@ public class FirebaseHelper implements IDatabase, SessionManager {
             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
+                    Log.e("REGISTRATION", "SUCCESSFUL");
                     handler.handleRegistrationSuccess();
                 }
             })
             .addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    Log.e("REGISTRATION", "FAILED");
                     handler.handleRegistrationFailure(e);
                 }
             });

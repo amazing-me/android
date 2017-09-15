@@ -26,6 +26,7 @@
         <activity android:name="amazingme.activities.app.UserProfileActivity"/>
         <activity android:name="amazingme.activities.app.LoginActivity"/>
         <activity android:name="amazingme.activities.app.PrimaryCarePhysicianInformationActivity"/>
+        <activity android:name="amazingme.activities.app.ChildRegistrationActivity"/>
     </application>
 
 </manifest>
