@@ -74,19 +74,20 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
     }
 
     @Override
-    public void handle(Task<AuthResult> task) {
+    public void handleRegistrationSuccess() {
+            goTo(EnumeratedActivity.MAIN_MENU);
+    }
+
+    @Override
+    public void handleRegistrationFailure(final Exception exception) {
         final String registrationFailed = this.getResources().getString(R.string.dialog_registration_failed);
         final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(this, registrationFailed);
+        final String exceptionMessage = getRegistrationExceptionMessage(exception);
 
-        if (task.isSuccessful()) {
-            goTo(EnumeratedActivity.MAIN_MENU);
-        } else {
-            final String exceptionMessage = getRegistrationExceptionMessage(task.getException());
-
-            alertDialog.setMessage(exceptionMessage);
-            alertDialog.show();
-        }
+        alertDialog.setMessage(exceptionMessage);
+        alertDialog.show();
     }
+
 
     private String getRegistrationExceptionMessage(final Exception exception) {
         final String registrationTag = this.getResources().getString(R.string.tag_registration);
