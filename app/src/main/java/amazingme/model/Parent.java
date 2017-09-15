@@ -3,6 +3,7 @@ package amazingme.model;
 
 public class Parent extends User {
 
+    //todo -> do we need to keep track of the email?
     private String email;
     private String primaryCarePhysicianEmail;
     private String primaryCarePhysicianPhoneNumber; // yes, a phone number is a String

@@ -80,12 +80,15 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="33dp"
         android:backgroundTint="@color/amazing_me_blue"
         android:text="Next"
         android:textColor="@color/amazing_me_white"
-        app:layout_constraintTop_toBottomOf="@+id/user_profile_last_name_edit_text"
-        tools:layout_editor_absoluteX="212dp" />
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/user_profile_last_name_edit_text" />
 
     <Button
         android:id="@+id/user_profile_back_button"
