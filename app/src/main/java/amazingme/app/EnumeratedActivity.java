@@ -3,6 +3,7 @@ package amazingme.app;
 import java.util.ArrayList;
 import java.util.List;
 
+import amazingme.activities.app.ChildRegistrationActivity;
 import amazingme.activities.app.ForgotPasswordActivity;
 import amazingme.activities.app.LoginActivity;
 import amazingme.activities.app.MainMenu;
@@ -20,6 +21,7 @@ public enum EnumeratedActivity {
     USERPROFILE(UserProfileActivity.class),
     FORGOT_PASSWORD(ForgotPasswordActivity.class),
     PCP_INFORMATION(PrimaryCarePhysicianInformationActivity.class),
+    CHILD_REGISTRATION(ChildRegistrationActivity.class),
     //GAME_SELECTION,
     THREE_TOUCH_GAME("ThreeTouchGame", true, true, ThreeTouchGame.class);
 

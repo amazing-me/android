@@ -51,8 +51,8 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements LoginHa
             public void onClick(View view) {
                 final String email = emailEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
-
-                AmazingMeApplicationContext.restoreSession(email, password, LoginActivity.this);
+                goTo(EnumeratedActivity.CHILD_REGISTRATION);
+                //AmazingMeApplicationContext.restoreSession(email, password, LoginActivity.this);
             }
         });
 

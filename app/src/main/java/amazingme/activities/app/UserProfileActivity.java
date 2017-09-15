@@ -40,8 +40,7 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO: This is how you save to database
-                // AmazingMeApplicationContext.setUserContext(userContext);
+                AmazingMeApplicationContext.setParentName(firstName.getText().toString(), lastName.getText().toString());
                 goTo(EnumeratedActivity.PCP_INFORMATION);
             }
         });
