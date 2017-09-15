@@ -83,7 +83,6 @@ public class FirebaseHelper implements IDatabase, SessionManager {
     @Override
     public void createUser(final String email, final String password, final RegistrationHandlingActivity handler) {
         final FirebaseAuth mAuth = getFirebaseAuthInstance();
-        // TODO: store names. also need to create another activity to store more parents and child info.
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
@@ -97,7 +96,6 @@ public class FirebaseHelper implements IDatabase, SessionManager {
                     handler.handleRegistrationFailure(e);
                 }
             });
-
     }
 
     @Override
