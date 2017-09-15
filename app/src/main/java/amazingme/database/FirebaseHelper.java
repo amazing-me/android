@@ -1,12 +1,9 @@
 package amazingme.database;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -14,13 +11,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-
 import amazingme.app.SessionManager;
 import amazingme.app.UserContext;
 import amazingme.controller.LoginHandlingActivity;
 import amazingme.controller.RegistrationHandlingActivity;
-import amazingme.model.User;
 
 public class FirebaseHelper implements IDatabase, SessionManager {
 
@@ -124,6 +118,23 @@ public class FirebaseHelper implements IDatabase, SessionManager {
         return FirebaseDatabase.getInstance().getReference();
     }
 
+    /**
+     * Here's our Firebase Rule
+     *
+     * {
+     *   "rules": {
+     *     "users": {
+     *       "$user_id": {
+     *         ".write": "$user_id === auth.uid",
+     *         ".read": "$user_id === auth.uid"
+     *       }
+     *     }
+     *   }
+     * }
+     *
+     * @param userId the user id
+     * @return the database reference for the user context
+     */
     private DatabaseReference getUserDatabaseReference(final String userId) {
         return databaseReference().child("users").child(userId);
     }
