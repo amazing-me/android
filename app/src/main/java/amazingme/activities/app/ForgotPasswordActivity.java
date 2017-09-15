@@ -1,35 +1,35 @@
 package amazingme.activities.app;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.amazingme.activities.R;
 
 import amazingme.app.EnumeratedActivity;
-import amazingme.controller.ActivityManager;
 import amazingme.model.AmazingMeAppCompatActivity;
-
-import static com.amazingme.activities.R.id.backFPBtn;
-import static com.amazingme.activities.R.id.sendPBtn;
 
 public class ForgotPasswordActivity extends AmazingMeAppCompatActivity {
 
     private Button backBtn, sendBtn;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password);
+    public ForgotPasswordActivity() {
+        super(R.layout.activity_forgot_password);
+    }
 
-        backBtn = (Button) findViewById(backFPBtn);
-        sendBtn = (Button) findViewById(sendPBtn);
+    @Override
+    public EnumeratedActivity activityName() {
+        return EnumeratedActivity.FORGOT_PASSWORD;
+    }
+
+    @Override
+    public void bindToUserInterface() {
+        backBtn = (Button) findViewById(R.id.forgot_password_back_button);
+        sendBtn = (Button) findViewById(R.id.forgot_password_send_button);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityManager.getInstance().goTo(ForgotPasswordActivity.this, EnumeratedActivity.LOGIN);
+                goTo(EnumeratedActivity.LOGIN);
             }
         });
 
@@ -40,10 +40,5 @@ public class ForgotPasswordActivity extends AmazingMeAppCompatActivity {
             }
         });
 
-    }
-
-    @Override
-    public EnumeratedActivity activityName() {
-        return EnumeratedActivity.FORGOTPASSWORD;
     }
 }

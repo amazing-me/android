@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import com.amazingme.activities.R;
 import com.google.firebase.auth.FirebaseUser;
 
+import amazingme.app.AmazingMeApplicationContext;
 import amazingme.database.FirebaseHelper;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.app.EnumeratedActivity;
@@ -23,32 +24,12 @@ import amazingme.app.EnumeratedActivity;
 public class MainMenu extends AmazingMeAppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public MainMenu() { super(R.layout.activity_main_menu); }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        redirectIfNotSignedIn();
-
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        redirectIfNotSignedIn();
     }
 
     @Override
@@ -102,9 +83,8 @@ public class MainMenu extends AmazingMeAppCompatActivity
         } else if (id == R.id.nav_send) {
 
         } else if (id == R.id.logout) {
-            FirebaseHelper.signOut();
-            final Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(loginIntent);
+            AmazingMeApplicationContext.endSession();
+            goTo(EnumeratedActivity.LOGIN);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -117,13 +97,33 @@ public class MainMenu extends AmazingMeAppCompatActivity
         return EnumeratedActivity.MAIN_MENU;
     }
 
-    private void redirectIfNotSignedIn() {
-        final FirebaseUser firebaseUser = FirebaseHelper.getFirebaseUser();
-        final boolean isUserSignedIn = firebaseUser != null;
-        if (!isUserSignedIn) {
-            Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(loginIntent);
-        }
+    @Override
+    public void bindToUserInterface() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void redirectIfNotSignedIn() {
+        if (!AmazingMeApplicationContext.hasActiveSession()) {
+            goTo(EnumeratedActivity.LOGIN);
+        }
     }
 }

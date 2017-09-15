@@ -7,6 +7,7 @@ import android.os.Build;
 
 public class DialogHelper {
 
+    //TODO -> generalize this to take some kind of enumerated dialog to build, so it's more generic
     public static AlertDialog.Builder getAlertDialog(final Activity activity, final String title) {
         final AlertDialog.Builder alertDialog;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

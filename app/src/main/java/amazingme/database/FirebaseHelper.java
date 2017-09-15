@@ -1,137 +1,139 @@
 package amazingme.database;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.res.Resources;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.amazingme.activities.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthEmailException;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import amazingme.activities.util.DialogHelper;
-import amazingme.app.EnumeratedActivity;
-import amazingme.controller.ActivityManager;
+import amazingme.app.SessionManager;
+import amazingme.app.UserContext;
+import amazingme.controller.LoginHandlingActivity;
+import amazingme.controller.RegistrationHandlingActivity;
 
-public class FirebaseHelper {
+public class FirebaseHelper implements IDatabase, SessionManager {
 
-    public static FirebaseAuth getFirebaseAuthInstance() {
-        return FirebaseAuth.getInstance();
+    private static FirebaseHelper instance;
+
+    public static FirebaseHelper getInstance() {
+        if (instance == null) {
+            instance = new FirebaseHelper();
+        }
+        return instance;
     }
 
-    public static FirebaseUser getFirebaseUser() {
-        return getFirebaseAuthInstance().getCurrentUser();
+    @Override
+    public void set(final UserContext userContext) {
+        final String uid = getFirebaseUser().getUid();
+
+        getUserDatabaseReference(uid).setValue(userContext);
     }
 
-    public static void createNewUser(final String email,
-                                     final String password,
-                                     final Activity activity) {
-        final FirebaseAuth mAuth = getFirebaseAuthInstance();
-        // TODO: store names. also need to create another activity to store more parents and child info.
-        mAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        onCompleteRegistrationHandler(activity, task);
-                    }
-                });
+    @Override
+    public void update() {
+        // TODO: Implement
     }
 
-    public static void loginUser(final String email, final String password, final Activity activity) {
+    @Override
+    public void push() {
+        // TODO: Implement
+    }
+
+    @Override
+    public DataSnapshot get() {
+        // TODO: Implement
+        return null;
+    }
+
+    @Override
+    public DataSnapshot getUserContext() {
+        // TODO: Implement
+        return null;
+    }
+
+    @Override
+    public void login(final String email, final String password, final LoginHandlingActivity handler) {
         final FirebaseAuth mAuth = getFirebaseAuthInstance();
 
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        onCompleteLoginHandler(activity, task);
+                    public void onSuccess(AuthResult authResult) {
+                        handler.handleLoginSuccess();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        handler.handleLoginFailure(e);
                     }
                 });
     }
 
-    public static void signOut() {
+    @Override
+    public void logout() {
         getFirebaseAuthInstance().signOut();
     }
 
-
-
-
-    private static void onCompleteRegistrationHandler(final Activity activity, final Task<AuthResult> task) {
-        final Resources res = activity.getResources();
-
-        final String registrationFailed = res.getString(R.string.dialog_registration_failed);
-        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(activity, registrationFailed);
-
-        if (task.isSuccessful()) {
-            ActivityManager.getInstance().goTo(activity, EnumeratedActivity.MAIN_MENU);
-        } else {
-            final String exceptionMessage = getRegistrationExceptionMessage(task.getException(), res);
-
-            alertDialog.setMessage(exceptionMessage);
-            alertDialog.show();
-        }
+    @Override
+    public void createUser(final String email, final String password, final RegistrationHandlingActivity handler) {
+        final FirebaseAuth mAuth = getFirebaseAuthInstance();
+        mAuth.createUserWithEmailAndPassword(email, password)
+            .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    handler.handleRegistrationSuccess();
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    handler.handleRegistrationFailure(e);
+                }
+            });
     }
 
-    private static String getRegistrationExceptionMessage(final Exception exception, final Resources res) {
-        final String registrationTag = res.getString(R.string.tag_registration);
-        String exceptionMessage;
-
-        try {
-            throw exception;
-        } catch (FirebaseAuthEmailException e) {
-            exceptionMessage = res.getString(R.string.error_invalid_email);
-        } catch (FirebaseAuthUserCollisionException e) {
-            exceptionMessage = res.getString(R.string.error_user_exists);
-        } catch (FirebaseAuthWeakPasswordException e) {
-            exceptionMessage = res.getString(R.string.error_weak_password);
-        } catch (Exception e) {
-            Log.e(registrationTag, e.getMessage());
-            exceptionMessage = res.getString(R.string.error_unknown);
-        }
-        return exceptionMessage;
+    @Override
+    public boolean isActive() {
+        return this.getFirebaseUser() != null;
     }
 
-    private static void onCompleteLoginHandler(final Activity activity, final Task<AuthResult> task) {
-        final Resources res = activity.getResources();
 
-        final String loginFailed = res.getString(R.string.dialog_login_failed);
-        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(activity, loginFailed);
-
-        if (task.isSuccessful()) {
-            ActivityManager.getInstance().goTo(activity, EnumeratedActivity.MAIN_MENU);
-        } else {
-            final String exceptionMessage = getLoginExceptionMessage(task.getException(), res);
-
-            alertDialog.setMessage(exceptionMessage);
-            alertDialog.show();
-        }
+    private FirebaseAuth getFirebaseAuthInstance() {
+        return FirebaseAuth.getInstance();
     }
 
-    private static String getLoginExceptionMessage(final Exception exception, final Resources res) {
-        final String loginTag = res.getString(R.string.tag_login);
-        String exceptionMessage;
-
-        try {
-            throw exception;
-        } catch (FirebaseAuthInvalidCredentialsException
-                | FirebaseAuthEmailException
-                | FirebaseAuthInvalidUserException e) {
-            exceptionMessage = res.getString(R.string.error_invalid_credentials);
-        } catch (Exception e) {
-            Log.e(loginTag, e.getMessage());
-            exceptionMessage = res.getString(R.string.error_unknown);
-        }
-
-        return exceptionMessage;
+    private FirebaseUser getFirebaseUser() {
+        return getFirebaseAuthInstance().getCurrentUser();
     }
 
+    private DatabaseReference databaseReference() {
+        return FirebaseDatabase.getInstance().getReference();
+    }
+
+    /**
+     * Here's our Firebase Rule
+     *
+     * {
+     *   "rules": {
+     *     "users": {
+     *       "$user_id": {
+     *         ".write": "$user_id === auth.uid",
+     *         ".read": "$user_id === auth.uid"
+     *       }
+     *     }
+     *   }
+     * }
+     *
+     * @param userId the user id
+     * @return the database reference for the user context
+     */
+    private DatabaseReference getUserDatabaseReference(final String userId) {
+        return databaseReference().child("users").child(userId);
+    }
 }

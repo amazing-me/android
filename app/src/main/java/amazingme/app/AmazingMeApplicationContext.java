@@ -1,66 +1,85 @@
 package amazingme.app;
 
-import com.google.firebase.database.DataSnapshot;
+import android.app.Application;
 
-import org.json.JSONObject;
+import java.util.Set;
 
-import java.util.List;
+import amazingme.controller.LoginHandlingActivity;
+import amazingme.controller.RegistrationHandlingActivity;
+import amazingme.database.FirebaseHelper;
+import amazingme.database.IDatabase;
 
-import amazingme.model.Child;
 import amazingme.model.AmazingMeGame;
-import amazingme.model.Parent;
-import amazingme.model.User;
+import amazingme.util.Loader;
 
 
-public class AmazingMeApplicationContext {
+public class AmazingMeApplicationContext extends Application {
 
-    private static User parentUser;
-    private static List<Child> children;
-    private static Child currentChildUser;
+    private static UserContext userContext;
+    private static final SessionManager session;
+    private static final IDatabase database; //for us, session and database are the same object (the firebase helper) but i want the option to possible let them be different.
+    private static Set<AmazingMeGame> availableGames;
 
-    private static List<AmazingMeGame> availableGames;
+    private static AmazingMeApplicationContext instance;
 
-    public static void loadContext(int parentId) {
-        /*JSONObject jsonObject = loadAmazingMeContextFromDatabase(parentId);
-        setParentUser(loadParentUserInformationFromContext(jsonObject));
-        setChildrenUsers(loadChildrenUserInformationFromContext(jsonObject));
-        setAvailableGames(loadAvailableGames(currentChildUser));
-        setCurrentChildPlayer(0);*/
-        //TODO -> probably need to make this happen with the loader... that way this class doesn't concern itself with HOW it does it, it just knows it happens.
-        //TODO -> we can do that when we've saved/loaded a datasnapshot to play around with... but then changes only happen in loader, not every class that needs loading of data
+    @Override
+    public void onCreate() {
+        super.onCreate();
     }
 
-    private static void setCurrentChildPlayer(int index) {
-        currentChildUser = children.get(index);
+    static {
+        session = FirebaseHelper.getInstance();
+        database = FirebaseHelper.getInstance(); // once again, redundant now but could be very useful.
     }
 
-    private static void setParentUser(Parent parent) {
-        parentUser = parent;
+    public static void loadContext() { // I don't like that an activity will be calling this, but perhaps it's necessary?
+        loadUserContext();
+        loadAvailableGames();
     }
 
-    private static void setChildrenUsers(List<Child> childList) {
-        children = childList;
+    public static void restoreSession(final String email, final String password, final LoginHandlingActivity handler) {
+        session().login(email, password, handler);
     }
 
-    private static void setAvailableGames(List<AmazingMeGame> games) {
-        availableGames = games;
+    public static void createNewUser(final String email, final String password, final RegistrationHandlingActivity handler) {
+        database().createUser(email, password, handler);
     }
-    //TODO -> implement
-    private static DataSnapshot loadAmazingMeContextFromDatabase(int parentId) {
-        return null;
+
+    public static void endSession() {
+        session.logout();
     }
-    //TODO -> implement
-    private static Parent loadParentUserInformationFromContext(DataSnapshot context) {
-        return null;
+
+    public static boolean hasActiveSession() {
+        return session.isActive();
     }
-    //TODO -> implement
-    private static List<Child> loadChildrenUserInformationFromContext(DataSnapshot context) {
-        return null;
+
+    private static void loadUserContext() {
+        userContext = Loader.loadUserContextUsingDatabaseSnapshot(database.getUserContext());
     }
-    //TODO -> implement
-    private static List<AmazingMeGame> loadAvailableGames(Child currentChildUser) {
-        //passing the child so we know how to filter.
-        return null;
+
+    private static void loadAvailableGames() {
+        availableGames = Loader.loadAvailableGamesUsingUserContext(userContext);
     }
+
+    public static void saveContext() {
+        database().set(userContext);
+    }
+
+    public static void setUserContext(UserContext newUserContext) {
+        userContext = newUserContext;
+    }
+
+    private static SessionManager session() {
+        return session;
+    }
+
+    private static UserContext getUserContext() {
+        return userContext;
+    }
+
+    private static IDatabase database() {
+        return database;
+    }
+
 
 }
