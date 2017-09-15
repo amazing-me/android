@@ -14,19 +14,14 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 import amazingme.activities.util.DialogHelper;
-import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
-import amazingme.app.UserContext;
 import amazingme.controller.RegistrationHandlingActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
-import amazingme.model.Child;
-import amazingme.model.GameResult;
-import amazingme.model.Parent;
-import amazingme.model.Problem;
 
 public class RegisterActivity extends AmazingMeAppCompatActivity implements RegistrationHandlingActivity {
     private EditText emailEditText, passwordEditText;
     private Button registerBtn, backBtn;
+    private Button chilBtn;
 
     public RegisterActivity() { super(R.layout.activity_register); }
 
@@ -42,6 +37,8 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
         registerBtn = (Button) findViewById(R.id.register_activity_register_button);
         backBtn = (Button) findViewById(R.id.register_activity_back_button);
         //nextBtn = (Button) findViewById((R.id.nextBtn));
+        //test child profile page
+        chilBtn = (Button) findViewById(R.id.button4);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +66,13 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
             @Override
             public void onClick(View view) {
                 goTo(EnumeratedActivity.LOGIN);
+            }
+        });
+
+        chilBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goTo(EnumeratedActivity.USERPROFILE);
             }
         });
     }
