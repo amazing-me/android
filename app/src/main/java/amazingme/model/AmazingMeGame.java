@@ -1,6 +1,9 @@
 package amazingme.model;
 
 import android.os.Bundle;
+
+import java.util.LinkedList;
+
 import amazingme.app.EnumeratedActivity;
 
 public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
@@ -12,7 +15,7 @@ public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
         if(gameWasCompleted) {
             gameResultsBundle.putSerializable("GAME RESULTS BUNDLE", this.gameResults());
         } else {
-            gameResultsBundle.putSerializable("GAME RESULTS BUNDLE", new GameResult(0, new Problem[] {Problem.DID_NOT_FINISH}));
+            gameResultsBundle.putSerializable("GAME RESULTS BUNDLE", new GameResult(0, new LinkedList<Problem>()));
         }
         goTo(EnumeratedActivity.MAIN_MENU);
     }
