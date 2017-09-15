@@ -41,7 +41,7 @@ public class PrimaryCarePhysicianInformationActivity extends AmazingMeAppCompatA
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(hasPCPInformation) {
+                if (hasPCPInformation) {
                     String email = ((EditText)findViewById(R.id.pcp_information_email_edit_text)).getText().toString();
                     String phoneNumber = ((EditText)findViewById(R.id.pcp_information_phone_number_edit_text)).getText().toString();
                     //TODO -> put the user information in the user context
