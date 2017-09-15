@@ -1,10 +1,9 @@
 package amazingme.database;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -12,13 +11,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-
 import amazingme.app.SessionManager;
 import amazingme.app.UserContext;
 import amazingme.controller.LoginHandlingActivity;
 import amazingme.controller.RegistrationHandlingActivity;
-import amazingme.model.User;
 
 public class FirebaseHelper implements IDatabase, SessionManager {
 
@@ -32,30 +28,31 @@ public class FirebaseHelper implements IDatabase, SessionManager {
     }
 
     @Override
-    public void set(UserContext input) {
-        HashMap<String, UserContext> map = new HashMap<>();
-        map.put(this.getFirebaseUser().getUid(), input);
-        this.databaseReference().setValue(map);
-        //for database stuff... almost getting there
+    public void set(final UserContext userContext) {
+        final String uid = getFirebaseUser().getUid();
+
+        getUserDatabaseReference(uid).setValue(userContext);
     }
 
     @Override
     public void update() {
-        //for database stuff... almost getting there
+        // TODO: Implement
     }
 
     @Override
     public void push() {
-        //for database stuff... almost getting there
+        // TODO: Implement
     }
 
     @Override
     public DataSnapshot get() {
+        // TODO: Implement
         return null;
     }
 
     @Override
     public DataSnapshot getUserContext() {
+        // TODO: Implement
         return null;
     }
 
@@ -64,10 +61,16 @@ public class FirebaseHelper implements IDatabase, SessionManager {
         final FirebaseAuth mAuth = getFirebaseAuthInstance();
 
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        handler.handle(task);
+                    public void onSuccess(AuthResult authResult) {
+                        handler.handleLoginSuccess();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        handler.handleLoginFailure(e);
                     }
                 });
     }
@@ -82,12 +85,19 @@ public class FirebaseHelper implements IDatabase, SessionManager {
         final FirebaseAuth mAuth = getFirebaseAuthInstance();
         // TODO: store names. also need to create another activity to store more parents and child info.
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        handler.handle(task);
-                    }
-                });
+            .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    handler.handleRegistrationSuccess();
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    handler.handleRegistrationFailure(e);
+                }
+            });
+
     }
 
     @Override
@@ -106,5 +116,26 @@ public class FirebaseHelper implements IDatabase, SessionManager {
 
     private DatabaseReference databaseReference() {
         return FirebaseDatabase.getInstance().getReference();
+    }
+
+    /**
+     * Here's our Firebase Rule
+     *
+     * {
+     *   "rules": {
+     *     "users": {
+     *       "$user_id": {
+     *         ".write": "$user_id === auth.uid",
+     *         ".read": "$user_id === auth.uid"
+     *       }
+     *     }
+     *   }
+     * }
+     *
+     * @param userId the user id
+     * @return the database reference for the user context
+     */
+    private DatabaseReference getUserDatabaseReference(final String userId) {
+        return databaseReference().child("users").child(userId);
     }
 }
