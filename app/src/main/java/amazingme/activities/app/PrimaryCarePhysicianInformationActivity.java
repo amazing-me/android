@@ -15,7 +15,7 @@ public class PrimaryCarePhysicianInformationActivity extends AmazingMeAppCompatA
 
     private Button nextBtn, backBtn;
     private ToggleButton toggleBtn;
-    private EditText pcp_email, pcp_phoneNumber;
+    private EditText pcpEmail, pcpPhoneNumber;
     private boolean hasPCPInformation = false;
 
     public PrimaryCarePhysicianInformationActivity() { super(R.layout.activity_pcp_information_page); }
@@ -54,18 +54,18 @@ public class PrimaryCarePhysicianInformationActivity extends AmazingMeAppCompatA
 
     private void setToggleFunctionality() {
         toggleBtn = (ToggleButton) findViewById(R.id.pcp_information_toggle_button);
-        pcp_email = (EditText) findViewById(R.id.pcp_information_email_edit_text);
-        pcp_phoneNumber = (EditText) findViewById(R.id.pcp_information_phone_number_edit_text);
+        pcpEmail = (EditText) findViewById(R.id.pcp_information_email_edit_text);
+        pcpPhoneNumber = (EditText) findViewById(R.id.pcp_information_phone_number_edit_text);
 
         toggleBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    pcp_email.setVisibility(View.VISIBLE);
-                    pcp_phoneNumber.setVisibility(View.VISIBLE);
+                    pcpEmail.setVisibility(View.VISIBLE);
+                    pcpPhoneNumber.setVisibility(View.VISIBLE);
                     hasPCPInformation = true;
                 } else {
-                    pcp_email.setVisibility(View.GONE);
-                    pcp_phoneNumber.setVisibility(View.GONE);
+                    pcpEmail.setVisibility(View.GONE);
+                    pcpPhoneNumber.setVisibility(View.GONE);
                     hasPCPInformation = false;
                 }
             }
