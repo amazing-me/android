@@ -60,7 +60,7 @@ public class FirebaseHelper implements IDatabase, SessionManager {
     }
 
     @Override
-    public void load(final String email, final String password, final LoginHandlingActivity handler) {
+    public void login(final String email, final String password, final LoginHandlingActivity handler) {
         final FirebaseAuth mAuth = getFirebaseAuthInstance();
 
         mAuth.signInWithEmailAndPassword(email, password)
@@ -73,12 +73,12 @@ public class FirebaseHelper implements IDatabase, SessionManager {
     }
 
     @Override
-    public void end() {
+    public void logout() {
         getFirebaseAuthInstance().signOut();
     }
 
     @Override
-    public void create(final String email, final String password, final RegistrationHandlingActivity handler) {
+    public void createUser(final String email, final String password, final RegistrationHandlingActivity handler) {
         final FirebaseAuth mAuth = getFirebaseAuthInstance();
         // TODO: store names. also need to create another activity to store more parents and child info.
         mAuth.createUserWithEmailAndPassword(email, password)
