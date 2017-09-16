@@ -8,58 +8,54 @@ import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 
-import amazingme.database.ISession;
 import amazingme.database.SessionManager;
 
 public class FirebaseSessionManager extends SessionManager<FirebaseSession> {
 
-    private FirebaseAuth auth;
+    private final FirebaseAuth auth;
 
-    @Override
-    public void onCreate() {
+    public FirebaseSessionManager() {
         auth = FirebaseAuth.getInstance();
-        currentSession = new FirebaseSession(auth.getCurrentUser());
     }
 
     @Override
-    public Task<ISession> startSession(@NonNull String email, @NonNull String pass) {
-        return auth.signInWithEmailAndPassword(email, pass).continueWith(new Continuation<AuthResult, ISession>() {
+    protected Task<FirebaseSession> initialize() {
+        FirebaseUser user = auth.getCurrentUser();
+        return Tasks.forResult(user != null ? new FirebaseSession(user) : null);
+    }
+
+    @Override
+    protected Task<FirebaseSession> login(@NonNull String email, @NonNull String pass) {
+        if(auth.getCurrentUser() != null) {
+            auth.signOut();
+        }
+        return auth.signInWithEmailAndPassword(email, pass).continueWith(new Continuation<AuthResult, FirebaseSession>() {
             @Override
-            public ISession then(@NonNull Task<AuthResult> task) throws Exception {
-                currentSession = new FirebaseSession(task.getResult().getUser());
-                return currentSession;
+            public FirebaseSession then(@NonNull Task<AuthResult> task) throws Exception {
+                return new FirebaseSession(task.getResult().getUser());
             }
         });
     }
 
     @Override
-    public Task<ISession> registerSession(@NonNull String email, @NonNull String pass, @NonNull final String displayName) {
-        return auth.createUserWithEmailAndPassword(email, pass).continueWithTask(new Continuation<AuthResult, Task<Void>>() {
-            @Override
-            public Task<Void> then(@NonNull Task<AuthResult> task) throws Exception {
-                currentSession = new FirebaseSession(task.getResult().getUser());
+    protected Task<FirebaseSession> register(@NonNull String email, @NonNull String pass) {
+        if(auth.getCurrentUser() != null) {
+            auth.signOut();
+        }
 
-                UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(displayName)
-                    .build();
-
-                return currentSession.getFirebaseUser().updateProfile(request);
-            }
-        }).continueWith(new Continuation<Void, ISession>() {
+        return auth.createUserWithEmailAndPassword(email, pass).continueWith(new Continuation<AuthResult, FirebaseSession>() {
             @Override
-            public ISession then(@NonNull Task<Void> task) throws Exception {
-                task.getResult(); // Propagate the error if one occurred
-                return currentSession;
+            public FirebaseSession then(@NonNull Task<AuthResult> task) throws Exception {
+                return new FirebaseSession(task.getResult().getUser());
             }
         });
     }
 
     @Override
-    public Task<Boolean> endSession() {
+    protected Task<Void> logout() {
         auth.signOut();
-        return Tasks.forResult(true);
+        return Tasks.forResult(null);
     }
 
 }

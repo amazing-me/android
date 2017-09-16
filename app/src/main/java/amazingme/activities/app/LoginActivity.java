@@ -2,7 +2,6 @@ package amazingme.activities.app;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,26 +9,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.amazingme.activities.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 import amazingme.activities.util.DialogHelper;
 import amazingme.app.EnumeratedActivity;
-import amazingme.database.ISession;
+import amazingme.controller.ISessionInitHandler;
+import amazingme.controller.ISessionLoginHandler;
+import amazingme.database.Session;
 import amazingme.model.AmazingMeAppCompatActivity;
 
-public class LoginActivity extends AmazingMeAppCompatActivity {
+public class LoginActivity extends AmazingMeAppCompatActivity implements ISessionLoginHandler, ISessionInitHandler {
 
     private EditText emailEditText, passwordEditText;
     private Button loginBtn, registerBtn;
     private TextView forgotPasswordTextBtn;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getContext().getSessionManager().initialize(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -49,37 +49,19 @@ public class LoginActivity extends AmazingMeAppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            final String email = emailEditText.getText().toString();
-            final String password = passwordEditText.getText().toString();
+                final String email = emailEditText.getText().toString();
+                final String password = passwordEditText.getText().toString();
 
-            getContext().getSessionManager().startSession(email, password)
-            .addOnSuccessListener(new OnSuccessListener<ISession>() {
-                @Override
-                public void onSuccess(ISession iSession) {
-                goTo(EnumeratedActivity.MAIN_MENU);
-                }
-            })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                final String loginFailed = LoginActivity.this.getResources().getString(R.string.dialog_login_failed);
-                final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(LoginActivity.this, loginFailed);
-                final String exceptionMessage = getLoginExceptionMessage(e);
-
-                alertDialog.setMessage(exceptionMessage);
-                alertDialog.show();
-                }
-            });
+                getContext().getSessionManager().login(email, password, LoginActivity.this);
             }
         });
 
         forgotPasswordTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            goTo(EnumeratedActivity.FORGOTPASSWORD);
+                goTo(EnumeratedActivity.FORGOTPASSWORD);
             }
         });
-
     }
 
     @Override
@@ -103,6 +85,30 @@ public class LoginActivity extends AmazingMeAppCompatActivity {
         }
 
         return exceptionMessage;
+    }
+
+    @Override
+    public void onSessionLoginSuccess(Session session) {
+        goTo(EnumeratedActivity.MAIN_MENU);
+    }
+
+    @Override
+    public void onSessionLoginFailure(Exception e) {
+        final String loginFailed = LoginActivity.this.getResources().getString(R.string.dialog_login_failed);
+        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(LoginActivity.this, loginFailed);
+        final String exceptionMessage = getLoginExceptionMessage(e);
+
+        alertDialog.setMessage(exceptionMessage);
+        alertDialog.show();
+    }
+
+    @Override
+    public void onSessionInitSuccess(Session session) {
+        goToIfSignedIn(EnumeratedActivity.MAIN_MENU);
+    }
+
+    @Override
+    public void onSessionInitFailure(Exception e) {
     }
 
 }

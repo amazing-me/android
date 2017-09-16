@@ -1,7 +1,6 @@
 package amazingme.activities.app;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -15,21 +14,17 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.amazingme.activities.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 
-import amazingme.app.AmazingMeApplicationContext;
-import amazingme.database.ISession;
+import amazingme.controller.ISessionLogoutHandler;
+import amazingme.database.Session;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.app.EnumeratedActivity;
 
 public class MainMenu extends AmazingMeAppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ISessionLogoutHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        checkSignedIn(EnumeratedActivity.LOGIN);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -57,7 +52,7 @@ public class MainMenu extends AmazingMeAppCompatActivity
         TextView userDisplayName = (TextView) header.findViewById(R.id.userDisplayNameText);
         TextView userEmail = (TextView) header.findViewById(R.id.userEmailText);
 
-        ISession session = getContext().getSessionManager().getCurrentSession();
+        Session session = getContext().getSessionManager().getSession();
         userDisplayName.setText(session.getDisplayName());
         userEmail.setText(session.getEmail());
     }
@@ -113,19 +108,7 @@ public class MainMenu extends AmazingMeAppCompatActivity
         } else if (id == R.id.nav_send) {
 
         } else if (id == R.id.logout) {
-            getContext().getSessionManager().endSession()
-            .addOnSuccessListener(new OnSuccessListener<Boolean>() {
-                @Override
-                public void onSuccess(Boolean aBoolean) {
-                    goTo(EnumeratedActivity.LOGIN);
-                }
-            })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    // TODO: Add error handling when failing to logout
-                }
-            });
+            getContext().getSessionManager().logout(this);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -136,6 +119,16 @@ public class MainMenu extends AmazingMeAppCompatActivity
     @Override
     public EnumeratedActivity activityName() {
         return EnumeratedActivity.MAIN_MENU;
+    }
+
+    @Override
+    public void onSessionLogoutSuccess() {
+        goTo(EnumeratedActivity.LOGIN);
+    }
+
+    @Override
+    public void onSessionLogoutFailure(Exception e) {
+        // TODO: Add error handling when failing to logout
     }
 
 }

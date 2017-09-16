@@ -2,31 +2,30 @@ package amazingme.app;
 
 import android.app.Application;
 
-import amazingme.database.ISession;
+import com.google.android.gms.tasks.Tasks;
+import com.google.firebase.FirebaseApp;
+
+import amazingme.database.Session;
 import amazingme.database.SessionManager;
 import amazingme.database.firebase.FirebaseSessionManager;
 
 public class AmazingMeApplicationContext extends Application {
 
-    private final SessionManager<? extends ISession> sessionManager;
+    private SessionManager<? extends Session> sessionManager;
 
 //    private static UserContext userContext;
 //    private static final SessionManager session;
 //    private static final IDatabase database; //for us, session and database are the same object (the firebase helper) but i want the option to possible let them be different.
 //    private static Set<AmazingMeGame> availableGames;
 
-    public AmazingMeApplicationContext() {
-        sessionManager = new FirebaseSessionManager();
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
 
-        sessionManager.onCreate();
+        sessionManager = new FirebaseSessionManager();
     }
 
-    public SessionManager<? extends ISession> getSessionManager() {
+    public SessionManager<? extends Session> getSessionManager() {
         return sessionManager;
     }
 //
@@ -46,7 +45,7 @@ public class AmazingMeApplicationContext extends Application {
 //        session().load(email, password, handler);
 //    }
 //
-//    public static void createNewSession(final String email, final String password, final RegistrationHandlingActivity handler) {
+//    public static void createNewSession(final String email, final String password, final IRegisterHandler handler) {
 //        session().create(email, password, handler);
 //    }
 //
