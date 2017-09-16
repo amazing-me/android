@@ -1,30 +1,35 @@
 package amazingme.model;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 public class GameResult implements Serializable {
 
     private int score;
-    private Problem[] problemAreas;
+    private List<Problem> problemAreas;
 
-    public GameResult(int score, Problem[] specifiedProblemAreas) {
+    public GameResult() {
+    }
+
+    public GameResult(int score, List<Problem> specifiedProblemAreas) {
         this.score = score;
-        this.problemAreas = deepCopy(specifiedProblemAreas);
+        this.problemAreas = specifiedProblemAreas;
     }
 
     public int getScore() {
-        return this.score;
+        return score;
     }
 
-    public Problem[] getProblemAreas() {
-        return deepCopy(this.problemAreas);
+    public void setScore(int score) {
+        this.score = score;
     }
 
-    private Problem[] deepCopy(Problem[] original) {
-        Problem[] copy = new Problem[original.length];
-        for(int i = 0; i < original.length; i++) { //this might be slow but the data transferred should always be small
-            copy[i] = original[i];
-        }
-        return copy;
+    public List<Problem> getProblemAreas() {
+        return problemAreas;
+    }
+
+    public void setProblemAreas(List<Problem> problemAreas) {
+        this.problemAreas = problemAreas;
     }
 }

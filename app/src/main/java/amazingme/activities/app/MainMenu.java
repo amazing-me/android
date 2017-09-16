@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.amazingme.activities.R;
 
+import org.w3c.dom.Text;
+
 import amazingme.controller.ISessionLogoutHandler;
 import amazingme.database.Session;
 import amazingme.model.AmazingMeAppCompatActivity;
@@ -23,38 +25,13 @@ import amazingme.app.EnumeratedActivity;
 public class MainMenu extends AmazingMeAppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ISessionLogoutHandler {
 
+    public MainMenu() { super(R.layout.activity_main_menu); }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        View header = navigationView.getHeaderView(0);
-        TextView userDisplayName = (TextView) header.findViewById(R.id.userDisplayNameText);
-        TextView userEmail = (TextView) header.findViewById(R.id.userEmailText);
-
-        Session session = getContext().getSessionManager().getSession();
-        userDisplayName.setText(session.getDisplayName());
-        userEmail.setText(session.getEmail());
+        goToIfNotSignedIn(EnumeratedActivity.LOGIN);
     }
 
     @Override
@@ -122,6 +99,37 @@ public class MainMenu extends AmazingMeAppCompatActivity
     }
 
     @Override
+    public void bindToUserInterface() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        View header = navigationView.getHeaderView(0);
+        TextView nameText = (TextView) header.findViewById(R.id.nav_main_menu_name_text);
+        TextView emailText = (TextView) header.findViewById(R.id.nav_main_menu_email_text);
+
+        Session session = getContext().getSession();
+        nameText.setText(session.getDisplayName());
+        emailText.setText(session.getEmail());
+    }
+
     public void onSessionLogoutSuccess() {
         goTo(EnumeratedActivity.LOGIN);
     }

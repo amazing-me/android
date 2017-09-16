@@ -1,6 +1,6 @@
 package amazingme.activities.games;
 
-import android.os.Bundle;
+import com.amazingme.activities.R;
 
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeGame;
@@ -13,12 +13,8 @@ import amazingme.model.Milestone;
 public class ThreeTouchGame extends AmazingMeGame {
 
     public ThreeTouchGame() {
+        super(0);
         this.relatedMilestones = new Milestone[] {Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_OR_UNDER};
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     //TODO -> implement
@@ -30,6 +26,11 @@ public class ThreeTouchGame extends AmazingMeGame {
     @Override
     public EnumeratedActivity activityName() {
         return EnumeratedActivity.THREE_TOUCH_GAME;
+    }
+
+    @Override
+    public void bindToUserInterface() {
+
     }
 
 }

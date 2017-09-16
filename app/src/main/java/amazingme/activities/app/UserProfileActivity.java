@@ -1,27 +1,33 @@
 package amazingme.activities.app;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.amazingme.activities.R;
 
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
-
-import static com.amazingme.activities.R.id.backToRegisterBtn;
+import amazingme.model.Parent;
 
 public class UserProfileActivity extends AmazingMeAppCompatActivity {
 
-    private Button backBtn;
+    private Button backBtn, nextBtn;
+    private EditText firstName, lastName;
+
+    public UserProfileActivity() { super(R.layout.activity_user_profile); }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+    public EnumeratedActivity activityName() {
+        return EnumeratedActivity.USER_PROFILE;
+    }
 
-        backBtn = (Button) findViewById(backToRegisterBtn);
+    @Override
+    public void bindToUserInterface() {
+        backBtn = (Button) findViewById(R.id.user_profile_back_button);
+        nextBtn = (Button) findViewById(R.id.user_profile_next_button);
+        firstName = (EditText) findViewById(R.id.user_profile_first_name_edit_text);
+        lastName = (EditText) findViewById(R.id.user_profile_last_name_edit_text);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,10 +35,19 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
                 goTo(EnumeratedActivity.REGISTRATION);
             }
         });
+
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Parent parent = getContext().getUserContext().getParent();
+                parent.setFirstName(firstName.getText().toString());
+                parent.setLastName(lastName.getText().toString());
+
+                getContext().getSession().saveContext();
+                goTo(EnumeratedActivity.PCP_INFORMATION);
+            }
+        });
     }
 
-    @Override
-    public EnumeratedActivity activityName() {
-        return EnumeratedActivity.USERPROFILE;
-    }
 }

@@ -1,7 +1,6 @@
 package amazingme.activities.app;
 
 import android.app.AlertDialog;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +15,7 @@ import amazingme.activities.util.DialogHelper;
 import amazingme.app.EnumeratedActivity;
 import amazingme.controller.ISessionRegisterHandler;
 import amazingme.database.Session;
+
 import amazingme.model.AmazingMeAppCompatActivity;
 
 public class RegisterActivity extends AmazingMeAppCompatActivity implements ISessionRegisterHandler {
@@ -23,16 +23,19 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements ISes
     private EditText emailEditText, passwordEditText;
     private Button registerBtn, backBtn;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+    public RegisterActivity() { super(R.layout.activity_register); }
 
-        emailEditText = (EditText) findViewById(R.id.emailEditText);
-        passwordEditText = (EditText) findViewById(R.id.passwordEditText);
-        registerBtn = (Button) findViewById(R.id.registerBtn);
-        backBtn = (Button) findViewById(R.id.backBtn);
-        //nextBtn = (Button) findViewById((R.id.nextBtn));
+    @Override
+    public EnumeratedActivity activityName() {
+        return EnumeratedActivity.REGISTRATION;
+    }
+
+    @Override
+    public void bindToUserInterface() {
+        emailEditText = (EditText) findViewById(R.id.register_activity_email_edit_text);
+        passwordEditText = (EditText) findViewById(R.id.register_activity_password_edit_text);
+        registerBtn = (Button) findViewById(R.id.register_activity_register_button);
+        backBtn = (Button) findViewById(R.id.register_activity_back_button);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,13 +56,8 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements ISes
     }
 
     @Override
-    public EnumeratedActivity activityName() {
-        return EnumeratedActivity.REGISTRATION;
-    }
-
-    @Override
     public void onSessionRegisterSuccess(Session session) {
-        goTo(EnumeratedActivity.MAIN_MENU);
+        goTo(EnumeratedActivity.USER_PROFILE);
     }
 
     @Override
