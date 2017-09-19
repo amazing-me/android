@@ -38,7 +38,7 @@
         android:checked="true"
         android:textOff="No"
         android:textOn="Yes"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintLeft_toRightOf="@+id/pcp_information_back_button"
@@ -83,7 +83,7 @@
         android:layout_marginBottom="51dp"
         android:layout_marginLeft="25dp"
         android:text="Back"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -94,7 +94,7 @@
         android:layout_marginBottom="51dp"
         android:layout_marginRight="16dp"
         android:text="Next"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
