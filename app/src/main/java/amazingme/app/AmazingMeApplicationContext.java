@@ -4,14 +4,14 @@ import android.app.Application;
 
 import java.util.Set;
 
-import amazingme.controller.ActivityManager;
 import amazingme.controller.LoginHandlingActivity;
 import amazingme.controller.RegistrationHandlingActivity;
 import amazingme.database.FirebaseHelper;
 import amazingme.database.IDatabase;
 
 import amazingme.model.AmazingMeGame;
-import amazingme.model.User;
+import amazingme.model.Child;
+import amazingme.model.Parent;
 import amazingme.util.Loader;
 
 
@@ -27,6 +27,7 @@ public class AmazingMeApplicationContext extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        userContext = new UserContext();
     }
 
     static {
@@ -40,15 +41,16 @@ public class AmazingMeApplicationContext extends Application {
     }
 
     public static void restoreSession(final String email, final String password, final LoginHandlingActivity handler) {
-        session().load(email, password, handler);
+        session().login(email, password, handler);
     }
 
-    public static void createNewSession(final String email, final String password, final RegistrationHandlingActivity handler) {
-        session().create(email, password, handler);
+    public static void createNewUser(final String email, final String password, final RegistrationHandlingActivity handler) {
+        database().createUser(email, password, handler);
+        setParentEmail(email);
     }
 
     public static void endSession() {
-        session.end();
+        session.logout();
     }
 
     public static boolean hasActiveSession() {
@@ -61,6 +63,24 @@ public class AmazingMeApplicationContext extends Application {
 
     private static void loadAvailableGames() {
         availableGames = Loader.loadAvailableGamesUsingUserContext(userContext);
+    }
+
+    public static void addChild(Child newChild) {
+        userContext.getChildren().add(newChild);
+    }
+
+    public static void setParentEmail(String email) { userContext.getParent().setEmail(email);}
+
+    public static void setParentName(String firstName, String lastName) {
+        Parent parent = userContext.getParent();
+        parent.setFirstName(firstName);
+        parent.setLastName(lastName);
+    }
+
+    public static void setPrimaryCareEmailAndPhoneNumber(String email, String number) {
+        Parent parent = userContext.getParent();
+        parent.setPrimaryCarePhysicianEmail(email);
+        parent.setPrimaryCarePhysicianPhoneNumber(number);
     }
 
     public static void saveContext() {

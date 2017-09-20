@@ -4,9 +4,12 @@ import java.util.List;
 
 public class Child extends User {
 
-    private final Sex sex;
-    private final int age;
-    private final List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities;
+    private Sex sex;
+    private int age;
+    private List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities;
+
+    public Child() {
+    }
 
     public Child(String firstName, String lastName, Sex sex, int age, List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities) {
         //TODO -> do we need a check here...??
@@ -21,4 +24,27 @@ public class Child extends User {
         FEMALE;
     }
 
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public List<KnownDevelopmentalDisabilities> getKnownDevelopmentalDisabilities() {
+        return knownDevelopmentalDisabilities;
+    }
+
+    public void setKnownDevelopmentalDisabilities(List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities) {
+        this.knownDevelopmentalDisabilities = knownDevelopmentalDisabilities;
+    }
 }

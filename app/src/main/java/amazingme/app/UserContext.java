@@ -1,7 +1,5 @@
 package amazingme.app;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,20 +9,51 @@ import amazingme.model.Parent;
 
 public class UserContext {
 
-    public Parent parent;
-    public HashMap<Integer, Child> children; //not setting this as final because it could change in a session of using the app
-    public List<GameResult> gameResults;
-    public int currentChildUser;
+    private Parent parent;
+    private List<Child> children; //not setting this as final because it could change in a session of using the app
+    private List<GameResult> gameResults;
+    private int currentChildUser;
 
     public UserContext() {
-        this(null, new LinkedHashMap<Integer, Child>(), new LinkedList<GameResult>());
+        this(new Parent(), new LinkedList<Child>(), new LinkedList<GameResult>());
     }
 
-    public UserContext(Parent parent, HashMap<Integer, Child> children, List<GameResult> gameResults) {
+    public UserContext(Parent parent, List<Child> children, List<GameResult> gameResults) {
         this.parent = parent;
         this.children = children;
         this.gameResults = gameResults;
         this.currentChildUser = 0;
     }
 
+    public Parent getParent() {
+        return parent;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
+    }
+
+    public List<Child> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Child> children) {
+        this.children = children;
+    }
+
+    public List<GameResult> getGameResults() {
+        return gameResults;
+    }
+
+    public void setGameResults(List<GameResult> gameResults) {
+        this.gameResults = gameResults;
+    }
+
+    public int getCurrentChildUser() {
+        return currentChildUser;
+    }
+
+    public void setCurrentChildUser(int currentChildUser) {
+        this.currentChildUser = currentChildUser;
+    }
 }

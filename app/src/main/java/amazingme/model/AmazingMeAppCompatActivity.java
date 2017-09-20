@@ -31,5 +31,4 @@ public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
     public final void goTo(EnumeratedActivity activity) {
         ActivityManager.getInstance().goTo(AmazingMeAppCompatActivity.this, activity);
     }
-
 }
