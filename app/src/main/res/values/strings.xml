@@ -65,6 +65,15 @@
         Unknown error encountered. Please try again later.
     </string>
 
+    <string-array name="yesno">
+        <item>no</item>
+        <item>yes</item>
+    </string-array>
+
+    <string-array name="sex">
+        <item>male</item>
+        <item>female</item>
+    </string-array>
 
 
 </resources>

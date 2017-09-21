@@ -5,6 +5,7 @@ import java.util.List;
 
 import amazingme.activities.app.ChildRegistrationActivity;
 import amazingme.activities.app.ForgotPasswordActivity;
+import amazingme.activities.app.GameSelectionPage;
 import amazingme.activities.app.LandingPage;
 import amazingme.activities.app.LoginActivity;
 import amazingme.activities.app.MainMenu;
@@ -25,6 +26,7 @@ public enum EnumeratedActivity {
     PCP_INFORMATION(PrimaryCarePhysicianInformationActivity.class),
     CHILD_REGISTRATION(ChildRegistrationActivity.class),
     //GAME_SELECTION,
+    GAME_SELECTION_PAGE(GameSelectionPage.class),
     THREE_TOUCH_GAME("ThreeTouchGame", true, true, ThreeTouchGame.class);
 
     private String className;
