@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.QuickContactBadge;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -11,8 +12,6 @@ import com.amazingme.activities.R;
 
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
-
-import static com.amazingme.activities.R.id.user_profile_back_button;
 
 public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
 
@@ -23,6 +22,7 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
     private EditText firstnameEditText, lastnameEditText, ageEditText, sexEditText;
     private TextView profview, abilityview, sexview;
     private Spinner yesnoSpinner, malefemale;
+    private QuickContactBadge profilepic;
 
     public ChildRegistrationActivity() {
         super(R.layout.activity_child_registration);
@@ -43,29 +43,30 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         //backBtn.setOnClickListener(new View.OnClickListener() {
         //@Override
         //public void onClick(View v) {
-        backBtn = (Button) findViewById(user_profile_back_button);
-        doneBtn = (Button) findViewById(R.id.button3);
-        childBtn = (Button) findViewById(R.id.button2);
-        firstnameEditText = (EditText) findViewById(R.id.editText2);
-        lastnameEditText = (EditText) findViewById(R.id.editText4);
-        ageEditText = (EditText) findViewById(R.id.editText5);
+        profilepic = (QuickContactBadge) findViewById(R.id.child_registration_child_portrait);
+        backBtn = (Button) findViewById(R.id.child_registration_back_button);
+        doneBtn = (Button) findViewById(R.id.child_registration_done_button);
+        childBtn = (Button) findViewById(R.id.child_registration_add_another_child);
+        firstnameEditText = (EditText) findViewById(R.id.child_registration_first_name);
+        lastnameEditText = (EditText) findViewById(R.id.child_registration_last_name);
+        ageEditText = (EditText) findViewById(R.id.child_registration_date_of_birth);
         //sexEditText = (EditText) findViewById(R.id.editText7);
-        profview = (TextView) findViewById(R.id.textView4);
-        abilityview = (TextView) findViewById(R.id.textView5);
-        sexview = (TextView) findViewById(R.id.lable);
+        profview = (TextView) findViewById(R.id.user_profile_parent_profile_label);
+        abilityview = (TextView) findViewById(R.id.child_registration_question_label);
+        sexview = (TextView) findViewById(R.id.child_registration_sex_label);
 
-        yesnoSpinner = (Spinner) findViewById(R.id.spinner1);
-        malefemale = (Spinner) findViewById(R.id.spinner2);
+        yesnoSpinner = (Spinner) findViewById(R.id.child_registration_disability_dropdown);
+        malefemale = (Spinner) findViewById(R.id.child_registration_sex_dropdown);
 
-        ArrayAdapter<String> spinAdapter = new ArrayAdapter<String>(ChildRegistrationActivity.this,
+        ArrayAdapter<String> child_registration_disability_dropdown = new ArrayAdapter<String>(ChildRegistrationActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.yesno));
-        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        yesnoSpinner.setAdapter(spinAdapter);
+        child_registration_disability_dropdown.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        yesnoSpinner.setAdapter(child_registration_disability_dropdown);
 
-        ArrayAdapter<String> spinAdapter2 = new ArrayAdapter<String>(ChildRegistrationActivity.this,
+        ArrayAdapter<String> child_registration_sex_dropdown = new ArrayAdapter<String>(ChildRegistrationActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.sex));
-        spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        malefemale.setAdapter(spinAdapter2);
+        child_registration_sex_dropdown.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        malefemale.setAdapter(child_registration_sex_dropdown);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
