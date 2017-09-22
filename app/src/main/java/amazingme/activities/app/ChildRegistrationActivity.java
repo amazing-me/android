@@ -19,10 +19,10 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
     //private Spinner birthMonth, birthDay, birthYear;
     //private String month, day, year;
     private Button backBtn, doneBtn, childBtn;
-    private EditText firstnameEditText, lastnameEditText, ageEditText, sexEditText;
-    private TextView profview, abilityview, sexview;
+    private EditText firstnameeditText, lastnameeditText, ageeditText, sexeditText;
+    private TextView profView, abilityView, sexView;
     private Spinner disList, sexSpinner;
-    private QuickContactBadge profilepic;
+    private QuickContactBadge profilePic;
 
     public ChildRegistrationActivity() {
         super(R.layout.activity_child_registration);
@@ -43,17 +43,17 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         //backBtn.setOnClickListener(new View.OnClickListener() {
         //@Override
         //public void onClick(View v) {
-        profilepic = (QuickContactBadge) findViewById(R.id.child_registration_child_portrait);
+        profilePic = (QuickContactBadge) findViewById(R.id.child_registration_child_portrait);
         backBtn = (Button) findViewById(R.id.child_registration_back_button);
         doneBtn = (Button) findViewById(R.id.child_registration_done_button);
         childBtn = (Button) findViewById(R.id.child_registration_add_another_child);
-        firstnameEditText = (EditText) findViewById(R.id.child_registration_first_name);
-        lastnameEditText = (EditText) findViewById(R.id.child_registration_last_name);
-        ageEditText = (EditText) findViewById(R.id.child_registration_date_of_birth);
-        //sexEditText = (EditText) findViewById(R.id.editText7);
-        profview = (TextView) findViewById(R.id.child_registration_parent_profile_label);
-        abilityview = (TextView) findViewById(R.id.child_registration_question_label);
-        sexview = (TextView) findViewById(R.id.child_registration_sex_label);
+        firstnameeditText = (EditText) findViewById(R.id.child_registration_first_name);
+        lastnameeditText = (EditText) findViewById(R.id.child_registration_last_name);
+        ageeditText = (EditText) findViewById(R.id.child_registration_date_of_birth);
+        //sexeditText = (EditText) findViewById(R.id.editText7);
+        profView = (TextView) findViewById(R.id.child_registration_parent_profile_label);
+        abilityView = (TextView) findViewById(R.id.child_registration_question_label);
+        sexView = (TextView) findViewById(R.id.child_registration_sex_label);
 
         disList = (Spinner) findViewById(R.id.child_registration_disability_dropdown);
         sexSpinner = (Spinner) findViewById(R.id.child_registration_sex_dropdown);
