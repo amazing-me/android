@@ -1,5 +1,7 @@
 package amazingme.activities.games;
 
+import com.amazingme.activities.R;
+
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeGame;
 import amazingme.model.GameResult;
@@ -11,6 +13,7 @@ import amazingme.model.Milestone;
 public class ThreeTouchGame extends AmazingMeGame {
 
     public ThreeTouchGame() {
+        super(0);
         this.relatedMilestones = new Milestone[] {Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_OR_UNDER};
     }
 

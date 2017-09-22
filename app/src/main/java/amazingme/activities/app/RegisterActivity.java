@@ -12,12 +12,14 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 import amazingme.activities.util.DialogHelper;
-import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
-import amazingme.controller.RegistrationHandlingActivity;
+import amazingme.controller.ISessionRegisterHandler;
+import amazingme.database.Session;
+
 import amazingme.model.AmazingMeAppCompatActivity;
 
-public class RegisterActivity extends AmazingMeAppCompatActivity implements RegistrationHandlingActivity {
+public class RegisterActivity extends AmazingMeAppCompatActivity implements ISessionRegisterHandler {
+
     private EditText emailEditText, passwordEditText;
     private Button registerBtn, backBtn;
 
@@ -35,14 +37,13 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
         registerBtn = (Button) findViewById(R.id.register_activity_register_button);
         backBtn = (Button) findViewById(R.id.register_activity_back_button);
 
-
-
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String email = emailEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
-                AmazingMeApplicationContext.createNewUser(email, password, RegisterActivity.this);
+
+                getContext().getSessionManager().register(email, password, RegisterActivity.this);
             }
         });
 
@@ -55,20 +56,19 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
     }
 
     @Override
-    public void handleRegistrationSuccess() {
-            goTo(EnumeratedActivity.USER_PROFILE);
+    public void onSessionRegisterSuccess(Session session) {
+        goTo(EnumeratedActivity.USER_PROFILE);
     }
 
     @Override
-    public void handleRegistrationFailure(final Exception exception) {
-        final String registrationFailed = this.getResources().getString(R.string.dialog_registration_failed);
-        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(this, registrationFailed);
-        final String exceptionMessage = getRegistrationExceptionMessage(exception);
+    public void onSessionRegisterFailure(Exception e) {
+        final String registrationFailed = RegisterActivity.this.getResources().getString(R.string.dialog_registration_failed);
+        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(RegisterActivity.this, registrationFailed);
+        final String exceptionMessage = getRegistrationExceptionMessage(e);
 
         alertDialog.setMessage(exceptionMessage);
         alertDialog.show();
     }
-
 
     private String getRegistrationExceptionMessage(final Exception exception) {
         final String registrationTag = this.getResources().getString(R.string.tag_registration);
@@ -88,4 +88,5 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements Regi
         }
         return exceptionMessage;
     }
+
 }

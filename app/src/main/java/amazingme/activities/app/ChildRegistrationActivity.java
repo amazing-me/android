@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.model.Child;
@@ -56,8 +55,11 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
             public void onClick(View v) {
                 String firstName = ((EditText) findViewById(R.id.child_registration_first_name)).getText().toString();
                 String lastName = ((EditText) findViewById(R.id.child_registration_last_name)).getText().toString();
-                AmazingMeApplicationContext.addChild(new Child(firstName, lastName, Child.Sex.MALE, 3, new LinkedList<KnownDevelopmentalDisabilities>()));
-                AmazingMeApplicationContext.saveContext();
+
+                Child child = new Child(firstName, lastName, Child.Sex.MALE, 3, new LinkedList<KnownDevelopmentalDisabilities>());
+                getContext().getUserContext().getChildren().add(child);
+                getContext().getSession().saveContext();
+
                 goTo(EnumeratedActivity.LANDING_PAGE);
             }
         });

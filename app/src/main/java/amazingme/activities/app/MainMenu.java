@@ -1,6 +1,5 @@
 package amazingme.activities.app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,24 +11,27 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.amazingme.activities.R;
-import com.google.firebase.auth.FirebaseUser;
 
-import amazingme.app.AmazingMeApplicationContext;
-import amazingme.database.FirebaseHelper;
+import org.w3c.dom.Text;
+
+import amazingme.controller.ISessionLogoutHandler;
+import amazingme.database.Session;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.app.EnumeratedActivity;
 
 public class MainMenu extends AmazingMeAppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ISessionLogoutHandler {
 
     public MainMenu() { super(R.layout.activity_main_menu); }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        redirectIfNotSignedIn();
+
+        goToIfNotSignedIn(EnumeratedActivity.LOGIN);
     }
 
     @Override
@@ -83,8 +85,7 @@ public class MainMenu extends AmazingMeAppCompatActivity
         } else if (id == R.id.nav_send) {
 
         } else if (id == R.id.logout) {
-            AmazingMeApplicationContext.endSession();
-            goTo(EnumeratedActivity.LOGIN);
+            getContext().getSessionManager().logout(this);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -119,11 +120,23 @@ public class MainMenu extends AmazingMeAppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View header = navigationView.getHeaderView(0);
+        TextView nameText = (TextView) header.findViewById(R.id.nav_main_menu_name_text);
+        TextView emailText = (TextView) header.findViewById(R.id.nav_main_menu_email_text);
+
+        Session session = getContext().getSession();
+        nameText.setText(session.getDisplayName());
+        emailText.setText(session.getEmail());
     }
 
-    private void redirectIfNotSignedIn() {
-        if (!AmazingMeApplicationContext.hasActiveSession()) {
-            goTo(EnumeratedActivity.LOGIN);
-        }
+    public void onSessionLogoutSuccess() {
+        goTo(EnumeratedActivity.LOGIN);
     }
+
+    @Override
+    public void onSessionLogoutFailure(Exception e) {
+        // TODO: Add error handling when failing to logout
+    }
+
 }

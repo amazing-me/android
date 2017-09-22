@@ -6,9 +6,9 @@ import android.widget.EditText;
 
 import com.amazingme.activities.R;
 
-import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
+import amazingme.model.Parent;
 
 public class UserProfileActivity extends AmazingMeAppCompatActivity {
 
@@ -40,7 +40,11 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                AmazingMeApplicationContext.setParentName(firstName.getText().toString(), lastName.getText().toString());
+                Parent parent = getContext().getUserContext().getParent();
+                parent.setFirstName(firstName.getText().toString());
+                parent.setLastName(lastName.getText().toString());
+
+                getContext().getSession().saveContext();
                 goTo(EnumeratedActivity.PCP_INFORMATION);
             }
         });

@@ -10,6 +10,10 @@ public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
 
     protected Milestone[] relatedMilestones;
 
+    public AmazingMeGame(int layout) {
+        super(layout);
+    }
+
     public final void resign(boolean gameWasCompleted) {
         Bundle gameResultsBundle = new Bundle();
         if(gameWasCompleted) {

@@ -1,6 +1,8 @@
 package amazingme.activities.app;
 
 import android.app.AlertDialog;
+import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,16 +15,26 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 import amazingme.activities.util.DialogHelper;
-import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
-import amazingme.controller.LoginHandlingActivity;
+import amazingme.controller.ISessionInitHandler;
+import amazingme.controller.ISessionLoginHandler;
+import amazingme.database.Session;
+
 import amazingme.model.AmazingMeAppCompatActivity;
 
-public class LoginActivity extends AmazingMeAppCompatActivity implements LoginHandlingActivity {
+public class LoginActivity extends AmazingMeAppCompatActivity implements ISessionLoginHandler, ISessionInitHandler {
+
     private EditText emailEditText, passwordEditText;
     private Button loginBtn, registerBtn;
     private TextView forgotPasswordTextBtn;
 
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        getContext().getSessionManager().initialize(this);
+    }
 
     public LoginActivity() { super(R.layout.activity_login); }
 
@@ -51,8 +63,8 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements LoginHa
             public void onClick(View view) {
                 final String email = emailEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
-                goTo(EnumeratedActivity.CHILD_REGISTRATION);
-                //AmazingMeApplicationContext.restoreSession(email, password, LoginActivity.this);
+
+                getContext().getSessionManager().login(email, password, LoginActivity.this);
             }
         });
 
@@ -65,19 +77,27 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements LoginHa
     }
 
     @Override
-    public void handleLoginSuccess() {
+    public void onSessionLoginSuccess(Session session) {
         goTo(EnumeratedActivity.MAIN_MENU);
     }
 
     @Override
-    public void handleLoginFailure(Exception e) {
-        final String loginFailed = this.getResources().getString(R.string.dialog_login_failed);
-        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(this, loginFailed);
-
+    public void onSessionLoginFailure(Exception e) {
+        final String loginFailed = LoginActivity.this.getResources().getString(R.string.dialog_login_failed);
+        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(LoginActivity.this, loginFailed);
         final String exceptionMessage = getLoginExceptionMessage(e);
 
         alertDialog.setMessage(exceptionMessage);
         alertDialog.show();
+    }
+
+    @Override
+    public void onSessionInitSuccess(Session session) {
+        goToIfSignedIn(EnumeratedActivity.MAIN_MENU);
+    }
+
+    @Override
+    public void onSessionInitFailure(Exception e) {
     }
 
     private String getLoginExceptionMessage(final Exception exception) {
