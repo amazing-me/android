@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 import amazingme.activities.util.DialogHelper;
-import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
 import amazingme.controller.LoginHandlingActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
@@ -52,7 +51,6 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements LoginHa
                 final String email = emailEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
                 goTo(EnumeratedActivity.CHILD_REGISTRATION);
-                //AmazingMeApplicationContext.restoreSession(email, password, LoginActivity.this);
             }
         });
 
