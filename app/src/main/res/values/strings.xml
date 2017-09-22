@@ -65,9 +65,16 @@
         Unknown error encountered. Please try again later.
     </string>
 
-    <string-array name="yesno">
+    <string-array name="disList">
         <item>no</item>
-        <item>yes</item>
+        <item>disability 1</item>
+        <item>disability 2</item>
+        <item>disability 3</item>
+        <item>disability 4</item>
+        <item>disability 5</item>
+        <item>disability 6</item>
+        <item>disability 7</item>
+        <item>disability 8</item>
     </string-array>
 
     <string-array name="sex">

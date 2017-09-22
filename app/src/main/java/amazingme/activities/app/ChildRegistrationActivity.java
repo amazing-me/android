@@ -21,7 +21,7 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
     private Button backBtn, doneBtn, childBtn;
     private EditText firstnameEditText, lastnameEditText, ageEditText, sexEditText;
     private TextView profview, abilityview, sexview;
-    private Spinner yesnoSpinner, malefemale;
+    private Spinner disList, sexSpinner;
     private QuickContactBadge profilepic;
 
     public ChildRegistrationActivity() {
@@ -51,22 +51,22 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         lastnameEditText = (EditText) findViewById(R.id.child_registration_last_name);
         ageEditText = (EditText) findViewById(R.id.child_registration_date_of_birth);
         //sexEditText = (EditText) findViewById(R.id.editText7);
-        profview = (TextView) findViewById(R.id.user_profile_parent_profile_label);
+        profview = (TextView) findViewById(R.id.child_registration_parent_profile_label);
         abilityview = (TextView) findViewById(R.id.child_registration_question_label);
         sexview = (TextView) findViewById(R.id.child_registration_sex_label);
 
-        yesnoSpinner = (Spinner) findViewById(R.id.child_registration_disability_dropdown);
-        malefemale = (Spinner) findViewById(R.id.child_registration_sex_dropdown);
+        disList = (Spinner) findViewById(R.id.child_registration_disability_dropdown);
+        sexSpinner = (Spinner) findViewById(R.id.child_registration_sex_dropdown);
 
         ArrayAdapter<String> child_registration_disability_dropdown = new ArrayAdapter<String>(ChildRegistrationActivity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.yesno));
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.disList));
         child_registration_disability_dropdown.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        yesnoSpinner.setAdapter(child_registration_disability_dropdown);
+        disList.setAdapter(child_registration_disability_dropdown);
 
         ArrayAdapter<String> child_registration_sex_dropdown = new ArrayAdapter<String>(ChildRegistrationActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.sex));
         child_registration_sex_dropdown.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        malefemale.setAdapter(child_registration_sex_dropdown);
+        sexSpinner.setAdapter(child_registration_sex_dropdown);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
