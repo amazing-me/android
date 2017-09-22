@@ -61,10 +61,12 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String email = emailEditText.getText().toString();
-                final String password = passwordEditText.getText().toString();
+                if (emailEditText.getText() != null && passwordEditText.getText() != null) {
+                    final String email = emailEditText.getText().toString();
+                    final String password = passwordEditText.getText().toString();
 
-                getContext().getSessionManager().login(email, password, LoginActivity.this);
+                    getContext().getSessionManager().login(email, password, LoginActivity.this);
+                }
             }
         });
 
