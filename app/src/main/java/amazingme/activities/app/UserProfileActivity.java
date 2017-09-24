@@ -40,11 +40,11 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Parent parent = getContext().getUserContext().getParent();
+                Parent parent = getAppContext().getUserContext().getParent();
                 parent.setFirstName(firstName.getText().toString());
                 parent.setLastName(lastName.getText().toString());
 
-                getContext().getSession().saveContext();
+                getAppContext().saveUserContext();
                 goTo(EnumeratedActivity.PCP_INFORMATION);
             }
         });

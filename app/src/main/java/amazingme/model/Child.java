@@ -8,9 +8,6 @@ public class Child extends User {
     private int age;
     private List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities;
 
-    public Child() {
-    }
-
     public Child(String firstName, String lastName, Sex sex, int age, List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities) {
         //TODO -> do we need a check here...??
         super(firstName, lastName);

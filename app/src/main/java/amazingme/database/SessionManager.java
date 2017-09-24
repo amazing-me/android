@@ -7,7 +7,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
-import amazingme.controller.ISessionInitHandler;
 import amazingme.controller.ISessionRegisterHandler;
 import amazingme.controller.ISessionLogoutHandler;
 import amazingme.controller.ISessionLoginHandler;
@@ -16,27 +15,20 @@ public abstract class SessionManager<T extends Session> {
 
     private T session;
 
-    public Task<T> initialize(final ISessionInitHandler handler) {
-        return loadContext(initialize()).addOnSuccessListener(new OnSuccessListener<T>() {
+    public Task<T> initialize(final ISessionLoginHandler handler) {
+        return loadContext(doInitialize()).addOnSuccessListener(new OnSuccessListener<T>() {
             @Override
             public void onSuccess(T session) {
                 SessionManager.this.session = session;
                 if(handler != null) {
-                    handler.onSessionInitSuccess(session);
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if(handler != null) {
-                    handler.onSessionInitFailure(e);
+                    handler.onSessionLoginSuccess(session);
                 }
             }
         });
     }
 
-    public Task<T> login(@NonNull String email, @NonNull String pass, final ISessionLoginHandler handler) {
-        return loadContext(login(email, pass)).addOnSuccessListener(new OnSuccessListener<T>() {
+    public Task<T> login(@NonNull final String email, @NonNull String pass, final ISessionLoginHandler handler) {
+        return loadContext(doLogin(email, pass)).addOnSuccessListener(new OnSuccessListener<T>() {
             @Override
             public void onSuccess(T session) {
                 SessionManager.this.session = session;
@@ -54,10 +46,12 @@ public abstract class SessionManager<T extends Session> {
         });
     }
 
-    public Task<T> register(@NonNull String email, @NonNull String pass, final ISessionRegisterHandler handler) {
-        return loadContext(register(email, pass)).addOnSuccessListener(new OnSuccessListener<T>() {
+    public Task<T> register(@NonNull final String email, @NonNull String pass, final ISessionRegisterHandler handler) {
+        return loadContext(doRegister(email, pass)).addOnSuccessListener(new OnSuccessListener<T>() {
             @Override
             public void onSuccess(T session) {
+                session.getUserContext().getParent().setEmail(email);
+
                 SessionManager.this.session = session;
                 if(handler != null) {
                     handler.onSessionRegisterSuccess(session);
@@ -74,7 +68,7 @@ public abstract class SessionManager<T extends Session> {
     }
 
     public Task<Void> logout(final ISessionLogoutHandler handler) {
-        return logout().addOnSuccessListener(new OnSuccessListener<Void>() {
+        return doLogout().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void arg) {
                 SessionManager.this.session = null;
@@ -92,13 +86,13 @@ public abstract class SessionManager<T extends Session> {
         });
     }
 
-    protected abstract Task<T> initialize();
+    protected abstract Task<T> doInitialize();
 
-    protected abstract Task<T> login(@NonNull String email, @NonNull String pass);
+    protected abstract Task<T> doLogin(@NonNull String email, @NonNull String pass);
 
-    protected abstract Task<T> register(@NonNull String email, @NonNull String pass);
+    protected abstract Task<T> doRegister(@NonNull String email, @NonNull String pass);
 
-    protected abstract Task<Void> logout();
+    protected abstract Task<Void> doLogout();
 
     public T getSession() {
         return session;

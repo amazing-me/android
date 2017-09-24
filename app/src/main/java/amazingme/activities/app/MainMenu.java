@@ -15,8 +15,6 @@ import android.widget.TextView;
 
 import com.amazingme.activities.R;
 
-import org.w3c.dom.Text;
-
 import amazingme.controller.ISessionLogoutHandler;
 import amazingme.database.Session;
 import amazingme.model.AmazingMeAppCompatActivity;
@@ -85,7 +83,7 @@ public class MainMenu extends AmazingMeAppCompatActivity
         } else if (id == R.id.nav_send) {
 
         } else if (id == R.id.logout) {
-            getContext().getSessionManager().logout(this);
+            getAppContext().sessionLogout(this);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -125,9 +123,8 @@ public class MainMenu extends AmazingMeAppCompatActivity
         TextView nameText = (TextView) header.findViewById(R.id.nav_main_menu_name_text);
         TextView emailText = (TextView) header.findViewById(R.id.nav_main_menu_email_text);
 
-        Session session = getContext().getSession();
-        nameText.setText(session.getDisplayName());
-        emailText.setText(session.getEmail());
+        nameText.setText(getUserContext().getParent().getDisplayName());
+        emailText.setText(getUserContext().getParent().getEmail());
     }
 
     public void onSessionLogoutSuccess() {
@@ -136,7 +133,7 @@ public class MainMenu extends AmazingMeAppCompatActivity
 
     @Override
     public void onSessionLogoutFailure(Exception e) {
-        // TODO: Add error handling when failing to logout
+        // TODO: Add error handling when failing to doLogout
     }
 
 }

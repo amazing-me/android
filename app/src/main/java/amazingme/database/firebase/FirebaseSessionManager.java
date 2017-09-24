@@ -20,16 +20,13 @@ public class FirebaseSessionManager extends SessionManager<FirebaseSession> {
     }
 
     @Override
-    protected Task<FirebaseSession> initialize() {
+    protected Task<FirebaseSession> doInitialize() {
         FirebaseUser user = auth.getCurrentUser();
         return Tasks.forResult(user != null ? new FirebaseSession(user) : null);
     }
 
     @Override
-    protected Task<FirebaseSession> login(@NonNull String email, @NonNull String pass) {
-        if(auth.getCurrentUser() != null) {
-            auth.signOut();
-        }
+    protected Task<FirebaseSession> doLogin(@NonNull String email, @NonNull String pass) {
         return auth.signInWithEmailAndPassword(email, pass).continueWith(new Continuation<AuthResult, FirebaseSession>() {
             @Override
             public FirebaseSession then(@NonNull Task<AuthResult> task) throws Exception {
@@ -39,11 +36,7 @@ public class FirebaseSessionManager extends SessionManager<FirebaseSession> {
     }
 
     @Override
-    protected Task<FirebaseSession> register(@NonNull String email, @NonNull String pass) {
-        if(auth.getCurrentUser() != null) {
-            auth.signOut();
-        }
-
+    protected Task<FirebaseSession> doRegister(@NonNull String email, @NonNull String pass) {
         return auth.createUserWithEmailAndPassword(email, pass).continueWith(new Continuation<AuthResult, FirebaseSession>() {
             @Override
             public FirebaseSession then(@NonNull Task<AuthResult> task) throws Exception {
@@ -53,7 +46,7 @@ public class FirebaseSessionManager extends SessionManager<FirebaseSession> {
     }
 
     @Override
-    protected Task<Void> logout() {
+    protected Task<Void> doLogout() {
         auth.signOut();
         return Tasks.forResult(null);
     }
