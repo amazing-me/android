@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.google.android.gms.tasks.Task;
 
+import amazingme.controller.ISessionForgotPasswordHandler;
 import amazingme.controller.ISessionLoginHandler;
 import amazingme.controller.ISessionLogoutHandler;
 import amazingme.controller.ISessionRegisterHandler;
@@ -44,6 +45,10 @@ public class AmazingMeApplicationContext extends Application {
 
     public void sessionLogout(final ISessionLogoutHandler handler) {
         sessionManager.logout(handler);
+    }
+
+    public void sessionForgotPassword(final ISessionForgotPasswordHandler handler, String email) {
+        sessionManager.forgotPassword(handler, email);
     }
 
     public boolean hasSession() {

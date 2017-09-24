@@ -7,6 +7,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import amazingme.controller.ISessionForgotPasswordHandler;
 import amazingme.controller.ISessionRegisterHandler;
 import amazingme.controller.ISessionLogoutHandler;
 import amazingme.controller.ISessionLoginHandler;
@@ -86,6 +87,24 @@ public abstract class SessionManager<T extends Session> {
         });
     }
 
+    public Task<Void> forgotPassword(final ISessionForgotPasswordHandler handler, @NonNull String email) {
+        return doForgotPassword(email).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                if(handler != null) {
+                    handler.onSessionForgotPasswordSuccess();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if(handler != null) {
+                    handler.onSessionForgotPasswordFailure(e);
+                }
+            }
+        });
+    }
+
     protected abstract Task<T> doInitialize();
 
     protected abstract Task<T> doLogin(@NonNull String email, @NonNull String pass);
@@ -93,6 +112,8 @@ public abstract class SessionManager<T extends Session> {
     protected abstract Task<T> doRegister(@NonNull String email, @NonNull String pass);
 
     protected abstract Task<Void> doLogout();
+
+    protected abstract Task<Void> doForgotPassword(@NonNull String email);
 
     public T getSession() {
         return session;

@@ -51,4 +51,9 @@ public class FirebaseSessionManager extends SessionManager<FirebaseSession> {
         return Tasks.forResult(null);
     }
 
+    @Override
+    protected Task<Void> doForgotPassword(@NonNull String email) {
+        return auth.sendPasswordResetEmail(email);
+    }
+
 }
