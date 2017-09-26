@@ -2,6 +2,8 @@ package amazingme.model;
 
 import android.os.Bundle;
 
+import com.amazingme.activities.R;
+
 import java.util.LinkedList;
 
 import amazingme.app.EnumeratedActivity;
