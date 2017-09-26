@@ -57,8 +57,8 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
                 String lastName = ((EditText) findViewById(R.id.child_registration_last_name)).getText().toString();
 
                 Child child = new Child(firstName, lastName, Child.Sex.MALE, 3, new LinkedList<KnownDevelopmentalDisabilities>());
-                getContext().getUserContext().getChildren().add(child);
-                getContext().getSession().saveContext();
+                getUserContext().addChild(child);
+                getAppContext().saveUserContext();
 
                 goTo(EnumeratedActivity.LANDING_PAGE);
             }
@@ -104,12 +104,12 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             month = parent.getItemAtPosition(position).toString();
-            //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+            //Toast.makeText(parent.getAppContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-            //Toast.makeText(parent.getContext(), "Val", Toast.LENGTH_LONG).show();
+            //Toast.makeText(parent.getAppContext(), "Val", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -117,12 +117,12 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             day = parent.getItemAtPosition(position).toString();
-            //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+            //Toast.makeText(parent.getAppContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-            //Toast.makeText(parent.getContext(), "Val", Toast.LENGTH_LONG).show();
+            //Toast.makeText(parent.getAppContext(), "Val", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -130,12 +130,12 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             year = parent.getItemAtPosition(position).toString();
-            //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+            //Toast.makeText(parent.getAppContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-            //Toast.makeText(parent.getContext(), "Val", Toast.LENGTH_LONG).show();
+            //Toast.makeText(parent.getAppContext(), "Val", Toast.LENGTH_LONG).show();
         }
     }
 }

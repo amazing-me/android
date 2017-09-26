@@ -43,7 +43,7 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements ISes
                 final String email = emailEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
 
-                getContext().getSessionManager().register(email, password, RegisterActivity.this);
+                getAppContext().sessionRegister(email, password, RegisterActivity.this);
             }
         });
 
