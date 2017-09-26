@@ -15,5 +15,7 @@ public class LandingPage extends AmazingMeAppCompatActivity {
     }
 
     @Override
-    public void bindToUserInterface() {}
+    public void bindToUserInterface() {
+
+    }
 }

@@ -39,14 +39,24 @@
         Login
     </string>
     <string name="dialog_login_failed">
-        Login failed.
+        Login Failed
     </string>
 
     <string name="tag_registration">
         Login
     </string>
     <string name="dialog_registration_failed">
-        Login failed.
+        Login Failed
+    </string>
+    <string name="dialog_forgot_password_success">
+        Forgot Password
+    </string>
+    <string name="dialog_forgot_password_failed">
+        Forgot Password Failed
+    </string>
+
+    <string name="success_forgot_password">
+        Instructions have been sent to your e-mail on how to reset your password.
     </string>
 
     <string name="error_weak_password">
@@ -64,7 +74,5 @@
     <string name="error_unknown">
         Unknown error encountered. Please try again later.
     </string>
-
-
 
 </resources>

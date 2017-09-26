@@ -3,6 +3,7 @@ package amazingme.controller;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import amazingme.app.EnumeratedActivity;
 
@@ -19,6 +20,10 @@ public class ActivityManager {
 
     public void goTo(final Activity context, final EnumeratedActivity endingActivity) {
         context.startActivity(new Intent(context, endingActivity.getAppCompatActivity()));
+    }
+
+    public void goTo(final Activity context, final Class<? extends AppCompatActivity> endingActivity) {
+        context.startActivity(new Intent(context, endingActivity));
     }
 
     public void goTo(final Activity context, final EnumeratedActivity endingActivity, final Bundle bundle) {

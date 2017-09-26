@@ -29,4 +29,8 @@ public abstract class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getDisplayName() {
+        return String.format("%s %s", firstName, lastName);
+    }
 }

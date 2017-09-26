@@ -9,19 +9,19 @@ import amazingme.app.UserContext;
 
 public abstract class Session {
 
-    private UserContext context;
+    private UserContext userContext;
 
     public Session() {
-        context = new UserContext();
+        userContext = new UserContext();
     }
 
-    public UserContext getContext() {
-        return context;
+    public UserContext getUserContext() {
+        return userContext;
     }
-
-    public abstract String getDisplayName();
 
     public abstract String getEmail();
+
+    public abstract String getUid();
 
     public Task<Void> loadContext() {
         return doLoadContext().continueWith(new Continuation<UserContext, Void>() {
@@ -29,7 +29,7 @@ public abstract class Session {
             public Void then(@NonNull Task<UserContext> task) throws Exception {
                 UserContext loadedContext = task.getResult();
                 if(loadedContext != null) {
-                    context = loadedContext;
+                    userContext = loadedContext;
                 }
 
                 return null;
@@ -38,7 +38,7 @@ public abstract class Session {
     }
 
     public Task<Void> saveContext() {
-        return doSaveContext(context);
+        return doSaveContext(userContext);
     }
 
     protected abstract Task<UserContext> doLoadContext();
