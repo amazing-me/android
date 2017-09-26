@@ -33,7 +33,6 @@ public class MainMenu extends AmazingMeAppCompatActivity
         super.onCreate(savedInstanceState);
 
         // Register games when app is launched
-        GameRegister.registerGames(getContext());
         goToIfNotSignedIn(EnumeratedActivity.LOGIN);
     }
 
@@ -87,10 +86,10 @@ public class MainMenu extends AmazingMeAppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        } else if (id == R.id.logout) {
+        } else if (id == R.id.nav_logout) {
             getAppContext().sessionLogout(this);
         } else if (id == R.id.nav_play) {
-            ActivityManager.getInstance().goTo(MainMenu.this, EnumeratedActivity.GAME_MENU);
+            goTo(EnumeratedActivity.GAME_MENU);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

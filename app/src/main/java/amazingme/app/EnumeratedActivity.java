@@ -1,6 +1,7 @@
 package amazingme.app;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import amazingme.activities.app.ChildRegistrationActivity;
@@ -14,6 +15,7 @@ import amazingme.activities.app.RegisterActivity;
 import amazingme.activities.app.UserProfileActivity;
 import amazingme.activities.games.ThreeTouchGame;
 import amazingme.model.AmazingMeAppCompatActivity;
+import amazingme.model.AmazingMeGame;
 
 //TODO -> clean this up... surely there is a way to format it better
 public enum EnumeratedActivity {
@@ -26,37 +28,43 @@ public enum EnumeratedActivity {
     PCP_INFORMATION(PrimaryCarePhysicianInformationActivity.class),
     CHILD_REGISTRATION(ChildRegistrationActivity.class),
     GAME_MENU(GameMenuActivity.class),
-    THREE_TOUCH_GAME(ThreeTouchGame.class.getName(), true, true, ThreeTouchGame.class);
+    THREE_TOUCH_GAME(ThreeTouchGame.class, true, true);
 
     private String className;
     private boolean isGame;
     private boolean isActiveGame;
     private final String PACKAGE_NAME = "amazingme.model.";
-    private final List<EnumeratedActivity> allGames = new ArrayList<>();
-    private final List<EnumeratedActivity> activeGames = new ArrayList<>();
     private final Class<? extends AmazingMeAppCompatActivity> appCompatActivity;
-
-    EnumeratedActivity(){
-        this("", false, false, null);
-    }
+    private final Class<? extends AmazingMeGame> appCompatGame;
 
     EnumeratedActivity(Class<? extends AmazingMeAppCompatActivity> appCompatActivity) {
-        this.appCompatActivity = appCompatActivity;
+        this(appCompatActivity, false, false);
     }
 
-    EnumeratedActivity(String className, boolean isGame, boolean isActive, Class<? extends AmazingMeAppCompatActivity> appCompatActivity){
-        this.className = className;
+    EnumeratedActivity(Class<? extends AmazingMeAppCompatActivity> appCompatActivity, boolean isGame, boolean isActive){
+        this.className = appCompatActivity.getName();
         this.isGame = isGame;
         this.isActiveGame = isGame && isActive;
-        if(isGame) { allGames.add(this); }
-        if(isActive) { activeGames.add(this);}
+        //TODO -> I don't love this, but it'll work for now. 
+        // so basically all games have an additional appCompatGame variable that holds the actual class
+        if(isGame) {
+            this.appCompatGame = (Class<? extends AmazingMeGame>) appCompatActivity;
+        } else {
+            this.appCompatGame = null;
+        }
         this.appCompatActivity = appCompatActivity;
-}
-
-
-    public List<String> activeGamesAsStringList() {
-        return new ArrayList<>();
     }
+
+    public static List<Class<? extends AmazingMeGame>> getRegisteredGames() {
+        List<Class<? extends AmazingMeGame>> activeGames = new LinkedList<>();
+        for (EnumeratedActivity activity : values()) {
+            if (activity.isActiveGame) {
+                activeGames.add(activity.appCompatGame);
+            }
+        }
+        return activeGames;
+    }
+
 
     public Class<? extends AmazingMeAppCompatActivity> getAppCompatActivity() {
         return this.appCompatActivity;
