@@ -7,8 +7,6 @@ import android.widget.TextView;
 
 import com.amazingme.activities.R;
 
-import org.w3c.dom.Text;
-
 import amazingme.activities.util.DialogHelper;
 import amazingme.app.EnumeratedActivity;
 import amazingme.controller.ISessionForgotPasswordHandler;
