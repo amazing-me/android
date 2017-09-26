@@ -8,13 +8,17 @@ import amazingme.controller.ISessionForgotPasswordHandler;
 import amazingme.controller.ISessionLoginHandler;
 import amazingme.controller.ISessionLogoutHandler;
 import amazingme.controller.ISessionRegisterHandler;
+import java.util.List;
+
 import amazingme.database.Session;
 import amazingme.database.SessionManager;
 import amazingme.database.firebase.FirebaseSessionManager;
+import amazingme.model.AmazingMeGame;
 
 public class AmazingMeApplicationContext extends Application {
 
     private SessionManager<? extends Session> sessionManager;
+    private List<Class<? extends AmazingMeGame>> games;
 
     @Override
     public void onCreate() {
@@ -53,6 +57,14 @@ public class AmazingMeApplicationContext extends Application {
 
     public boolean hasSession() {
         return sessionManager.hasSession();
+    }
+
+    public List<Class<? extends AmazingMeGame>> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Class<? extends AmazingMeGame>> games) {
+        this.games = games;
     }
 
 }

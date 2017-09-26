@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.amazingme.activities.R;
 
+import amazingme.activities.util.GameRegister;
+import amazingme.controller.ActivityManager;
 import amazingme.controller.ISessionLogoutHandler;
 import amazingme.database.Session;
 import amazingme.model.AmazingMeAppCompatActivity;
@@ -30,6 +32,8 @@ public class MainMenu extends AmazingMeAppCompatActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Register games when app is launched
+        GameRegister.registerGames(getContext());
         goToIfNotSignedIn(EnumeratedActivity.LOGIN);
     }
 
@@ -85,6 +89,8 @@ public class MainMenu extends AmazingMeAppCompatActivity
 
         } else if (id == R.id.logout) {
             getAppContext().sessionLogout(this);
+        } else if (id == R.id.nav_play) {
+            ActivityManager.getInstance().goTo(MainMenu.this, EnumeratedActivity.GAME_MENU);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
