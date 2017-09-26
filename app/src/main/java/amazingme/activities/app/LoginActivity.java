@@ -63,7 +63,9 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
                 final String email = emailEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
 
-                getAppContext().sessionLogin(email, password, LoginActivity.this);
+                if (!email.isEmpty() && !password.isEmpty()) {
+                    getAppContext().sessionLogin(email, password, LoginActivity.this);
+                }
             }
         });
 
