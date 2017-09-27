@@ -62,7 +62,6 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
             public void onClick(View v) {
                 String firstName = ((EditText) findViewById(R.id.child_registration_first_name)).getText().toString();
                 String lastName = ((EditText) findViewById(R.id.child_registration_last_name)).getText().toString();
-                Log.e("register", String.valueOf(year) + String.valueOf(month) + String.valueOf(day));
                 LocalDate dateOfBirth = new LocalDate(year, month, day);
 
                 Child child = new Child(firstName, lastName, Child.Sex.MALE, dateOfBirth, new LinkedList<KnownDevelopmentalDisabilities>());
@@ -103,7 +102,6 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
     private class MonthSpinnerListener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            Log.e("month spin listener", "month: " + month);
             month = Integer.parseInt(parent.getItemAtPosition(position).toString());
             Toast.makeText(parent.getContext(), String.valueOf(month), Toast.LENGTH_LONG).show();
         }
@@ -118,7 +116,6 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             day = Integer.parseInt(parent.getItemAtPosition(position).toString());
-            Log.e("day spin listener", "day: " + day);
             Toast.makeText(parent.getContext(), String.valueOf(day), Toast.LENGTH_LONG).show();
         }
 
@@ -131,7 +128,6 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
     private class YearSpinnerListener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            Log.e("year spin listener", "year: " + year);
             year = Integer.parseInt(parent.getItemAtPosition(position).toString());
             Toast.makeText(parent.getContext(), String.valueOf(year), Toast.LENGTH_LONG).show();
         }

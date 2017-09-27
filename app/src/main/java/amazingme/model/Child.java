@@ -11,7 +11,7 @@ public class Child extends User {
     private Sex sex;
     private int ageInMonths;
 
-    // have to use these because somewhere in the depths of LocalDate there's an array being used... BUT LocalDate makes counting months way easier so i'm keeping it.  
+    // have to use these because somewhere in the depths of LocalDate there's an array being used... BUT LocalDate makes counting months way easier so i'm keeping it.
     private int year;
     private int month;
     private int day;
