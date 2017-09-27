@@ -10,6 +10,9 @@ public class Child extends User {
 
     private Sex sex;
     private int ageInMonths;
+    private int year;
+    private int month;
+    private int day;
     private LocalDate dateOfBirth;
     private List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities;
 
@@ -26,13 +29,25 @@ public class Child extends User {
         this.sex = sex;
         this.dateOfBirth = dob;
         this.knownDevelopmentalDisabilities = knownDevelopmentalDisabilities;
-        this.updateAge();
+        this.setDateOfBirth(dob.getYear(), dob.getMonthOfYear(), dob.getDayOfMonth());
     }
 
     public enum Sex { //for health data, i'm decently sure gender preference isn't a factor, but we should clarify
         MALE,
         FEMALE;
     }
+
+    public void setYear(int year) { this.year = year; }
+
+    public void setMonth(int month) { this.year = month; }
+
+    public void setDay(int day) { this.year = day; }
+
+    public int getYear() { return this.year; }
+
+    public int getMonth() { return this.month; }
+
+    public int getDay() { return this.day; }
 
     public Sex getSex() {
         return sex;
@@ -43,6 +58,7 @@ public class Child extends User {
     }
 
     public int getAgeInMonths() {
+        this.updateAge();           // when we load in the date of birth isn't set. so we make sure it's set and adjust anytime we report the age in the rest of the app
         return ageInMonths;
     }
 
@@ -58,15 +74,18 @@ public class Child extends User {
         this.knownDevelopmentalDisabilities = knownDevelopmentalDisabilities;
     }
 
-    public void setDateOfBirth(LocalDate dob) {
-        this.dateOfBirth = dob;
+    private void setDateOfBirth(int year, int month, int day) {
+        this.dateOfBirth = new LocalDate(year, month, day);
         this.updateAge();
     }
 
-    public LocalDate getDateOfBirth() { return this.dateOfBirth; }
+    private LocalDate getDateOfBirth() { return this.dateOfBirth; }
 
-    public void updateAge() {
+    private void updateAge() {
         LocalDate now = new LocalDate();
+        if (this.dateOfBirth == null) { //we haven't set it yet, perhaps because of loading from the database
+            this.dateOfBirth = new LocalDate(this.year, this.month, this.day);
+        }
         this.ageInMonths = Months.monthsBetween(this.dateOfBirth, now).getMonths();
     }
 }
