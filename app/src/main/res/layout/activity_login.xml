@@ -81,21 +81,22 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
         app:srcCompat="@drawable/amazingmelogo"
-        android:layout_below="@+id/login_activity_login_button"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/login_activity_forgot_password_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp" />
 
     <TextView
         android:id="@+id/login_activity_forgot_password_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/login_activity_password_edit_text"
         android:clickable="true"
         android:text="Forgot Password?"
         android:textColor="@color/amazing_me_blue_and_white"
-        android:textStyle="italic" />
+        android:textStyle="bold|italic"
+        android:textSize="25dp"
+        android:layout_marginTop="14dp"
+        android:layout_below="@+id/login_activity_register_button"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

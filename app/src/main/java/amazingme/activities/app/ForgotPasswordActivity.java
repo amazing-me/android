@@ -3,6 +3,7 @@ package amazingme.activities.app;
 import android.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.amazingme.activities.R;
@@ -15,7 +16,7 @@ import amazingme.model.AmazingMeAppCompatActivity;
 public class ForgotPasswordActivity extends AmazingMeAppCompatActivity implements ISessionForgotPasswordHandler {
 
     private Button backBtn, sendBtn;
-    private TextView emailText;
+    private EditText emailText;
 
     public ForgotPasswordActivity() {
         super(R.layout.activity_forgot_password);
@@ -30,7 +31,7 @@ public class ForgotPasswordActivity extends AmazingMeAppCompatActivity implement
     public void bindToUserInterface() {
         backBtn = (Button) findViewById(R.id.forgot_password_back_button);
         sendBtn = (Button) findViewById(R.id.forgot_password_send_button);
-        emailText = (TextView) findViewById(R.id.forgot_password_email_text);
+        emailText = (EditText) findViewById(R.id.forgot_password_email_text);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
