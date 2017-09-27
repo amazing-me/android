@@ -1,5 +1,6 @@
 package amazingme.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Child extends User {
@@ -7,6 +8,12 @@ public class Child extends User {
     private Sex sex;
     private int age;
     private List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities;
+
+    public Child() {
+        this.sex = null;
+        this.age = -1;
+        this.knownDevelopmentalDisabilities = new LinkedList<>();
+    }
 
     public Child(String firstName, String lastName, Sex sex, int age, List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities) {
         //TODO -> do we need a check here...??

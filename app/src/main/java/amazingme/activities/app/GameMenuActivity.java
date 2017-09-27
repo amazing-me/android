@@ -33,7 +33,7 @@ public class GameMenuActivity extends AmazingMeAppCompatActivity {
 
     @Override
     public void bindToUserInterface() {
-        gamesClasses = getContext().getGames();
+        gamesClasses = getAppContext().getGames();
         populateGameItems();
 
         GridView gridview = (GridView) findViewById(R.id.gridview);

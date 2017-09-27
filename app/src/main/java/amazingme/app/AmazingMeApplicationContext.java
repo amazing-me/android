@@ -23,7 +23,7 @@ public class AmazingMeApplicationContext extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        setGames(EnumeratedActivity.getRegisteredGames());
         sessionManager = new FirebaseSessionManager();
     }
 
