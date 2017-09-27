@@ -134,7 +134,7 @@
         <item>"2012"</item>
     </string-array>
 
-    <string-array name="sex">
+    <string-array name="sex_options">
         <item>"Sex"</item>
         <item>"Male"</item>
         <item>"Female"</item>

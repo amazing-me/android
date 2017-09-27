@@ -34,6 +34,7 @@
 
     <Spinner
         android:id="@+id/child_registration_sex_spinner"
+        android:entries="@array/sex_options"
         android:layout_width="93dp"
         android:layout_height="37dp"
         android:layout_marginTop="19dp"

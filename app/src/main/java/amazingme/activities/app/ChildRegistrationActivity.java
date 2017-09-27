@@ -31,6 +31,7 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
     private Button backBtn, doneBtn;
     private Spinner birthMonth, birthDay, birthYear;
     private int month, day, year;
+    private Child.Sex sex;
 
     public ChildRegistrationActivity() { super(R.layout.activity_child_registration); }
 
@@ -45,6 +46,7 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         initDaySpinner();
         initYearSpinner();
         initDoneButton();
+        initSexSpinner();
         backBtn = (Button) findViewById(R.id.child_registration_add_another_button);
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,13 +66,21 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
                 String lastName = ((EditText) findViewById(R.id.child_registration_last_name)).getText().toString();
                 LocalDate dateOfBirth = new LocalDate(year, month, day);
 
-                Child child = new Child(firstName, lastName, Child.Sex.MALE, dateOfBirth, new LinkedList<KnownDevelopmentalDisabilities>());
+                Child child = new Child(firstName, lastName, sex, dateOfBirth, new LinkedList<KnownDevelopmentalDisabilities>());
                 getUserContext().addChild(child);
                 getAppContext().saveUserContext();
 
                 goTo(EnumeratedActivity.LANDING_PAGE);
             }
         });
+    }
+
+    private void initSexSpinner() {
+        birthMonth = (Spinner) findViewById(R.id.child_registration_sex_spinner);
+        ArrayAdapter<CharSequence> dataAdapter = ArrayAdapter.createFromResource(this, R.array.sex_options, android.R.layout.simple_spinner_item);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        birthMonth.setAdapter(dataAdapter);
+        birthMonth.setOnItemSelectedListener(new SexSpinnerListener());
     }
 
     private void initMonthSpinner() {
@@ -102,7 +112,9 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
     private class MonthSpinnerListener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            month = Integer.parseInt(parent.getItemAtPosition(position).toString());
+            if (!parent.getItemAtPosition(position).toString().equalsIgnoreCase("MONTH")) {
+                month = Integer.parseInt(parent.getItemAtPosition(position).toString());
+            }
             Toast.makeText(parent.getContext(), String.valueOf(month), Toast.LENGTH_LONG).show();
         }
 
@@ -112,10 +124,29 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         }
     }
 
+    private class SexSpinnerListener implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            //would rather figure out how to give the hint but whatever
+            if (!parent.getItemAtPosition(position).toString().toUpperCase().equalsIgnoreCase("SEX")) {
+                sex = Child.Sex.valueOf(parent.getItemAtPosition(position).toString().toUpperCase());
+            }
+            Toast.makeText(parent.getContext(), String.valueOf(sex), Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            Toast.makeText(parent.getContext(), "Sex", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
     private class DaySpinnerListener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            day = Integer.parseInt(parent.getItemAtPosition(position).toString());
+            if (!parent.getItemAtPosition(position).toString().equalsIgnoreCase("DAY")) {
+                day = Integer.parseInt(parent.getItemAtPosition(position).toString());
+            }
             Toast.makeText(parent.getContext(), String.valueOf(day), Toast.LENGTH_LONG).show();
         }
 
@@ -128,7 +159,9 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
     private class YearSpinnerListener implements AdapterView.OnItemSelectedListener {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            year = Integer.parseInt(parent.getItemAtPosition(position).toString());
+            if (!parent.getItemAtPosition(position).toString().equalsIgnoreCase("YEAR")) {
+                year = Integer.parseInt(parent.getItemAtPosition(position).toString());
+            }
             Toast.makeText(parent.getContext(), String.valueOf(year), Toast.LENGTH_LONG).show();
         }
 
