@@ -12,12 +12,12 @@
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:text="Games"
         android:textColor="@color/amazing_me_red"
-        android:textSize="45sp"
-        android:textStyle="bold" />
+        android:textSize="55sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 
     <GridView
