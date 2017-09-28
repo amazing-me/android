@@ -5,7 +5,8 @@
     android:layout_height = "match_parent" android:paddingLeft= "@dimen/activity_horizontal_margin"
     android:paddingRight = "@dimen/activity_horizontal_margin"
     android:paddingTop = "@dimen/activity_vertical_margin"
-    android:paddingBottom = "@dimen/activity_vertical_margin" tools:context = "amazingme.activities.app.LoginActivity">
+    android:paddingBottom = "@dimen/activity_vertical_margin" tools:context = "amazingme.activities.app.LoginActivity"
+    android:background="@drawable/amazingMeGameBackGround">
 
     <TextView
         android:id="@+id/textview"
@@ -14,8 +15,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="Games"
-        android:textColor="@color/amazing_me_blue"
-        android:textSize="35dp"
+        android:textColor="@color/amazing_me_red"
+        android:textSize="45sp"
         android:textStyle="bold" />
 
 
