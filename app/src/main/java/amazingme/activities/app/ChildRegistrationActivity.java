@@ -70,7 +70,7 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
                 getUserContext().addChild(child);
                 getAppContext().saveUserContext();
 
-                goTo(EnumeratedActivity.LANDING_PAGE);
+                goTo(EnumeratedActivity.MAIN_MENU);
             }
         });
     }
