@@ -49,8 +49,7 @@ public class ThreeTouchGame extends AmazingMeGame {
         }
 
 
-        int score = (redCount == 3 && blueCount == 0) ? 50 : 0;
-        score += Math.max((60 - seconds), 50);
+        int score = ((redCount == 3 && blueCount == 0) ? 40 : 0) + seconds;
         result.setScore(score);
 
         return result;
