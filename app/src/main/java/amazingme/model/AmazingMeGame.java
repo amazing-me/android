@@ -21,7 +21,7 @@ public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
         if(gameWasCompleted) {
             gameResultsBundle.putSerializable("GAME RESULTS BUNDLE", this.gameResults());
         } else {
-            gameResultsBundle.putSerializable("GAME RESULTS BUNDLE", new GameResult(0, new LinkedList<Problem>()));
+            gameResultsBundle.putSerializable("GAME RESULTS BUNDLE", new GameResult());
         }
         goTo(EnumeratedActivity.MAIN_MENU);
     }
