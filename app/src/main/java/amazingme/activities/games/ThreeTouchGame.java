@@ -1,5 +1,6 @@
 package amazingme.activities.games;
 
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ public class ThreeTouchGame extends AmazingMeGame {
 
     public ThreeTouchGame() {
         super(R.layout.activity_game_three_touch);
-        this.relatedMilestones = new Milestone[] {Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_OR_UNDER};
+        this.relatedMilestones = new Milestone[] {Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_AND_UNDER};
     }
 
     @Override
