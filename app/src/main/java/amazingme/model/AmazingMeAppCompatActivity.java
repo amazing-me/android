@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
+import amazingme.app.UserContext;
 import amazingme.controller.ActivityManager;
 
 public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
@@ -25,19 +26,23 @@ public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
     }
 
     public final void goToIfSignedIn(EnumeratedActivity activity) {
-        if(getContext().getSessionManager().hasSession()) {
+        if(getAppContext().hasSession()) {
             goTo(activity);
         }
     }
 
     public final void goToIfNotSignedIn(EnumeratedActivity activity) {
-        if(!getContext().getSessionManager().hasSession()) {
+        if(!getAppContext().hasSession()) {
             goTo(activity);
         }
     }
 
-    public final AmazingMeApplicationContext getContext() {
+    public final AmazingMeApplicationContext getAppContext() {
         return (AmazingMeApplicationContext) getApplicationContext();
+    }
+
+    public final UserContext getUserContext() {
+        return getAppContext().getUserContext();
     }
 
     public abstract EnumeratedActivity activityName();

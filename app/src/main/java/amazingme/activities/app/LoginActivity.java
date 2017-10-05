@@ -16,13 +16,12 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 import amazingme.activities.util.DialogHelper;
 import amazingme.app.EnumeratedActivity;
-import amazingme.controller.ISessionInitHandler;
 import amazingme.controller.ISessionLoginHandler;
 import amazingme.database.Session;
 
 import amazingme.model.AmazingMeAppCompatActivity;
 
-public class LoginActivity extends AmazingMeAppCompatActivity implements ISessionLoginHandler, ISessionInitHandler {
+public class LoginActivity extends AmazingMeAppCompatActivity implements ISessionLoginHandler {
 
     private EditText emailEditText, passwordEditText;
     private Button loginBtn, registerBtn;
@@ -33,7 +32,7 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getContext().getSessionManager().initialize(this);
+        getAppContext().sessionInitialize(this);
     }
 
     public LoginActivity() { super(R.layout.activity_login); }
@@ -64,7 +63,9 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
                 final String email = emailEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
 
-                getContext().getSessionManager().login(email, password, LoginActivity.this);
+                if (!email.isEmpty() && !password.isEmpty()) {
+                    getAppContext().sessionLogin(email, password, LoginActivity.this);
+                }
             }
         });
 
@@ -89,15 +90,6 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
 
         alertDialog.setMessage(exceptionMessage);
         alertDialog.show();
-    }
-
-    @Override
-    public void onSessionInitSuccess(Session session) {
-        goToIfSignedIn(EnumeratedActivity.MAIN_MENU);
-    }
-
-    @Override
-    public void onSessionInitFailure(Exception e) {
     }
 
     private String getLoginExceptionMessage(final Exception exception) {

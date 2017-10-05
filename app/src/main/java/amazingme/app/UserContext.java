@@ -25,6 +25,10 @@ public class UserContext {
         this.currentChildUser = 0;
     }
 
+    public void addChild(Child child) {
+        children.add(child);
+    }
+
     public Parent getParent() {
         return parent;
     }
@@ -37,9 +41,7 @@ public class UserContext {
         return children;
     }
 
-    public void setChildren(List<Child> children) {
-        this.children = children;
-    }
+
 
     public List<GameResult> getGameResults() {
         return gameResults;

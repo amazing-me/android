@@ -8,7 +8,6 @@ import android.widget.ToggleButton;
 
 import com.amazingme.activities.R;
 
-import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.model.Parent;
@@ -47,11 +46,11 @@ public class PrimaryCarePhysicianInformationActivity extends AmazingMeAppCompatA
                     String email = ((EditText)findViewById(R.id.pcp_information_email_edit_text)).getText().toString();
                     String phoneNumber = ((EditText)findViewById(R.id.pcp_information_phone_number_edit_text)).getText().toString();
 
-                    Parent parent = getContext().getUserContext().getParent();
+                    Parent parent = getUserContext().getParent();
                     parent.setPrimaryCarePhysicianEmail(email);
                     parent.setPrimaryCarePhysicianPhoneNumber(phoneNumber);
 
-                    getContext().getSession().saveContext();
+                    getAppContext().saveUserContext();
                 }
 
                 goTo(EnumeratedActivity.CHILD_REGISTRATION);

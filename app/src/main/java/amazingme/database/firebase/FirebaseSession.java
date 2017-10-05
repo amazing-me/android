@@ -46,17 +46,13 @@ public class FirebaseSession extends Session {
     }
 
     @Override
-    public String getDisplayName() {
-        return user.getDisplayName();
-    }
-
-    @Override
     public String getEmail() {
         return user.getEmail();
     }
 
-    public DatabaseReference getDatabaseRef() {
-        return ref;
+    @Override
+    public String getUid() {
+        return user.getUid();
     }
 
 }
