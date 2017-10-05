@@ -9,11 +9,11 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="217dp"
-        android:layout_height="202dp"
+        android:layout_width="186dp"
+        android:layout_height="187dp"
         app:srcCompat="@drawable/amazingmechildreg"
-        tools:layout_editor_absoluteX="170dp"
-        tools:layout_editor_absoluteY="123dp" />
+        tools:layout_editor_absoluteX="201dp"
+        tools:layout_editor_absoluteY="131dp" />
 
     <TextView
         android:id="@+id/child_registration_date_of_birth_text_view"
