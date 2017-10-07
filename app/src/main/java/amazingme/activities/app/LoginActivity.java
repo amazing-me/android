@@ -65,6 +65,8 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
             public void onClick(View view) {
                 if (fieldsAreValidated()) {
                     getAppContext().sessionLogin(email, password, LoginActivity.this);
+                } else {
+                    onSessionLoginFailure(new InvalidFieldsException());
                 }
             }
         });
@@ -85,6 +87,7 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
     @Override
     public void onSessionLoginFailure(Exception e) {
         final String loginFailed = LoginActivity.this.getResources().getString(R.string.dialog_login_failed);
+
         final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(LoginActivity.this, loginFailed);
         final String exceptionMessage = getLoginExceptionMessage(e);
 
@@ -100,7 +103,8 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
             throw exception;
         } catch (FirebaseAuthInvalidCredentialsException
                 | FirebaseAuthEmailException
-                | FirebaseAuthInvalidUserException e) {
+                | FirebaseAuthInvalidUserException
+                | InvalidFieldsException e) {
             exceptionMessage = this.getResources().getString(R.string.error_invalid_credentials);
         } catch (Exception e) {
             Log.e(loginTag, e.getMessage());
@@ -112,6 +116,10 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
 
     private boolean fieldsAreValidated() {
         return !email.isEmpty() && !password.isEmpty();
+    }
+
+    private class InvalidFieldsException extends Exception {
+
     }
 
 }
