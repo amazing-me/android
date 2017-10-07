@@ -32,6 +32,7 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
     private Spinner birthMonth, birthDay, birthYear;
     private int month, day, year;
     private Child.Sex sex;
+    private String firstName, lastName;
 
     public ChildRegistrationActivity() { super(R.layout.activity_child_registration); }
 
@@ -62,17 +63,24 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String firstName = ((EditText) findViewById(R.id.child_registration_first_name)).getText().toString();
-                String lastName = ((EditText) findViewById(R.id.child_registration_last_name)).getText().toString();
-                LocalDate dateOfBirth = new LocalDate(year, month, day);
+                firstName = ((EditText) findViewById(R.id.child_registration_first_name)).getText().toString();
+                lastName = ((EditText) findViewById(R.id.child_registration_last_name)).getText().toString();
 
-                Child child = new Child(firstName, lastName, sex, dateOfBirth, new LinkedList<KnownDevelopmentalDisabilities>());
-                getUserContext().addChild(child);
-                getAppContext().saveUserContext();
+                if (fieldsAreValidated()) {
+                    LocalDate dateOfBirth = new LocalDate(year, month, day);
 
-                goTo(EnumeratedActivity.MAIN_MENU);
+                    Child child = new Child(firstName, lastName, sex, dateOfBirth, new LinkedList<KnownDevelopmentalDisabilities>());
+                    getUserContext().addChild(child);
+                    getAppContext().saveUserContext();
+
+                    goTo(EnumeratedActivity.MAIN_MENU);
+                }
             }
         });
+    }
+
+    private boolean fieldsAreValidated() {
+        return ((!firstName.isEmpty()) && (!lastName.isEmpty()) && (year != 0) && (month != 0) && (day != 0));
     }
 
     private void initSexSpinner() {

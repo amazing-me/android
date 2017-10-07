@@ -17,6 +17,7 @@ public class ForgotPasswordActivity extends AmazingMeAppCompatActivity implement
 
     private Button backBtn, sendBtn;
     private EditText emailText;
+    private String email;
 
     public ForgotPasswordActivity() {
         super(R.layout.activity_forgot_password);
@@ -32,6 +33,7 @@ public class ForgotPasswordActivity extends AmazingMeAppCompatActivity implement
         backBtn = (Button) findViewById(R.id.forgot_password_back_button);
         sendBtn = (Button) findViewById(R.id.forgot_password_send_button);
         emailText = (EditText) findViewById(R.id.forgot_password_email_text);
+        email = emailText.getText().toString();
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,10 +45,16 @@ public class ForgotPasswordActivity extends AmazingMeAppCompatActivity implement
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getAppContext().sessionForgotPassword(ForgotPasswordActivity.this, emailText.getText().toString());
+                if (fieldsAreValidated()) {
+                    getAppContext().sessionForgotPassword(ForgotPasswordActivity.this, email);
+                }
             }
         });
 
+    }
+
+    private boolean fieldsAreValidated() {
+        return (!email.isEmpty());
     }
 
     @Override

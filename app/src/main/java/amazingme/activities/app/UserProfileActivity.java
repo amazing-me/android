@@ -14,6 +14,7 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
 
     private Button backBtn, nextBtn;
     private EditText firstName, lastName;
+    private String firstNameString, lastNameString;
 
     public UserProfileActivity() { super(R.layout.activity_user_profile); }
 
@@ -28,6 +29,8 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
         nextBtn = (Button) findViewById(R.id.user_profile_next_button);
         firstName = (EditText) findViewById(R.id.user_profile_first_name_edit_text);
         lastName = (EditText) findViewById(R.id.user_profile_last_name_edit_text);
+        firstNameString = firstName.getText().toString();
+        lastNameString = lastName.getText().toString();
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,14 +42,20 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Parent parent = getUserContext().getParent();
-                parent.setFirstName(firstName.getText().toString());
-                parent.setLastName(lastName.getText().toString());
+                if (fieldsAreValidated()) {
+                    Parent parent = getUserContext().getParent();
+                    parent.setFirstName(firstNameString);
+                    parent.setLastName(lastNameString);
 
-                getAppContext().saveUserContext();
-                goTo(EnumeratedActivity.PCP_INFORMATION);
+                    getAppContext().saveUserContext();
+                    goTo(EnumeratedActivity.PCP_INFORMATION);
+                }
             }
         });
+    }
+
+    private boolean fieldsAreValidated() {
+        return ((!firstNameString.isEmpty()) && (!lastNameString.isEmpty()));
     }
 
 }
