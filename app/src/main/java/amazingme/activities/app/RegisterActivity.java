@@ -22,6 +22,8 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements ISes
 
     private EditText emailEditText, passwordEditText;
     private Button registerBtn, backBtn;
+    private String email, password;
+
 
     public RegisterActivity() { super(R.layout.activity_register); }
 
@@ -36,14 +38,15 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements ISes
         passwordEditText = (EditText) findViewById(R.id.register_activity_password_edit_text);
         registerBtn = (Button) findViewById(R.id.register_activity_register_button);
         backBtn = (Button) findViewById(R.id.register_activity_back_button);
+        email = emailEditText.getText().toString();
+        password = passwordEditText.getText().toString();
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email = emailEditText.getText().toString();
-                final String password = passwordEditText.getText().toString();
-
+            if (fieldsAreValidated()) {
                 getAppContext().sessionRegister(email, password, RegisterActivity.this);
+            }
             }
         });
 
@@ -53,6 +56,10 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements ISes
                 goTo(EnumeratedActivity.LOGIN);
             }
         });
+    }
+
+    private boolean fieldsAreValidated() {
+        return ((!email.isEmpty()) && (!password.isEmpty()));
     }
 
     @Override

@@ -26,6 +26,7 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
     private EditText emailEditText, passwordEditText;
     private Button loginBtn, registerBtn;
     private TextView forgotPasswordTextBtn;
+    private String email, password;
 
 
     @Override
@@ -49,6 +50,8 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
         loginBtn = (Button) findViewById(R.id.login_activity_login_button);
         registerBtn = (Button) findViewById(R.id.login_activity_register_button);
         forgotPasswordTextBtn = (TextView) findViewById(R.id.login_activity_forgot_password_button);
+        email = emailEditText.getText().toString();
+        password = passwordEditText.getText().toString();
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,10 +63,7 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String email = emailEditText.getText().toString();
-                final String password = passwordEditText.getText().toString();
-
-                if (!email.isEmpty() && !password.isEmpty()) {
+                if (fieldsAreValidated()) {
                     getAppContext().sessionLogin(email, password, LoginActivity.this);
                 }
             }
@@ -108,6 +108,10 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
         }
 
         return exceptionMessage;
+    }
+
+    private boolean fieldsAreValidated() {
+        return !email.isEmpty() && !password.isEmpty();
     }
 
 }
