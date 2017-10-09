@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.amazingme.activities.R;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,21 +41,22 @@ public class ThreeTouchGame extends AmazingMeGame {
     }
 
     @Override
-    public GameResult gameResults() {
-        GameResult result = new GameResult();
+    public void updateGameResults() {
+        GameResult understandsWordsLikeInOnAndUnder = new GameResult();
+
+        understandsWordsLikeInOnAndUnder.setRelatedMilestone(Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_AND_UNDER);
 
         if(redCount < 3 || blueCount > 0) {
-            result.addProblem(Problem.DID_NOT_FOLLOW_DIRECTIONS);
+            understandsWordsLikeInOnAndUnder.addProblem(Problem.DID_NOT_FOLLOW_DIRECTIONS);
         }
         if(seconds == 0) {
-            result.addProblem(Problem.TIME_TOO_LONG);
+            understandsWordsLikeInOnAndUnder.addProblem(Problem.TIME_TOO_LONG);
         }
 
-
         int score = ((redCount == 3 && blueCount == 0) ? 40 : 0) + seconds;
-        result.setScore(score);
+        understandsWordsLikeInOnAndUnder.setScore(score);
 
-        return result;
+        gameResults.add(understandsWordsLikeInOnAndUnder);
     }
 
     @Override

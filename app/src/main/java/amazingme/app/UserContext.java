@@ -41,8 +41,6 @@ public class UserContext {
         return children;
     }
 
-
-
     public List<GameResult> getGameResults() {
         return gameResults;
     }
@@ -50,6 +48,8 @@ public class UserContext {
     public void setGameResults(List<GameResult> gameResults) {
         this.gameResults = gameResults;
     }
+
+    public void addGameResults(List<GameResult> newGameResults) { this.gameResults.addAll(newGameResults);}
 
     public int getCurrentChildUser() {
         return currentChildUser;

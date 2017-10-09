@@ -6,6 +6,9 @@ public enum Milestone {
 
     //TODO -> not all milestones are included, only those thought to be measurable in amazingme :: https://www.cdc.gov/ncbddd/actearly/milestones/milestones-2mo.html
 
+    // for default constructors and cases
+    NONE,
+
     //2 month milestones
     BEGINS_TO_SMILE_AT_PEOPLE("", Constants.TWO_MONTHS, Constants.SIX_YEARS),
     CAN_BRIEFLY_CALM,HERSELF ("", Constants.TWO_MONTHS, Constants.SIX_YEARS),
