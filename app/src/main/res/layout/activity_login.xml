@@ -54,28 +54,25 @@
         android:id="@+id/login_activity_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/login_activity_password_edit_text"
-        android:layout_marginLeft="61dp"
-        android:layout_marginStart="61dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="26dp"
         android:backgroundTint="@color/amazing_me_blue"
         android:text="Login"
-        android:textColor="@color/amazing_me_white" />
+        android:textColor="@color/amazing_me_white"
+        android:layout_below="@+id/login_activity_password_edit_text"
+        android:layout_alignRight="@+id/login_activity_forgot_password_button"
+        android:layout_alignEnd="@+id/login_activity_forgot_password_button" />
 
     <Button
         android:id="@+id/login_activity_register_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/login_activity_login_button"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="49dp"
-        android:layout_marginRight="49dp"
-        android:backgroundTint="@color/amazing_me_blue"
+        android:backgroundTint="@color/amazing_me_white"
         android:text="Register"
-        android:textColor="@color/amazing_me_white" />
+        android:textColor="@color/amazing_me_blue"
+        android:layout_alignBaseline="@+id/login_activity_login_button"
+        android:layout_alignBottom="@+id/login_activity_login_button"
+        android:layout_alignLeft="@+id/textview"
+        android:layout_alignStart="@+id/textview" />
 
     <ImageView
         android:id="@+id/imageView2"

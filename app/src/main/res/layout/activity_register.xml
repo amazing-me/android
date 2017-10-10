@@ -49,24 +49,24 @@
         android:id="@+id/register_activity_register_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/amazing_me_blue"
-        android:text="Register"
-        android:textColor="@color/amazing_me_white"
         android:layout_alignBaseline="@+id/register_activity_back_button"
         android:layout_alignBottom="@+id/register_activity_back_button"
+        android:layout_alignEnd="@+id/register_activity_password_edit_text"
         android:layout_alignRight="@+id/register_activity_password_edit_text"
-        android:layout_alignEnd="@+id/register_activity_password_edit_text" />
+        android:backgroundTint="@color/amazing_me_blue"
+        android:text="Register"
+        android:textColor="@color/amazing_me_white" />
 
     <Button
         android:id="@+id/register_activity_back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/amazing_me_blue"
-        android:text="Back"
-        android:textColor="@color/amazing_me_white"
-        android:layout_marginTop="36dp"
-        android:layout_below="@+id/register_activity_password_edit_text"
         android:layout_alignLeft="@+id/register_activity_password_edit_text"
-        android:layout_alignStart="@+id/register_activity_password_edit_text" />
+        android:layout_alignStart="@+id/register_activity_password_edit_text"
+        android:layout_below="@+id/register_activity_password_edit_text"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="@color/amazing_me_white"
+        android:text="Back"
+        android:textColor="@color/amazing_me_blue" />
 
 </RelativeLayout>
