@@ -16,7 +16,7 @@ import amazingme.controller.ActivityManager;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.model.AmazingMeGame;
 
-public class GameMenuActivity extends AmazingMeAppCompatActivity {
+public class GameMenuActivity extends NavigationBarActivity {
     private final String DEFAULT_GAME_TITLE = "Unnamed Game";
     private final int DEFAULT_GAME_ICON_ID = R.drawable.amazingmelogo;
 
@@ -33,6 +33,7 @@ public class GameMenuActivity extends AmazingMeAppCompatActivity {
 
     @Override
     public void bindToUserInterface() {
+
         gamesClasses = getAppContext().getGames();
         populateGameItems();
 
