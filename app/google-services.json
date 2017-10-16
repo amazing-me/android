@@ -46,10 +46,62 @@
       },
       "oauth_client": [
         {
+          "client_id": "64945648329-eu9gd5jpahdhbncbrravf9flvuvqsnj3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amazingme.amazingmesample",
+            "certificate_hash": "7a65d64abaff53505076f9cd4894f6cd6a82a049"
+          }
+        },
+        {
           "client_id": "64945648329-gi0h71lkpkvr3t2abacn3rv1u02h04id.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.amazingme.amazingmesample",
+            "certificate_hash": "7ba2538af37fd6988474fd1f9c0dc93de53d464d"
+          }
+        },
+        {
+          "client_id": "64945648329-uipkmcknqs5c5sph9plq9p48kukcdgid.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6dvhDnFnogmkqfPRnOrEzdKJkWSGZsYE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "64945648329-uipkmcknqs5c5sph9plq9p48kukcdgid.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64945648329:android:4dd516aee02b5006",
+        "android_client_info": {
+          "package_name": "com.amazingme.milestonetracker.amazing_me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64945648329-0lr7id43bfcnc857mboqu5urvtlgog3r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amazingme.milestonetracker.amazing_me",
             "certificate_hash": "7ba2538af37fd6988474fd1f9c0dc93de53d464d"
           }
         },

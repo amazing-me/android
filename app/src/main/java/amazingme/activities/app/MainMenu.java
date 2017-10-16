@@ -15,12 +15,13 @@ import android.widget.TextView;
 
 import com.amazingme.activities.R;
 
-import org.w3c.dom.Text;
-
+import amazingme.activities.util.GameRegister;
+import amazingme.controller.ActivityManager;
 import amazingme.controller.ISessionLogoutHandler;
 import amazingme.database.Session;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.app.EnumeratedActivity;
+import amazingme.model.Parent;
 
 public class MainMenu extends AmazingMeAppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ISessionLogoutHandler {
@@ -31,6 +32,7 @@ public class MainMenu extends AmazingMeAppCompatActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Register games when app is launched
         goToIfNotSignedIn(EnumeratedActivity.LOGIN);
     }
 
@@ -84,8 +86,10 @@ public class MainMenu extends AmazingMeAppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
-        } else if (id == R.id.logout) {
-            getContext().getSessionManager().logout(this);
+        } else if (id == R.id.nav_logout) {
+            getAppContext().sessionLogout(this);
+        } else if (id == R.id.nav_play) {
+            goTo(EnumeratedActivity.GAME_MENU);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -125,9 +129,14 @@ public class MainMenu extends AmazingMeAppCompatActivity
         TextView nameText = (TextView) header.findViewById(R.id.nav_main_menu_name_text);
         TextView emailText = (TextView) header.findViewById(R.id.nav_main_menu_email_text);
 
-        Session session = getContext().getSession();
-        nameText.setText(session.getDisplayName());
-        emailText.setText(session.getEmail());
+        Parent parent = getUserContext().getParent();
+        if(parent != null) {
+            nameText.setText(parent.getDisplayName());
+            emailText.setText(parent.getEmail());
+        } else {
+            nameText.setText("");
+            emailText.setText("");
+        }
     }
 
     public void onSessionLogoutSuccess() {
@@ -136,7 +145,7 @@ public class MainMenu extends AmazingMeAppCompatActivity
 
     @Override
     public void onSessionLogoutFailure(Exception e) {
-        // TODO: Add error handling when failing to logout
+        // TODO: Add error handling when failing to doLogout
     }
 
 }

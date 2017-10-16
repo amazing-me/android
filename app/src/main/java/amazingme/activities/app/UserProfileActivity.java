@@ -37,14 +37,13 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
         });
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                Parent parent = getContext().getUserContext().getParent();
+                Parent parent = getUserContext().getParent();
                 parent.setFirstName(firstName.getText().toString());
                 parent.setLastName(lastName.getText().toString());
 
-                getContext().getSession().saveContext();
+                getAppContext().saveUserContext();
                 goTo(EnumeratedActivity.PCP_INFORMATION);
             }
         });
