@@ -9,13 +9,15 @@
 
     <TextView
         android:id="@+id/textview"
-        android:layout_width="wrap_content"
+        android:layout_width="371dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="Register"
+        android:textAlignment="center"
         android:textColor="@color/amazing_me_blue"
-        android:textSize="35dp" />
+        android:textSize="60sp"
+        android:textStyle="bold" />
 
 
     <EditText
@@ -27,9 +29,11 @@
         android:inputType="textEmailAddress"
         android:textColorHighlight="#5eb41b"
         android:textColorHint="#5eb41b"
-        android:layout_centerVertical="true"
+        android:textSize="50sp"
+        android:layout_below="@+id/textview"
         android:layout_alignLeft="@+id/register_activity_password_edit_text"
         android:layout_alignStart="@+id/register_activity_password_edit_text"
+        android:layout_marginTop="383dp"
         android:layout_alignRight="@+id/register_activity_password_edit_text"
         android:layout_alignEnd="@+id/register_activity_password_edit_text" />
 
@@ -37,36 +41,39 @@
         android:id="@+id/register_activity_password_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:textColorHint="#5eb41b"
-        android:hint="Password"
-        android:layout_marginTop="14dp"
         android:layout_below="@+id/register_activity_email_edit_text"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="#5eb41b"
+        android:textSize="50sp" />
 
     <Button
         android:id="@+id/register_activity_register_button"
-        android:layout_width="wrap_content"
+        android:layout_width="239dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/register_activity_back_button"
         android:layout_alignBottom="@+id/register_activity_back_button"
         android:layout_alignEnd="@+id/register_activity_password_edit_text"
         android:layout_alignRight="@+id/register_activity_password_edit_text"
+        android:layout_alignTop="@+id/register_activity_back_button"
         android:backgroundTint="@color/amazing_me_blue"
         android:text="Register"
-        android:textColor="@color/amazing_me_white" />
+        android:textColor="@color/amazing_me_white"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/register_activity_back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="239dp"
+        android:layout_height="94dp"
         android:layout_alignLeft="@+id/register_activity_password_edit_text"
         android:layout_alignStart="@+id/register_activity_password_edit_text"
         android:layout_below="@+id/register_activity_password_edit_text"
         android:layout_marginTop="36dp"
         android:backgroundTint="@color/amazing_me_white"
         android:text="Back"
-        android:textColor="@color/amazing_me_blue" />
+        android:textColor="@color/amazing_me_blue"
+        android:textSize="20sp" />
 
 </RelativeLayout>
