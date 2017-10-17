@@ -15,10 +15,7 @@ import android.widget.TextView;
 
 import com.amazingme.activities.R;
 
-import amazingme.activities.util.GameRegister;
-import amazingme.controller.ActivityManager;
 import amazingme.controller.ISessionLogoutHandler;
-import amazingme.database.Session;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.Parent;

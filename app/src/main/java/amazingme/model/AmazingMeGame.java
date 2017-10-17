@@ -1,31 +1,33 @@
 package amazingme.model;
 
-import android.os.Bundle;
-
-import com.amazingme.activities.R;
-
 import java.util.LinkedList;
+import java.util.List;
 
 import amazingme.app.EnumeratedActivity;
 
 public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
 
     protected Milestone[] relatedMilestones;
+    protected List<GameResult> gameResults;
 
     public AmazingMeGame(int layout) {
         super(layout);
+        this.gameResults = new LinkedList<>();
     }
 
     public final void resign(boolean gameWasCompleted) {
-        Bundle gameResultsBundle = new Bundle();
-        if(gameWasCompleted) {
-            gameResultsBundle.putSerializable("GAME RESULTS BUNDLE", this.gameResults());
-        } else {
-            gameResultsBundle.putSerializable("GAME RESULTS BUNDLE", new GameResult());
+        if (gameWasCompleted) {
+            this.updateGameResults();
+            this.addGameResultsToUserContext(gameResults);
         }
-        goTo(EnumeratedActivity.MAIN_MENU);
+        goTo(EnumeratedActivity.GAME_MENU);
     }
 
-    public abstract GameResult gameResults();
+    private void addGameResultsToUserContext(List<GameResult> gameResults) {
+        // TODO should we make sure the length of the list is the same length as the related milestone array to force them to give data for everything?
+        this.getUserContext().addGameResults(gameResults);
+    }
+
+    public abstract void updateGameResults();
 
 }
