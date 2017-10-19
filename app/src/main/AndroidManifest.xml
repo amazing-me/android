@@ -29,6 +29,9 @@
         <activity android:name="amazingme.activities.app.ChildRegistrationActivity"/>
         <activity android:name="amazingme.activities.app.LandingPage"/>
         <activity android:name="amazingme.activities.app.GameMenuActivity"/>
+        <activity android:name="amazingme.activities.app.PerformanceMainActivity"/>
+        <activity android:name="amazingme.activities.app.PerformanceSkillActivity"/>
+        <activity android:name="amazingme.activities.app.PerformanceDetailActivity"/>
     </application>
 
 </manifest>

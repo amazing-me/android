@@ -286,4 +286,9 @@ public enum Milestone {
         this("no description available", 0, 0);
     }
 
+    @Override
+    public String toString() {
+        return this.descriptor;
+    }
+
 }

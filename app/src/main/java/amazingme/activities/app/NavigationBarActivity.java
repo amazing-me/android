@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -76,8 +77,6 @@ public abstract class NavigationBarActivity extends AmazingMeAppCompatActivity
 
         if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -86,6 +85,8 @@ public abstract class NavigationBarActivity extends AmazingMeAppCompatActivity
             getAppContext().sessionLogout(this);
         } else if (id == R.id.nav_play) {
             goTo(EnumeratedActivity.GAME_MENU);
+        } else if (id == R.id.nav_performance) {
+            goTo(EnumeratedActivity.PERFORMANCE_MAIN);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
