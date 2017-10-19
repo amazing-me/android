@@ -40,13 +40,13 @@ public class EndGameActivity extends AmazingMeAppCompatActivity {
         replayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goTo(EnumeratedActivity.REGISTRATION); //go back to game enum
+                goTo(EnumeratedActivity.THREE_TOUCH_GAME); //go back to same game enum
             }
         });
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goTo(EnumeratedActivity.REGISTRATION); //go to next game enum
+                goTo(EnumeratedActivity.THREE_TOUCH_GAME); //go to next game enum
             }
         });
     }
