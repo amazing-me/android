@@ -164,7 +164,7 @@ public enum Skill {
             , Milestone.SCREWS_AND_UNSCREWS_JAR_LIDS_OR_TURNS_DOOR_HANDLE
             , Milestone.NAMES_SOME_COLORS_AND_SOME_NUMBERS
             , Milestone.UNDERSTANDS_THE_IDEA_OF_COUNTING
-            , Milestone.STARTS_TO_UNDERSTANT_TIME
+            , Milestone.STARTS_TO_UNDERSTAND_TIME
             , Milestone.REMEMBERS_PARTS_OF_A_STORY
             , Milestone.UNDERSTANDS_THE_IDEA_OF_SAME_AND_DIFFERENT
             , Milestone.DRAWS_A_PERSON_WITH_TWO_TO_FOUR_BODY_PARTS
@@ -213,7 +213,7 @@ public enum Skill {
             ,Milestone.MAKES_OR_COPIES_STRAIGHT_LINES_AND_CIRCLES
             ,Milestone.CLIMBS_WELL
             ,Milestone.RUNS_EASILY
-            ,Milestone.PEDALS_A_TRICYLCE_THREE_WHEEL_BIKE
+            ,Milestone.PEDALS_A_TRICYCLE_THREE_WHEEL_BIKE
             ,Milestone.WALKS_UP_AND_DOWN_STAIRS_ONE_FOOT_ON_EACH_STEP
             ,Milestone.HOPS_AND_STANDS_ON_ONE_FOOT_UP_TO_TWO_SECONDS
             ,Milestone.CATCHES_A_BOUNCED_BALL_MOST_OF_THE_TIME
@@ -221,7 +221,7 @@ public enum Skill {
             ,Milestone.STANDS_ON_ONE_FOOT_FOR_TEN_SECONDS_OR_LONGER
             ,Milestone.HOPS_MAY_BE_ABLE_TO_SKIP
             ,Milestone.CAN_DO_A_SOMERSAULT
-            ,Milestone.USES_A_FOR_AND_SPOON_AND_SOMETIMES_A_TABLE_KNIFE
+            ,Milestone.USES_A_FORK_AND_SPOON_AND_SOMETIMES_A_TABLE_KNIFE
             ,Milestone.CAN_USE_THE_TOILET_ON_HER_OWN
             ,Milestone.SWINGS_AND_CLIMBS);
 

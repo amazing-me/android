@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import amazingme.activities.app.ChildRegistrationActivity;
+import amazingme.activities.app.EndGameActivity;
 import amazingme.activities.app.ForgotPasswordActivity;
 import amazingme.activities.app.GameMenuActivity;
 import amazingme.activities.app.LandingPage;
@@ -33,7 +34,9 @@ public enum EnumeratedActivity {
     PERFORMANCE_SKILL(PerformanceSkillActivity.class),
     PERFORMANCE_DETAIL(PerformanceDetailActivity.class),
     GAME_MENU(GameMenuActivity.class),
+    END_GAME(EndGameActivity.class),
     THREE_TOUCH_GAME(ThreeTouchGame.class, true, true);
+
 
     private String className;
     private boolean isGame;

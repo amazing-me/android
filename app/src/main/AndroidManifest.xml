@@ -3,12 +3,12 @@
     package="com.amazingme.activities">
 
     <application
+        android:name="amazingme.app.AmazingMeApplicationContext"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name="amazingme.app.AmazingMeApplicationContext"
         android:theme="@style/AppTheme">
         <activity
             android:name="amazingme.activities.app.LoginActivity"
@@ -23,15 +23,16 @@
         <activity android:name="amazingme.activities.games.ThreeTouchGame" />
         <activity android:name="amazingme.activities.app.RegisterActivity" />
         <activity android:name="amazingme.activities.app.ForgotPasswordActivity" />
-        <activity android:name="amazingme.activities.app.UserProfileActivity"/>
-        <activity android:name="amazingme.activities.app.MainMenu"/>
-        <activity android:name="amazingme.activities.app.PrimaryCarePhysicianInformationActivity"/>
-        <activity android:name="amazingme.activities.app.ChildRegistrationActivity"/>
-        <activity android:name="amazingme.activities.app.LandingPage"/>
-        <activity android:name="amazingme.activities.app.GameMenuActivity"/>
+        <activity android:name="amazingme.activities.app.UserProfileActivity" />
+        <activity android:name="amazingme.activities.app.MainMenu" />
+        <activity android:name="amazingme.activities.app.PrimaryCarePhysicianInformationActivity" />
+        <activity android:name="amazingme.activities.app.ChildRegistrationActivity" />
+        <activity android:name="amazingme.activities.app.LandingPage" />
+        <activity android:name="amazingme.activities.app.GameMenuActivity" />
         <activity android:name="amazingme.activities.app.PerformanceMainActivity"/>
         <activity android:name="amazingme.activities.app.PerformanceSkillActivity"/>
         <activity android:name="amazingme.activities.app.PerformanceDetailActivity"/>
+        <activity android:name="amazingme.activities.app.EndGameActivity" />
     </application>
 
 </manifest>
