@@ -37,14 +37,14 @@
         android:id="@+id/game_three_touch_seconds_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/game_three_touch_time_text"
-        android:layout_toRightOf="@+id/game_three_touch_time_text"
         android:text="60 seconds"
         android:textColor="@color/amazing_me_blue"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/game_three_touch_start_button"
+        android:layout_alignEnd="@+id/game_three_touch_start_button" />
 
     <TextView
         android:id="@+id/game_three_touch_time_text"
@@ -53,11 +53,14 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="Time Left: "
+        android:text="Time Left:"
         android:textColor="@color/amazing_me_blue"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:layout_toStartOf="@+id/game_three_touch_seconds_text"
+        android:layout_toLeftOf="@+id/game_three_touch_seconds_text"
+        android:layout_alignTop="@+id/game_three_touch_seconds_text" />
 
     <TextView
         android:id="@+id/game_three_touch_instr2_text"
@@ -117,6 +120,26 @@
         android:layout_below="@+id/game_three_touch_instr3_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp" />
+
+    <Button
+        android:id="@+id/game_three_touch_pause_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pause"
+        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/game_three_touch_stop_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop"
+        android:visibility="invisible"
+        android:layout_above="@+id/game_three_touch_pause_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

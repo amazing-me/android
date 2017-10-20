@@ -28,16 +28,107 @@ public class ThreeTouchGame extends AmazingMeGame {
     private static final int TIME_SECS = 60;
 
     private int seconds = TIME_SECS;
-
-    private Timer timer;
-    private TimerTask gameTask;
-
     private int redCount;
     private int blueCount ;
+
+    private TextView secondsText;
 
     public ThreeTouchGame() {
         super(R.layout.activity_game_three_touch);
         this.relatedMilestones = new Milestone[] {Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_AND_UNDER};
+    }
+
+    @Override
+    public void bindToUserInterface() {
+        secondsText = (TextView)findViewById(R.id.game_three_touch_seconds_text);
+
+        final TextView timeText = (TextView)findViewById(R.id.game_three_touch_time_text);
+        final Button redButton = (Button)findViewById(R.id.game_three_touch_red_button);
+        redButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isPaused() && ++redCount == 3) {
+                    resignGame(true);
+                }
+            }
+        });
+
+        final Button blueButton = (Button)findViewById(R.id.game_three_touch_blue_button);
+        blueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isPaused() && ++blueCount == 3) {
+                    resignGame(true);
+                }
+            }
+        });
+
+        final Button pauseButton = (Button)findViewById(R.id.game_three_touch_pause_button);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isPaused()) {
+                    unpauseGame();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pauseButton.setText("Pause");
+                        }
+                    });
+                } else {
+                    pauseGame();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pauseButton.setText("Unpause");
+                        }
+                    });
+                }
+            }
+        });
+
+        final Button stopButton = (Button)findViewById(R.id.game_three_touch_stop_button);
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resignGame(false);
+            }
+        });
+
+        final Button startButton = (Button)findViewById(R.id.game_three_touch_start_button);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        redButton.setVisibility(View.VISIBLE);
+                        blueButton.setVisibility(View.VISIBLE);
+                        timeText.setVisibility(View.VISIBLE);
+                        secondsText.setVisibility(View.VISIBLE);
+                        pauseButton.setVisibility(View.VISIBLE);
+                        stopButton.setVisibility(View.VISIBLE);
+
+                        startButton.setVisibility(View.INVISIBLE);
+                    }
+                });
+
+                startGame(1000);
+            }
+        });
+    }
+
+    @Override
+    public void gameLogicUpdate() {
+        seconds--;
+        if(seconds == 0) {
+            resignGame(true);
+        }
+    }
+
+    @Override
+    public void gameUIUpdate() {
+        secondsText.setText(String.format("%d second%s", seconds, seconds == 1 ? "" : "s"));
     }
 
     @Override
@@ -62,74 +153,6 @@ public class ThreeTouchGame extends AmazingMeGame {
     @Override
     public EnumeratedActivity activityName() {
         return EnumeratedActivity.THREE_TOUCH_GAME;
-    }
-
-    @Override
-    public void bindToUserInterface() {
-        final TextView timeText = (TextView)findViewById(R.id.game_three_touch_time_text);
-        final TextView secondsText = (TextView)findViewById(R.id.game_three_touch_seconds_text);
-
-        timer = new Timer();
-        gameTask = new TimerTask() {
-            @Override
-            public void run() {
-                seconds--;
-                if(seconds == 0) {
-                    timer.cancel();
-                    resign(true);
-                }
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        secondsText.setText(String.format("%d second%s", seconds, seconds == 1 ? "" : "s"));
-                    }
-                });
-            }
-        };
-
-        final Button redButton = (Button)findViewById(R.id.game_three_touch_red_button);
-        redButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(++redCount == 3) {
-                    timer.cancel();
-                    resign(true);
-                }
-            }
-        });
-
-        final Button blueButton = (Button)findViewById(R.id.game_three_touch_blue_button);
-        blueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(++blueCount == 3) {
-                    timer.cancel();
-                    resign(true);
-                }
-            }
-        });
-
-        final Button startButton = (Button)findViewById(R.id.game_three_touch_start_button);
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        redButton.setVisibility(View.VISIBLE);
-                        blueButton.setVisibility(View.VISIBLE);
-                        timeText.setVisibility(View.VISIBLE);
-                        secondsText.setVisibility(View.VISIBLE);
-
-                        startButton.setVisibility(View.INVISIBLE);
-                    }
-                });
-
-                timer.scheduleAtFixedRate(gameTask, 1000, 1000);
-            }
-        });
-
     }
 
 }
