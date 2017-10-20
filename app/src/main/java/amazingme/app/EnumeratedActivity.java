@@ -1,10 +1,10 @@
 package amazingme.app;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import amazingme.activities.app.ChildRegistrationActivity;
+import amazingme.activities.app.EndGameActivity;
 import amazingme.activities.app.ForgotPasswordActivity;
 import amazingme.activities.app.GameMenuActivity;
 import amazingme.activities.app.LandingPage;
@@ -16,6 +16,7 @@ import amazingme.activities.app.UserProfileActivity;
 import amazingme.activities.games.ThreeTouchGame;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.model.AmazingMeGame;
+import amazingme.model.Milestone;
 
 //TODO -> clean this up... surely there is a way to format it better
 public enum EnumeratedActivity {
@@ -28,7 +29,9 @@ public enum EnumeratedActivity {
     PCP_INFORMATION(PrimaryCarePhysicianInformationActivity.class),
     CHILD_REGISTRATION(ChildRegistrationActivity.class),
     GAME_MENU(GameMenuActivity.class),
+    END_GAME(EndGameActivity.class),
     THREE_TOUCH_GAME(ThreeTouchGame.class, true, true);
+
 
     private String className;
     private boolean isGame;
@@ -55,11 +58,11 @@ public enum EnumeratedActivity {
         this.appCompatActivity = appCompatActivity;
     }
 
-    public static List<Class<? extends AmazingMeGame>> getRegisteredGames() {
-        List<Class<? extends AmazingMeGame>> activeGames = new LinkedList<>();
+    public static List<EnumeratedActivity> getRegisteredGames() {
+        List<EnumeratedActivity> activeGames = new LinkedList<>();
         for (EnumeratedActivity activity : values()) {
             if (activity.isActiveGame) {
-                activeGames.add(activity.appCompatGame);
+                activeGames.add(activity);
             }
         }
         return activeGames;
@@ -68,6 +71,14 @@ public enum EnumeratedActivity {
 
     public Class<? extends AmazingMeAppCompatActivity> getAppCompatActivity() {
         return this.appCompatActivity;
+    }
+
+    public Class<? extends AmazingMeGame> getAppCompatGame() {
+        return this.appCompatGame;
+    }
+
+    public boolean isActiveGame() {
+        return this.isActiveGame;
     }
 
 }
