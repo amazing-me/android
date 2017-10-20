@@ -1,6 +1,5 @@
 package amazingme.activities.app;
 
-import android.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
-import amazingme.activities.util.DialogHelper;
 import amazingme.app.EnumeratedActivity;
 import amazingme.controller.ISessionRegisterHandler;
 import amazingme.database.Session;
@@ -22,6 +20,8 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements ISes
 
     private EditText emailEditText, passwordEditText;
     private Button registerBtn, backBtn;
+    private String email, password;
+
 
     public RegisterActivity() { super(R.layout.activity_register); }
 
@@ -40,10 +40,13 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements ISes
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email = emailEditText.getText().toString();
-                final String password = passwordEditText.getText().toString();
-
-                getAppContext().sessionRegister(email, password, RegisterActivity.this);
+                email = emailEditText.getText().toString();
+                password = passwordEditText.getText().toString();
+                if (fieldsAreValidated()) {
+                    getAppContext().sessionRegister(email, password, RegisterActivity.this);
+                } else {
+                    showRegistrationFailedAlertDialog();
+                }
             }
         });
 
@@ -55,6 +58,17 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements ISes
         });
     }
 
+    private void showRegistrationFailedAlertDialog() {
+        final String registrationFailed = RegisterActivity.this.getResources().getString(R.string.dialog_registration_failed);
+        final String exceptionMessage = RegisterActivity.this.getResources().getString(R.string.generic_empty_field_error_message);
+
+        this.showAlertDialogBox(registrationFailed, exceptionMessage, null);
+    }
+
+    private boolean fieldsAreValidated() {
+        return !email.isEmpty() && !password.isEmpty();
+    }
+
     @Override
     public void onSessionRegisterSuccess(Session session) {
         goTo(EnumeratedActivity.USER_PROFILE);
@@ -63,11 +77,9 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements ISes
     @Override
     public void onSessionRegisterFailure(Exception e) {
         final String registrationFailed = RegisterActivity.this.getResources().getString(R.string.dialog_registration_failed);
-        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(RegisterActivity.this, registrationFailed);
         final String exceptionMessage = getRegistrationExceptionMessage(e);
 
-        alertDialog.setMessage(exceptionMessage);
-        alertDialog.show();
+        this.showAlertDialogBox(registrationFailed, exceptionMessage, null);
     }
 
     private String getRegistrationExceptionMessage(final Exception exception) {

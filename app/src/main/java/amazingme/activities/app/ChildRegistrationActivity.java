@@ -1,6 +1,5 @@
 package amazingme.activities.app;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,15 +10,9 @@ import android.widget.Toast;
 
 import com.amazingme.activities.R;
 
-import org.joda.time.DateTime;
-import org.joda.time.Instant;
 import org.joda.time.LocalDate;
-import org.joda.time.Months;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
 
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
@@ -28,10 +21,11 @@ import amazingme.model.KnownDevelopmentalDisabilities;
 
 public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
 
-    private Button backBtn, doneBtn;
+    private Button addAnotherChildButton, doneBtn;
     private Spinner birthMonth, birthDay, birthYear;
     private int month, day, year;
     private Child.Sex sex;
+    private String firstName, lastName;
 
     public ChildRegistrationActivity() { super(R.layout.activity_child_registration); }
 
@@ -47,11 +41,14 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         initYearSpinner();
         initDoneButton();
         initSexSpinner();
-        backBtn = (Button) findViewById(R.id.child_registration_add_another_button);
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        addAnotherChildButton = (Button) findViewById(R.id.child_registration_add_another_button);
+        addAnotherChildButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goTo(EnumeratedActivity.PCP_INFORMATION);
+                firstName = ((EditText) findViewById(R.id.child_registration_first_name)).getText().toString();
+                lastName = ((EditText) findViewById(R.id.child_registration_last_name)).getText().toString();
+
+                registerChild(firstName, lastName, sex, year, month, day, EnumeratedActivity.CHILD_REGISTRATION);
             }
         });
     }
@@ -62,17 +59,39 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String firstName = ((EditText) findViewById(R.id.child_registration_first_name)).getText().toString();
-                String lastName = ((EditText) findViewById(R.id.child_registration_last_name)).getText().toString();
-                LocalDate dateOfBirth = new LocalDate(year, month, day);
+                firstName = ((EditText) findViewById(R.id.child_registration_first_name)).getText().toString();
+                lastName = ((EditText) findViewById(R.id.child_registration_last_name)).getText().toString();
 
-                Child child = new Child(firstName, lastName, sex, dateOfBirth, new LinkedList<KnownDevelopmentalDisabilities>());
-                getUserContext().addChild(child);
-                getAppContext().saveUserContext();
-
-                goTo(EnumeratedActivity.MAIN_MENU);
+                registerChild(firstName, lastName, sex, year, month, day, EnumeratedActivity.MAIN_MENU);
             }
         });
+    }
+
+    private void registerChild(final String firstName, final String lastName, final Child.Sex sex, final int birthYear,
+                               final int birthMonth, final int birthDay, EnumeratedActivity nextActivity) {
+        if (fieldsAreValidated()) {
+            LocalDate dateOfBirth = new LocalDate(birthYear, birthMonth, birthDay);
+
+            // TODO -> I don't like that I instantiated the child here... pass all the info to the context and let it do the work. maybe use a factory/builder pattern
+            Child child = new Child(firstName, lastName, sex, dateOfBirth, new LinkedList<KnownDevelopmentalDisabilities>());
+            getUserContext().addChild(child);
+            getAppContext().saveUserContext();
+
+            goTo(nextActivity);
+        } else {
+            showChildRegistrationFailedAlertDialog();
+        }
+    }
+
+    private boolean fieldsAreValidated() {
+        return ((!firstName.isEmpty()) && (!lastName.isEmpty()) && (year != 0) && (month != 0) && (day != 0));
+    }
+
+    private void showChildRegistrationFailedAlertDialog() {
+        final String childRegistrationFailed = ChildRegistrationActivity.this.getResources().getString(R.string.child_registration_failed);
+        final String exceptionMessage = ChildRegistrationActivity.this.getResources().getString(R.string.generic_empty_field_error_message);
+
+        this.showAlertDialogBox(childRegistrationFailed, exceptionMessage, null);
     }
 
     private void initSexSpinner() {
