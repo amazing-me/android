@@ -62,9 +62,6 @@ public class PrimaryCarePhysicianInformationActivity extends AmazingMeAppCompatA
     }
 
     private boolean fieldsAreValidated() {
-        Log.e("PCP activity", "hasPCPInfo: " + hasPCPInformation);
-        Log.e("PCP activity", "pcp email: " + email);
-        Log.e("PCP activity", "pcp phone: " + phoneNumber);
         if (hasPCPInformation) {
             return !email.isEmpty() && !phoneNumber.isEmpty();
         }
