@@ -42,7 +42,7 @@ public class PerformanceMainActivity extends NavigationBarActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(getResources().getString(R.string.key_skill), allSkills.get(position));
-                ActivityManager.getInstance().goTo(PerformanceMainActivity.this, EnumeratedActivity.PERFORMANCE_SKILL, bundle);
+                goTo(EnumeratedActivity.PERFORMANCE_SKILL, bundle);
             }
         });
 

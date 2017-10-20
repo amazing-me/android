@@ -12,7 +12,7 @@ public class Child extends User {
     private Sex sex;
 
     // have to use these because somewhere in the depths of LocalDate there's an array being used... BUT LocalDate makes counting months way easier so i'm keeping it.
-    private Birthday birthday;
+    private AmazingMeDate birthday;
 
     private List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities;
 
@@ -52,7 +52,7 @@ public class Child extends User {
     }
 
     private void setDateOfBirth(int year, int month, int day) {
-        this.birthday = new Birthday(year, month, day);
+        this.birthday = new AmazingMeDate(year, month, day);
     }
 
 }
