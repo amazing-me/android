@@ -22,7 +22,7 @@
         app:headerLayout="@layout/nav_header_main_menu"
         app:menu="@menu/activity_main_menu_drawer" />
 
-    <RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+   <RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools = "http://schemas.android.com/tools" android:layout_width="match_parent"
         android:layout_height = "match_parent" android:paddingLeft= "@dimen/activity_horizontal_margin"
@@ -32,7 +32,7 @@
 
 
         <TextView
-            android:id="@+id/textview"
+            android:id="@+id/header_game_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -52,11 +52,25 @@
             android:horizontalSpacing="20dp"
             android:stretchMode="columnWidth"
             android:gravity="center"
-            android:layout_below="@+id/textview"
+            android:layout_below="@+id/header_game_menu"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="35dp" />
 
-    </RelativeLayout>
-</android.support.v4.widget.DrawerLayout>
+   </RelativeLayout>
 
+   <ImageView
+        android:id="@+id/background_game_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/amazingmegameselect"
+        android:alpha="0.2"
+        android:layout_below="@+id/textview"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</android.support.v4.widget.DrawerLayout>

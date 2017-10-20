@@ -19,13 +19,19 @@ public class ActivityManager {
     }
 
     public void goTo(final Activity context, final EnumeratedActivity endingActivity) {
-        context.startActivity(new Intent(context, endingActivity.getAppCompatActivity()));
+        if (endingActivity.isActiveGame()) {
+            this.goTo(context, endingActivity.getAppCompatGame());
+        } else {
+            this.goTo(context, endingActivity.getAppCompatActivity());
+        }
     }
 
     public void goTo(final Activity context, final Class<? extends AppCompatActivity> endingActivity) {
         context.startActivity(new Intent(context, endingActivity));
     }
 
+
+    // TODO i think we can get rid of this?? in the review, remind me if you know it's used anywhere
     public void goTo(final Activity context, final EnumeratedActivity endingActivity, final Bundle bundle) {
         final Intent switchIntent = new Intent(context, endingActivity.getAppCompatActivity());
         switchIntent.putExtras(bundle);
