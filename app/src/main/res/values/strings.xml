@@ -140,4 +140,15 @@
         <item>"Female"</item>
     </string-array>
 
+
+    <!-- KEYS -->
+    <string name="key_skill">
+        key_skill
+    </string>
+
+    <string name="key_milestone">
+        key_milestone
+    </string>
+
+
 </resources>

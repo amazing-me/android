@@ -34,8 +34,7 @@ public class ActivityManager {
     // TODO i think we can get rid of this?? in the review, remind me if you know it's used anywhere
     public void goTo(final Activity context, final EnumeratedActivity endingActivity, final Bundle bundle) {
         final Intent switchIntent = new Intent(context, endingActivity.getAppCompatActivity());
-        final Bundle extras = switchIntent.getExtras();
-        extras.putAll(bundle);
+        switchIntent.putExtras(bundle);
         context.startActivity(switchIntent);
     }
 }

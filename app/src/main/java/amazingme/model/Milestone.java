@@ -291,5 +291,8 @@ public enum Milestone {
         this("no description available", 0, 0, false);
     }
 
-    //Milestone beginstosmile = new Milestone();
+    @Override
+    public String toString() {
+        return this.descriptor;
+    }
 }
