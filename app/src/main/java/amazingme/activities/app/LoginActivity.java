@@ -14,7 +14,6 @@ import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
-import amazingme.activities.util.DialogHelper;
 import amazingme.app.EnumeratedActivity;
 import amazingme.controller.ISessionLoginHandler;
 import amazingme.database.Session;
@@ -87,12 +86,9 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
     @Override
     public void onSessionLoginFailure(Exception e) {
         final String loginFailed = LoginActivity.this.getResources().getString(R.string.dialog_login_failed);
-
-        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(LoginActivity.this, loginFailed);
         final String exceptionMessage = getLoginExceptionMessage(e);
 
-        alertDialog.setMessage(exceptionMessage);
-        alertDialog.show();
+        this.showAlertDialogBox(loginFailed, exceptionMessage, null);
     }
 
     private String getLoginExceptionMessage(final Exception exception) {
