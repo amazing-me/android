@@ -42,20 +42,36 @@ public class PrimaryCarePhysicianInformationActivity extends AmazingMeAppCompatA
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (hasPCPInformation) {
+                if (fieldsAreValidated()) {
                     String email = ((EditText)findViewById(R.id.pcp_information_email_edit_text)).getText().toString();
                     String phoneNumber = ((EditText)findViewById(R.id.pcp_information_phone_number_edit_text)).getText().toString();
 
+                    // TODO -> also move this kind of setup stuff to user context... just pass the information along
                     Parent parent = getUserContext().getParent();
                     parent.setPrimaryCarePhysicianEmail(email);
                     parent.setPrimaryCarePhysicianPhoneNumber(phoneNumber);
 
                     getAppContext().saveUserContext();
+                    goTo(EnumeratedActivity.CHILD_REGISTRATION);
+                } else {
+                    showPCPFailedAlertDialog();
                 }
-
-                goTo(EnumeratedActivity.CHILD_REGISTRATION);
             }
         });
+    }
+
+    private boolean fieldsAreValidated() {
+        if (hasPCPInformation) {
+            return !pcpEmail.toString().isEmpty() && !pcpPhoneNumber.toString().isEmpty();
+        }
+        return true;
+    }
+
+    private void showPCPFailedAlertDialog() {
+        final String pcpFailed = PrimaryCarePhysicianInformationActivity.this.getResources().getString(R.string.pcp_failed);
+        final String exceptionMessage = PrimaryCarePhysicianInformationActivity.this.getResources().getString(R.string.generic_empty_field_error_message);
+
+        this.showAlertDialogBox(pcpFailed, exceptionMessage, null);
     }
 
     private void setToggleFunctionality() {

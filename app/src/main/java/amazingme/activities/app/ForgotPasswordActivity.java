@@ -1,14 +1,11 @@
 package amazingme.activities.app;
 
-import android.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.amazingme.activities.R;
 
-import amazingme.activities.util.DialogHelper;
 import amazingme.app.EnumeratedActivity;
 import amazingme.controller.ISessionForgotPasswordHandler;
 import amazingme.model.AmazingMeAppCompatActivity;
@@ -47,10 +44,19 @@ public class ForgotPasswordActivity extends AmazingMeAppCompatActivity implement
             public void onClick(View view) {
                 if (fieldsAreValidated()) {
                     getAppContext().sessionForgotPassword(ForgotPasswordActivity.this, email);
+                } else {
+                    showForgotPasswordFailedAlertDialog();
                 }
             }
         });
 
+    }
+
+    private void showForgotPasswordFailedAlertDialog() {
+        final String forgotPasswordFailed = ForgotPasswordActivity.this.getResources().getString(R.string.dialog_forgot_password_failed);
+        final String errorMessage = ForgotPasswordActivity.this.getResources().getString(R.string.generic_empty_field_error_message);
+
+        this.showAlertDialogBox(forgotPasswordFailed, errorMessage, null);
     }
 
     private boolean fieldsAreValidated() {
@@ -62,15 +68,12 @@ public class ForgotPasswordActivity extends AmazingMeAppCompatActivity implement
         final String forgotPassSuccess = getResources().getString(R.string.dialog_forgot_password_success);
         final String forgotPassMessage = getResources().getString(R.string.success_forgot_password);
 
-        final AlertDialog.Builder alertDialog = DialogHelper.getInfoDialog(this, forgotPassSuccess, new Runnable() {
+        this.showInfoDialogBox(forgotPassSuccess, forgotPassMessage, new Runnable() {
             @Override
             public void run() {
                 goTo(EnumeratedActivity.LOGIN);
             }
         });
-
-        alertDialog.setMessage(forgotPassMessage);
-        alertDialog.show();
     }
 
     @Override
@@ -78,9 +81,8 @@ public class ForgotPasswordActivity extends AmazingMeAppCompatActivity implement
         final String loginFailed = getResources().getString(R.string.dialog_forgot_password_failed);
         final String exceptionMessage = getResources().getString(R.string.error_unknown);
 
-        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(this, loginFailed);
-        alertDialog.setMessage(exceptionMessage);
-        alertDialog.show();
+        this.showAlertDialogBox(loginFailed, exceptionMessage, null);
+
     }
 
 }

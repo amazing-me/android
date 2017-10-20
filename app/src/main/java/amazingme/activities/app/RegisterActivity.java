@@ -1,6 +1,5 @@
 package amazingme.activities.app;
 
-import android.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
-import amazingme.activities.util.DialogHelper;
 import amazingme.app.EnumeratedActivity;
 import amazingme.controller.ISessionRegisterHandler;
 import amazingme.database.Session;
@@ -70,11 +68,9 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements ISes
     @Override
     public void onSessionRegisterFailure(Exception e) {
         final String registrationFailed = RegisterActivity.this.getResources().getString(R.string.dialog_registration_failed);
-        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(RegisterActivity.this, registrationFailed);
         final String exceptionMessage = getRegistrationExceptionMessage(e);
 
-        alertDialog.setMessage(exceptionMessage);
-        alertDialog.show();
+        this.showAlertDialogBox(registrationFailed, exceptionMessage, null);
     }
 
     private String getRegistrationExceptionMessage(final Exception exception) {

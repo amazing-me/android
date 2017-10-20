@@ -1,6 +1,5 @@
 package amazingme.activities.app;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,15 +10,9 @@ import android.widget.Toast;
 
 import com.amazingme.activities.R;
 
-import org.joda.time.DateTime;
-import org.joda.time.Instant;
 import org.joda.time.LocalDate;
-import org.joda.time.Months;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
 
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
@@ -69,11 +62,14 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
                 if (fieldsAreValidated()) {
                     LocalDate dateOfBirth = new LocalDate(year, month, day);
 
+                    // TODO -> I don't like that I instantiated the child here... pass all the info to the context and let it do the work. maybe use a factory/builder pattern
                     Child child = new Child(firstName, lastName, sex, dateOfBirth, new LinkedList<KnownDevelopmentalDisabilities>());
                     getUserContext().addChild(child);
                     getAppContext().saveUserContext();
 
                     goTo(EnumeratedActivity.MAIN_MENU);
+                } else {
+                    showChildRegistrationFailedAlertDialog();
                 }
             }
         });
@@ -81,6 +77,13 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
 
     private boolean fieldsAreValidated() {
         return ((!firstName.isEmpty()) && (!lastName.isEmpty()) && (year != 0) && (month != 0) && (day != 0));
+    }
+
+    private void showChildRegistrationFailedAlertDialog() {
+        final String childRegistrationFailed = ChildRegistrationActivity.this.getResources().getString(R.string.child_registration_failed);
+        final String exceptionMessage = ChildRegistrationActivity.this.getResources().getString(R.string.generic_empty_field_error_message);
+
+        this.showAlertDialogBox(childRegistrationFailed, exceptionMessage, null);
     }
 
     private void initSexSpinner() {

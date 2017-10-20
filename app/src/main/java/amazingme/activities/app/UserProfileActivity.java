@@ -1,11 +1,13 @@
 package amazingme.activities.app;
 
+import android.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.amazingme.activities.R;
 
+import amazingme.activities.util.DialogHelper;
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.model.Parent;
@@ -49,6 +51,8 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
 
                     getAppContext().saveUserContext();
                     goTo(EnumeratedActivity.PCP_INFORMATION);
+                } else {
+                    showUserProfileSetupFailedAlertDialog();
                 }
             }
         });
@@ -56,6 +60,15 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
 
     private boolean fieldsAreValidated() {
         return ((!firstNameString.isEmpty()) && (!lastNameString.isEmpty()));
+    }
+
+    private void showUserProfileSetupFailedAlertDialog() {
+        final String childRegistrationFailed = UserProfileActivity.this.getResources().getString(R.string.user_profile_setup_failed);
+        final String exceptionMessage = UserProfileActivity.this.getResources().getString(R.string.generic_empty_field_error_message);
+
+        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(UserProfileActivity.this, childRegistrationFailed);
+        alertDialog.setMessage(exceptionMessage);
+        alertDialog.show();
     }
 
 }
