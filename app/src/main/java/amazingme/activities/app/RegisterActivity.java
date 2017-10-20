@@ -36,15 +36,17 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements ISes
         passwordEditText = (EditText) findViewById(R.id.register_activity_password_edit_text);
         registerBtn = (Button) findViewById(R.id.register_activity_register_button);
         backBtn = (Button) findViewById(R.id.register_activity_back_button);
-        email = emailEditText.getText().toString();
-        password = passwordEditText.getText().toString();
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            if (fieldsAreValidated()) {
-                getAppContext().sessionRegister(email, password, RegisterActivity.this);
-            }
+                email = emailEditText.getText().toString();
+                password = passwordEditText.getText().toString();
+                if (fieldsAreValidated()) {
+                    getAppContext().sessionRegister(email, password, RegisterActivity.this);
+                } else {
+                    showRegistrationFailedAlertDialog();
+                }
             }
         });
 
@@ -56,8 +58,15 @@ public class RegisterActivity extends AmazingMeAppCompatActivity implements ISes
         });
     }
 
+    private void showRegistrationFailedAlertDialog() {
+        final String registrationFailed = RegisterActivity.this.getResources().getString(R.string.dialog_registration_failed);
+        final String exceptionMessage = RegisterActivity.this.getResources().getString(R.string.generic_empty_field_error_message);
+
+        this.showAlertDialogBox(registrationFailed, exceptionMessage, null);
+    }
+
     private boolean fieldsAreValidated() {
-        return ((!email.isEmpty()) && (!password.isEmpty()));
+        return !email.isEmpty() && !password.isEmpty();
     }
 
     @Override

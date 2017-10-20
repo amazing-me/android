@@ -21,7 +21,7 @@ import amazingme.model.KnownDevelopmentalDisabilities;
 
 public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
 
-    private Button backBtn, doneBtn;
+    private Button addAnotherChildButton, doneBtn;
     private Spinner birthMonth, birthDay, birthYear;
     private int month, day, year;
     private Child.Sex sex;
@@ -41,11 +41,14 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
         initYearSpinner();
         initDoneButton();
         initSexSpinner();
-        backBtn = (Button) findViewById(R.id.child_registration_add_another_button);
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        addAnotherChildButton = (Button) findViewById(R.id.child_registration_add_another_button);
+        addAnotherChildButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goTo(EnumeratedActivity.PCP_INFORMATION);
+                firstName = ((EditText) findViewById(R.id.child_registration_first_name)).getText().toString();
+                lastName = ((EditText) findViewById(R.id.child_registration_last_name)).getText().toString();
+
+                registerChild(firstName, lastName, sex, year, month, day, EnumeratedActivity.CHILD_REGISTRATION);
             }
         });
     }
@@ -59,20 +62,25 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
                 firstName = ((EditText) findViewById(R.id.child_registration_first_name)).getText().toString();
                 lastName = ((EditText) findViewById(R.id.child_registration_last_name)).getText().toString();
 
-                if (fieldsAreValidated()) {
-                    LocalDate dateOfBirth = new LocalDate(year, month, day);
-
-                    // TODO -> I don't like that I instantiated the child here... pass all the info to the context and let it do the work. maybe use a factory/builder pattern
-                    Child child = new Child(firstName, lastName, sex, dateOfBirth, new LinkedList<KnownDevelopmentalDisabilities>());
-                    getUserContext().addChild(child);
-                    getAppContext().saveUserContext();
-
-                    goTo(EnumeratedActivity.MAIN_MENU);
-                } else {
-                    showChildRegistrationFailedAlertDialog();
-                }
+                registerChild(firstName, lastName, sex, year, month, day, EnumeratedActivity.MAIN_MENU);
             }
         });
+    }
+
+    private void registerChild(final String firstName, final String lastName, final Child.Sex sex, final int birthYear,
+                               final int birthMonth, final int birthDay, EnumeratedActivity nextActivity) {
+        if (fieldsAreValidated()) {
+            LocalDate dateOfBirth = new LocalDate(birthYear, birthMonth, birthDay);
+
+            // TODO -> I don't like that I instantiated the child here... pass all the info to the context and let it do the work. maybe use a factory/builder pattern
+            Child child = new Child(firstName, lastName, sex, dateOfBirth, new LinkedList<KnownDevelopmentalDisabilities>());
+            getUserContext().addChild(child);
+            getAppContext().saveUserContext();
+
+            goTo(nextActivity);
+        } else {
+            showChildRegistrationFailedAlertDialog();
+        }
     }
 
     private boolean fieldsAreValidated() {

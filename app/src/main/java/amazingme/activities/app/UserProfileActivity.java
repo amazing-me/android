@@ -7,7 +7,6 @@ import android.widget.EditText;
 
 import com.amazingme.activities.R;
 
-import amazingme.activities.util.DialogHelper;
 import amazingme.app.EnumeratedActivity;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.model.Parent;
@@ -31,8 +30,6 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
         nextBtn = (Button) findViewById(R.id.user_profile_next_button);
         firstName = (EditText) findViewById(R.id.user_profile_first_name_edit_text);
         lastName = (EditText) findViewById(R.id.user_profile_last_name_edit_text);
-        firstNameString = firstName.getText().toString();
-        lastNameString = lastName.getText().toString();
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +41,8 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                firstNameString = firstName.getText().toString();
+                lastNameString = lastName.getText().toString();
                 if (fieldsAreValidated()) {
                     Parent parent = getUserContext().getParent();
                     parent.setFirstName(firstNameString);
@@ -63,12 +62,10 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
     }
 
     private void showUserProfileSetupFailedAlertDialog() {
-        final String childRegistrationFailed = UserProfileActivity.this.getResources().getString(R.string.user_profile_setup_failed);
+        final String userProfileSetupFailed = UserProfileActivity.this.getResources().getString(R.string.user_profile_setup_failed);
         final String exceptionMessage = UserProfileActivity.this.getResources().getString(R.string.generic_empty_field_error_message);
 
-        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(UserProfileActivity.this, childRegistrationFailed);
-        alertDialog.setMessage(exceptionMessage);
-        alertDialog.show();
+        this.showAlertDialogBox(userProfileSetupFailed, exceptionMessage, null);
     }
 
 }
