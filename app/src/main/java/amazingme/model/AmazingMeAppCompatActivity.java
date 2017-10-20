@@ -3,6 +3,7 @@ package amazingme.model;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import amazingme.activities.util.DialogBoxShower;
 import amazingme.app.AmazingMeApplicationContext;
 import amazingme.app.EnumeratedActivity;
 import amazingme.app.UserContext;
@@ -35,6 +36,16 @@ public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
         if(!getAppContext().hasSession()) {
             goTo(activity);
         }
+    }
+
+    public final void showInfoDialogBox(final String title, final String message, final Runnable fn) {
+        DialogBoxShower.show(DialogBoxShower.DialogType.INFO_DIALOG, AmazingMeAppCompatActivity.this,
+                title, message, fn);
+    }
+
+    public final void showAlertDialogBox(final String title, final String message, final Runnable fn) {
+        DialogBoxShower.show(DialogBoxShower.DialogType.ALERT_DIALOG, AmazingMeAppCompatActivity.this,
+                title, message, fn);
     }
 
     public final AmazingMeApplicationContext getAppContext() {

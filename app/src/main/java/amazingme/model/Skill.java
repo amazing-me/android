@@ -9,7 +9,7 @@ import static amazingme.model.Milestone.HERSELF;
 
 public enum Skill {
 
-    SOCIAL_AND_EMOTIONAL(Milestone.BEGINS_TO_SMILE_AT_PEOPLE, Milestone.TRIES_TO_LOOK_AT_PARENT
+    SOCIAL_AND_EMOTIONAL("Social and Emotional", Milestone.BEGINS_TO_SMILE_AT_PEOPLE, Milestone.TRIES_TO_LOOK_AT_PARENT
             , Milestone.CAN_BRIEFLY_CALM,HERSELF , Milestone.SMILES_SPONTANEOUSLY_ESPECIALLY_AT_PEOPLE
             , Milestone.LIKES_TO_PLAY_WITH_PEOPLE_AND_MIGHT_CRY_WHEN_PLAYING_STOPS
             , Milestone.COPIES_SOME_MOVEMENTS_AND_FACIAL_EXPRESSIONS_LIKE_SMILING_OR_FROWNING
@@ -66,7 +66,7 @@ public enum Skill {
             , Milestone.SHOWS_MORE_INDEPENDENCE_FOR_EXAMPLE_MAY_VISIT_A_NEXT_DOOR_NEIGHBOR_BY_HIMSELF_ADULT_SUPERVISION_STILL_NEEDED
             , Milestone.IS_SOMETIMES_DEMANDING_AND_SOMETIMES_VERY_COOPERATIVE
     ),
-    LANGUAGE_AND_COMMUNICATION(Milestone.COOS_OR_MAKES_GURGLING_SOUNDS, Milestone.TURNS_HEAD_TOWARD_SOUNDS,
+    LANGUAGE_AND_COMMUNICATION("Language and Communication", Milestone.COOS_OR_MAKES_GURGLING_SOUNDS, Milestone.TURNS_HEAD_TOWARD_SOUNDS,
             Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_AND_UNDER
             ,Milestone.BEGINS_TO_BABBLE
             ,Milestone.BABBLES_WITH_EXPRESSION_AND_COPIES_SOUNDS_HE_HEARS
@@ -111,7 +111,7 @@ public enum Skill {
             ,Milestone.USES_FUTURE_TENSE_FOR_EXAMPLE_GRANDMA_WILL_BE_HERE
             ,Milestone.SAYS_NAME_AND_ADDRESS
     ),
-    COGNITIVE(Milestone.BEGINS_TO_FOLLOW_THINGS_WITH_EYES, Milestone.CRIES_AND_FUSSES_IF_ACTIVITY_DOESNT_CHANGE
+    COGNITIVE("Cognitive", Milestone.BEGINS_TO_FOLLOW_THINGS_WITH_EYES, Milestone.CRIES_AND_FUSSES_IF_ACTIVITY_DOESNT_CHANGE
             , Milestone.PAYS_ATTENTION_TO_FACES
             , Milestone.LETS_YOU_KNOW_IF_HE_IS_HAPPY_OR_SAD
             , Milestone.RESPONDS_TO_AFFECTION
@@ -164,7 +164,7 @@ public enum Skill {
             , Milestone.SCREWS_AND_UNSCREWS_JAR_LIDS_OR_TURNS_DOOR_HANDLE
             , Milestone.NAMES_SOME_COLORS_AND_SOME_NUMBERS
             , Milestone.UNDERSTANDS_THE_IDEA_OF_COUNTING
-            , Milestone.STARTS_TO_UNDERSTANT_TIME
+            , Milestone.STARTS_TO_UNDERSTAND_TIME
             , Milestone.REMEMBERS_PARTS_OF_A_STORY
             , Milestone.UNDERSTANDS_THE_IDEA_OF_SAME_AND_DIFFERENT
             , Milestone.DRAWS_A_PERSON_WITH_TWO_TO_FOUR_BODY_PARTS
@@ -177,7 +177,7 @@ public enum Skill {
             , Milestone.CAN_PRINT_SOME_LETTERS_OR_NUMBERS
             , Milestone.COPIES_A_TRIANGLE_AND_OTHER_GEOMETRIC_SHAPES
             , Milestone.KNOWS_ABOUT_THINGS_USED_EVERY_DAY_LIKE_MONEY_AND_FOOD),
-    MOVEMENT_AND_PHYSICAL_DEVELOPMENT(Milestone.CAN_HOLD_HEAD_UP_AND_BEGINS_TO_PUSH_UP_WHEN_LYING_ON_TUMMY,
+    MOVEMENT_AND_PHYSICAL_DEVELOPMENT("Movement and Physical Development", Milestone.CAN_HOLD_HEAD_UP_AND_BEGINS_TO_PUSH_UP_WHEN_LYING_ON_TUMMY,
             Milestone.MAKES_SMOOTHER_MOVEMENTS_WITH_ARMS_AND_LEGS
             ,Milestone.HOLDS_HEAD_STEADY_UNSUPPORTED
             ,Milestone.PUSHES_DOWN_ON_LEGS_WHEN_FEET_ARE_ON_A_HARD_SURFACE
@@ -213,7 +213,7 @@ public enum Skill {
             ,Milestone.MAKES_OR_COPIES_STRAIGHT_LINES_AND_CIRCLES
             ,Milestone.CLIMBS_WELL
             ,Milestone.RUNS_EASILY
-            ,Milestone.PEDALS_A_TRICYLCE_THREE_WHEEL_BIKE
+            ,Milestone.PEDALS_A_TRICYCLE_THREE_WHEEL_BIKE
             ,Milestone.WALKS_UP_AND_DOWN_STAIRS_ONE_FOOT_ON_EACH_STEP
             ,Milestone.HOPS_AND_STANDS_ON_ONE_FOOT_UP_TO_TWO_SECONDS
             ,Milestone.CATCHES_A_BOUNCED_BALL_MOST_OF_THE_TIME
@@ -221,15 +221,26 @@ public enum Skill {
             ,Milestone.STANDS_ON_ONE_FOOT_FOR_TEN_SECONDS_OR_LONGER
             ,Milestone.HOPS_MAY_BE_ABLE_TO_SKIP
             ,Milestone.CAN_DO_A_SOMERSAULT
-            ,Milestone.USES_A_FOR_AND_SPOON_AND_SOMETIMES_A_TABLE_KNIFE
+            ,Milestone.USES_A_FORK_AND_SPOON_AND_SOMETIMES_A_TABLE_KNIFE
             ,Milestone.CAN_USE_THE_TOILET_ON_HER_OWN
             ,Milestone.SWINGS_AND_CLIMBS);
 
     Set<Milestone> relatedMilestones;
+    String title;
 
-    Skill(Milestone... milestones) {
+    Skill(String title, Milestone... milestones) {
+        this.title = title;
         this.relatedMilestones = new HashSet<>();
         Collections.addAll(relatedMilestones, milestones);
+    }
+
+    public Set<Milestone> getRelatedMilestones() {
+        return this.relatedMilestones;
+    }
+
+    @Override
+    public String toString() {
+        return this.title;
     }
 
 }

@@ -22,7 +22,7 @@
         app:headerLayout="@layout/nav_header_main_menu"
         app:menu="@menu/activity_main_menu_drawer" />
 
-   <RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools = "http://schemas.android.com/tools" android:layout_width="match_parent"
         android:layout_height = "match_parent" android:paddingLeft= "@dimen/activity_horizontal_margin"
@@ -32,45 +32,56 @@
 
 
         <TextView
-            android:id="@+id/header_game_menu"
+            android:id="@+id/textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Games"
+            android:text="Performance"
             android:textColor="@color/amazing_me_blue"
             android:textSize="35dp"
             android:textStyle="bold"
             android:layout_marginTop="50dp" />
 
+        <TextView
+            android:id="@+id/overall_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7.0"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="80dp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/textview"
+            android:layout_centerHorizontal="true" />
 
-        <GridView
-            android:id="@+id/gridview"
+        <TextView
+            android:id="@+id/overall_score_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="overall score"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/overall_score"
+            android:layout_centerHorizontal="true" />
+
+        <ListView
+            android:id="@+id/performance_skill_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:numColumns="2"
-            android:verticalSpacing="30dp"
+            android:numColumns="1"
+            android:verticalSpacing="40dp"
             android:horizontalSpacing="20dp"
-            android:stretchMode="columnWidth"
+            android:textSize="45dp"
+            android:textStyle="bold"
             android:gravity="center"
-            android:layout_below="@+id/header_game_menu"
+            android:layout_below="@+id/overall_score_label"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="35dp" />
+            android:layout_marginTop="50dp" />
 
-   </RelativeLayout>
-
-   <ImageView
-        android:id="@+id/background_game_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/amazingmegamepic"
-        android:alpha="0.2"
-        android:layout_below="@+id/textview"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-
+    </RelativeLayout>
 </android.support.v4.widget.DrawerLayout>
+

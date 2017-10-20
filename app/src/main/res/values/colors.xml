@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ff4081</color>
-    <color name="amazing_me_green">#64AD54</color>
+    <color name="amazing_me_green">#64ad54</color>
     <color name="amazing_me_blue">#5295df</color>
     <color name="amazing_me_white">#ffffff</color>
     <color name="amazing_me_blue_and_white">#74aae6</color>
     <color name="amazing_me_green_and_blue">#6aac8a</color>
     <color name="amazing_me_red">#EE2200</color>
+    <color name="black">#000000</color>
 </resources>
 
 

@@ -1,5 +1,6 @@
 package amazingme.activities.app;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -17,7 +18,8 @@ public class PrimaryCarePhysicianInformationActivity extends AmazingMeAppCompatA
     private Button nextBtn, backBtn;
     private ToggleButton toggleBtn;
     private EditText pcpEmail, pcpPhoneNumber;
-    private boolean hasPCPInformation = false;
+    private String email, phoneNumber;
+    private boolean hasPCPInformation = true;
 
     public PrimaryCarePhysicianInformationActivity() { super(R.layout.activity_pcp_information_page); }
 
@@ -42,20 +44,35 @@ public class PrimaryCarePhysicianInformationActivity extends AmazingMeAppCompatA
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (hasPCPInformation) {
-                    String email = ((EditText)findViewById(R.id.pcp_information_email_edit_text)).getText().toString();
-                    String phoneNumber = ((EditText)findViewById(R.id.pcp_information_phone_number_edit_text)).getText().toString();
-
+                email = ((EditText)findViewById(R.id.pcp_information_email_edit_text)).getText().toString();
+                phoneNumber = ((EditText)findViewById(R.id.pcp_information_phone_number_edit_text)).getText().toString();
+                if (fieldsAreValidated()) {
+                    // TODO -> also move this kind of setup stuff to user context... just pass the information along
                     Parent parent = getUserContext().getParent();
                     parent.setPrimaryCarePhysicianEmail(email);
                     parent.setPrimaryCarePhysicianPhoneNumber(phoneNumber);
 
                     getAppContext().saveUserContext();
+                    goTo(EnumeratedActivity.CHILD_REGISTRATION);
+                } else {
+                    showPCPFailedAlertDialog();
                 }
-
-                goTo(EnumeratedActivity.CHILD_REGISTRATION);
             }
         });
+    }
+
+    private boolean fieldsAreValidated() {
+        if (hasPCPInformation) {
+            return !email.isEmpty() && !phoneNumber.isEmpty();
+        }
+        return true;
+    }
+
+    private void showPCPFailedAlertDialog() {
+        final String pcpFailed = PrimaryCarePhysicianInformationActivity.this.getResources().getString(R.string.pcp_failed);
+        final String exceptionMessage = PrimaryCarePhysicianInformationActivity.this.getResources().getString(R.string.generic_empty_field_error_message);
+
+        this.showAlertDialogBox(pcpFailed, exceptionMessage, null);
     }
 
     private void setToggleFunctionality() {
