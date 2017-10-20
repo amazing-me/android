@@ -9,10 +9,16 @@ public class GameResult implements Serializable {
 
     private int score;
     private List<Problem> problems;
+    private Milestone relatedMilestone;
 
     public GameResult() {
-        this.score = 0;
-        this.problems = new ArrayList<>();
+        this(Milestone.NONE, 0, new LinkedList<Problem>());
+    }
+
+    public GameResult(Milestone relatedMilestone, int score, List<Problem> problems) {
+        this.relatedMilestone = relatedMilestone;
+        this.score = score;
+        this.problems = problems;
     }
 
     public int getScore() {
@@ -30,5 +36,9 @@ public class GameResult implements Serializable {
     public void addProblem(Problem problem) {
         problems.add(problem);
     }
+
+    public void setRelatedMilestone(Milestone newMilestone) { this.relatedMilestone = newMilestone; }
+
+    public Milestone getRelatedMilestone() { return this.relatedMilestone; }
 
 }
