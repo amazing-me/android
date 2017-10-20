@@ -295,4 +295,8 @@ public enum Milestone {
     public String toString() {
         return this.descriptor;
     }
+
+    public boolean isCurrentlyMeasured() {
+        return this.isCurrentlyMeasured;
+    }
 }

@@ -37,7 +37,9 @@ public class PerformanceSkillActivity extends NavigationBarActivity {
         final List<Milestone> milestonesEnumList = new ArrayList<>(skill.getRelatedMilestones());
         final List<String> milestonesStringList = new ArrayList<>();
         for (Milestone milestone : milestonesEnumList) {
-            milestonesStringList.add(milestone.toString());
+            if (milestone.isCurrentlyMeasured()) {
+                milestonesStringList.add(milestone.toString());
+            }
         }
 
         final TextView skillHeaderTextView = (TextView) findViewById(R.id.skill_header);
