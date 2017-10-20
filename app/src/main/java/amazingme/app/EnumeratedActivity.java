@@ -1,10 +1,10 @@
 package amazingme.app;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import amazingme.activities.app.ChildRegistrationActivity;
+import amazingme.activities.app.EndGameActivity;
 import amazingme.activities.app.ForgotPasswordActivity;
 import amazingme.activities.app.GameMenuActivity;
 import amazingme.activities.app.LandingPage;
@@ -29,7 +29,9 @@ public enum EnumeratedActivity {
     PCP_INFORMATION(PrimaryCarePhysicianInformationActivity.class),
     CHILD_REGISTRATION(ChildRegistrationActivity.class),
     GAME_MENU(GameMenuActivity.class),
+    END_GAME(EndGameActivity.class),
     THREE_TOUCH_GAME(ThreeTouchGame.class, true, true);
+
 
     private String className;
     private boolean isGame;
