@@ -1,20 +1,24 @@
 package amazingme.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class GameResult implements Serializable {
 
     private int score;
-    private List<Problem> problemAreas;
+    private List<Problem> problems;
+    private Milestone relatedMilestone;
 
     public GameResult() {
+        this(Milestone.NONE, 0, new LinkedList<Problem>());
     }
 
-    public GameResult(int score, List<Problem> specifiedProblemAreas) {
+    public GameResult(Milestone relatedMilestone, int score, List<Problem> problems) {
+        this.relatedMilestone = relatedMilestone;
         this.score = score;
-        this.problemAreas = specifiedProblemAreas;
+        this.problems = problems;
     }
 
     public int getScore() {
@@ -25,11 +29,16 @@ public class GameResult implements Serializable {
         this.score = score;
     }
 
-    public List<Problem> getProblemAreas() {
-        return problemAreas;
+    public List<Problem> getProblems() {
+        return problems;
     }
 
-    public void setProblemAreas(List<Problem> problemAreas) {
-        this.problemAreas = problemAreas;
+    public void addProblem(Problem problem) {
+        problems.add(problem);
     }
+
+    public void setRelatedMilestone(Milestone newMilestone) { this.relatedMilestone = newMilestone; }
+
+    public Milestone getRelatedMilestone() { return this.relatedMilestone; }
+
 }
