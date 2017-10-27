@@ -13,6 +13,7 @@ public class UserContext {
     private Parent parent;
     private Map<String, Child> children; //not setting this as final because it could change in a session of using the app
     private int currentChildUser;
+    private static final String childrenMapToken = "CHILD_";
 
     public UserContext() {
         this(new Parent(), new HashMap<String, Child>());
@@ -25,7 +26,7 @@ public class UserContext {
     }
 
     public void addChild(Child child) {
-        children.put(String.valueOf(children.size()), child);
+        children.put(childrenMapToken + String.valueOf(children.size()), child);
     }
 
     public Parent getParent() {
@@ -48,9 +49,9 @@ public class UserContext {
 
     public int getCurrentChildUser() {return this.currentChildUser; }
 
-     public Child currentChildUser() { return this.children.get(String.valueOf(currentChildUser)); }
-
     public void addGameResultsForCurrentChildUser(List<GameResult> newGameResults) {
         this.currentChildUser().addToGameResults(newGameResults);
     }
+
+    private Child currentChildUser() { return this.children.get(childrenMapToken + String.valueOf(currentChildUser)); }
 }
