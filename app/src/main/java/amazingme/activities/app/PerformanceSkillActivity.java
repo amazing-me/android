@@ -12,10 +12,8 @@ import com.amazingme.activities.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import amazingme.app.EnumeratedActivity;
-import amazingme.controller.ActivityManager;
 import amazingme.model.Milestone;
 import amazingme.model.Skill;
 
@@ -30,16 +28,15 @@ public class PerformanceSkillActivity extends NavigationBarActivity {
     @Override
     public void bindToUserInterface() {
         final Skill skill = getSkillFromBundle();
-        if (skill == null) {
+        if (skill == null || skill.getCurrentlyMeasuredMilestonesRelatedToThisSkill().contains(Milestone.NONE)) {
             Log.e("PERFORMANCE SKILL", "Internal application error. Skill should not be null");
+            return;
         }
 
-        final List<Milestone> milestonesEnumList = new ArrayList<>(skill.getRelatedMilestones());
+        final List<Milestone> milestonesEnumList = new ArrayList<>(skill.getCurrentlyMeasuredMilestonesRelatedToThisSkill());
         final List<String> milestonesStringList = new ArrayList<>();
         for (Milestone milestone : milestonesEnumList) {
-            if (milestone.isCurrentlyMeasured()) {
-                milestonesStringList.add(milestone.toString());
-            }
+            milestonesStringList.add(milestone.toString());
         }
 
         final TextView skillHeaderTextView = (TextView) findViewById(R.id.skill_header);
@@ -54,7 +51,7 @@ public class PerformanceSkillActivity extends NavigationBarActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(getResources().getString(R.string.key_milestone), milestonesEnumList.get(position));
-                ActivityManager.getInstance().goTo(PerformanceSkillActivity.this, EnumeratedActivity.PERFORMANCE_DETAIL, bundle);
+                goTo(EnumeratedActivity.PERFORMANCE_DETAIL, bundle);
             }
         });
 
