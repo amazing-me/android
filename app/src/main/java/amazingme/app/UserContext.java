@@ -11,21 +11,21 @@ import amazingme.model.Parent;
 public class UserContext {
 
     private Parent parent;
-    private Map<Integer, Child> children; //not setting this as final because it could change in a session of using the app
+    private Map<String, Child> children; //not setting this as final because it could change in a session of using the app
     private int currentChildUser;
 
     public UserContext() {
-        this(new Parent(), new HashMap<Integer, Child>());
+        this(new Parent(), new HashMap<String, Child>());
     }
 
-    public UserContext(Parent parent, Map<Integer, Child> children) {
+    public UserContext(Parent parent, Map<String, Child> children) {
         this.parent = parent;
         this.children = children;
         this.currentChildUser = 0;
     }
 
     public void addChild(Child child) {
-        children.put(children.size(), child);
+        children.put(String.valueOf(children.size()), child);
     }
 
     public Parent getParent() {
@@ -36,21 +36,21 @@ public class UserContext {
         this.parent = parent;
     }
 
-    public Map<Integer, Child> getChildren() {
+    public Map<String, Child> getChildren() {
         return children;
     }
 
-    public List<GameResult> getGameResultsForCurrentChildUser() {
-        return this.getCurrentChildUser().getGameResults();
-    }
-
-    public void addGameResultsForCurrentChildUser(List<GameResult> newGameResults) {
-        this.getCurrentChildUser().addToGameResults(newGameResults);
-    }
+    public void setChildren(Map<String, Child> children) { this.children = children; }
 
     public void setCurrentChildUser(int currentChildUser) {
         this.currentChildUser = currentChildUser;
     }
 
-    public Child getCurrentChildUser() { return this.children.get(currentChildUser); }
+    public int getCurrentChildUser() {return this.currentChildUser; }
+
+     public Child currentChildUser() { return this.children.get(String.valueOf(currentChildUser)); }
+
+    public void addGameResultsForCurrentChildUser(List<GameResult> newGameResults) {
+        this.currentChildUser().addToGameResults(newGameResults);
+    }
 }

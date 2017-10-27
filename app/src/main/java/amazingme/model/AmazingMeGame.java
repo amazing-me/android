@@ -19,6 +19,7 @@ public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
         if (gameWasCompleted) {
             this.updateGameResults();
             this.addGameResultsToUserContext(gameResults);
+            this.getAppContext().saveUserContext();
         }
         goTo(EnumeratedActivity.GAME_MENU);
     }

@@ -33,8 +33,8 @@ public abstract class NavigationBarActivity extends AmazingMeAppCompatActivity
         super.onCreate(savedInstanceState);
         initializeNavigationBar();
 
-        // Register games when app is launched
         goToIfNotSignedIn(EnumeratedActivity.LOGIN);
+        // Register games when app is launched
     }
 
     @Override
