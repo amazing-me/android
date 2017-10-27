@@ -25,7 +25,7 @@ public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
 
     private void addGameResultsToUserContext(List<GameResult> gameResults) {
         // TODO should we make sure the length of the list is the same length as the related milestone array to force them to give data for everything?
-        this.getUserContext().addGameResults(gameResults);
+        this.getUserContext().addGameResultsForCurrentChildUser(gameResults);
     }
 
     public abstract void updateGameResults();

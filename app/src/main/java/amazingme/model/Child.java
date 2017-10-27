@@ -1,9 +1,13 @@
 package amazingme.model;
 
+import android.support.annotation.NonNull;
+
 import org.joda.time.LocalDate;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import amazingme.util.DateAdapter;
 
@@ -11,15 +15,17 @@ public class Child extends User {
 
     private Sex sex;
 
-    // have to use these because somewhere in the depths of LocalDate there's an array being used... BUT LocalDate makes counting months way easier so i'm keeping it.
     private AmazingMeDate birthday;
-
+    // leaving this as "game results" so other classes don't worry about it if they don't need to concern themselves about it
+    private Map<Milestone, List<GameResult>> gameResults;
     private List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities;
 
     public Child() {
         this.sex = null;
         this.knownDevelopmentalDisabilities = new LinkedList<>();
         this.birthday = null;
+        this.birthday = null;
+        this.gameResults = new HashMap<>();
     }
 
     public Child(String firstName, String lastName, Sex sex, LocalDate dob, List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities) {
@@ -29,6 +35,7 @@ public class Child extends User {
         this.birthday = DateAdapter.convertLocalDateToBirthday(dob);
         this.knownDevelopmentalDisabilities = knownDevelopmentalDisabilities;
         this.setDateOfBirth(dob.getYear(), dob.getMonthOfYear(), dob.getDayOfMonth());
+        this.gameResults = new HashMap<>();
     }
 
     public enum Sex { //for health data, i'm decently sure gender preference isn't a factor, but we should clarify
@@ -55,4 +62,21 @@ public class Child extends User {
         this.birthday = new AmazingMeDate(year, month, day);
     }
 
+    public List<GameResult> getGameResultsCorrespondingTo(Milestone milestone) {
+        return this.gameResults.get(milestone);
+    }
+
+    public List<GameResult> getGameResults() {
+        List<GameResult> fullGameList = new LinkedList<>();
+        for (Milestone milestone : this.gameResults.keySet()) {
+            fullGameList.addAll(this.gameResults.get(milestone));
+        }
+        return fullGameList;
+    }
+
+    public void addToGameResults(@NonNull final List<GameResult> results) {
+        for (GameResult result : results) {
+            this.gameResults.get(result.getRelatedMilestone()).add(result);
+        }
+    }
 }
