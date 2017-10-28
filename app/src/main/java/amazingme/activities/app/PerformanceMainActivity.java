@@ -1,11 +1,11 @@
 package amazingme.activities.app;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.amazingme.activities.R;
 
@@ -13,9 +13,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import amazingme.activities.util.Formatter;
 import amazingme.app.EnumeratedActivity;
-import amazingme.controller.ActivityManager;
 import amazingme.model.Skill;
+import amazingme.util.AverageCalculator;
 
 public class PerformanceMainActivity extends NavigationBarActivity {
     public PerformanceMainActivity() { super(R.layout.activity_performance_main); }
@@ -45,6 +46,11 @@ public class PerformanceMainActivity extends NavigationBarActivity {
                 goTo(EnumeratedActivity.PERFORMANCE_SKILL, bundle);
             }
         });
+
+        // TODO -> look for NaN and replace with useful text
+        TextView overallScore = (TextView)findViewById(R.id.overall_score);
+        overallScore.setText(Formatter.getStringFormatterForScoreDisplay()
+                .format(AverageCalculator.calculateSkillAverageFor(this.getUserContext().currentChildUser(), allSkills)));
 
     }
 

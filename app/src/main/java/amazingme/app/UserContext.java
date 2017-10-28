@@ -53,5 +53,5 @@ public class UserContext {
         this.currentChildUser().addToGameResults(newGameResults);
     }
 
-    private Child currentChildUser() { return this.children.get(childrenMapToken + String.valueOf(currentChildUser)); }
+    public Child currentChildUser() { return this.children.get(childrenMapToken + String.valueOf(currentChildUser)); }
 }

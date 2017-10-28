@@ -11,7 +11,7 @@ public enum Milestone {
 
     //2 month milestones
     BEGINS_TO_SMILE_AT_PEOPLE("Begins to smile at people", Constants.TWO_MONTHS, Constants.SIX_YEARS, false),
-    CAN_BRIEFLY_CALM,HERSELF ("Can briefly calm herself", Constants.TWO_MONTHS, Constants.SIX_YEARS, false),
+    CAN_BRIEFLY_CALM_HIMSELF_OR_HERSELF ("Can briefly calm himself or herself", Constants.TWO_MONTHS, Constants.SIX_YEARS, false),
     TRIES_TO_LOOK_AT_PARENT("Tries to look at parent", Constants.TWO_MONTHS, Constants.SIX_YEARS, false),
 
     COOS_OR_MAKES_GURGLING_SOUNDS("Coos or makes gurgling sounds", Constants.TWO_MONTHS, Constants.SIX_YEARS, false),

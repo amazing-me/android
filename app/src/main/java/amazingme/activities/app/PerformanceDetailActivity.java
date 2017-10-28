@@ -13,10 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import amazingme.activities.util.Formatter;
 import amazingme.app.EnumeratedActivity;
 import amazingme.controller.ActivityManager;
 import amazingme.model.Milestone;
 import amazingme.model.Skill;
+import amazingme.util.AverageCalculator;
 
 public class PerformanceDetailActivity extends NavigationBarActivity {
     public PerformanceDetailActivity() { super(R.layout.activity_performance_detail); }
@@ -35,6 +37,12 @@ public class PerformanceDetailActivity extends NavigationBarActivity {
 
         final TextView milestoneHeaderTextView = (TextView) findViewById(R.id.milestone_header);
         milestoneHeaderTextView.setText(milestone.toString());
+
+        // TODO -> look for NaN and replace with useful text
+        TextView milestoneScore = (TextView)findViewById(R.id.milestone_score);
+        milestoneScore.setText(Formatter.getStringFormatterForScoreDisplay()
+                .format(AverageCalculator.calculateMilestoneAverageFor(this.getUserContext().currentChildUser(), milestone)));
+
     }
 
     private Milestone getMilestoneFromBundle() {

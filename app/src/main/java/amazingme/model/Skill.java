@@ -8,7 +8,7 @@ public enum Skill {
     SOCIAL_AND_EMOTIONAL("Social and Emotional",
             Milestone.BEGINS_TO_SMILE_AT_PEOPLE,
             Milestone.TRIES_TO_LOOK_AT_PARENT,
-            Milestone.CAN_BRIEFLY_CALM,
+            Milestone.CAN_BRIEFLY_CALM_HIMSELF_OR_HERSELF,
             Milestone.SMILES_SPONTANEOUSLY_ESPECIALLY_AT_PEOPLE,
             Milestone.LIKES_TO_PLAY_WITH_PEOPLE_AND_MIGHT_CRY_WHEN_PLAYING_STOPS,
             Milestone.COPIES_SOME_MOVEMENTS_AND_FACIAL_EXPRESSIONS_LIKE_SMILING_OR_FROWNING,
