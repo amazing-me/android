@@ -13,7 +13,6 @@ import java.util.List;
 import amazingme.database.Session;
 import amazingme.database.SessionManager;
 import amazingme.database.firebase.FirebaseSessionManager;
-import amazingme.model.AmazingMeGame;
 
 public class AmazingMeApplicationContext extends Application {
 

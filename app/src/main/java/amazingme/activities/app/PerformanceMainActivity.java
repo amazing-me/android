@@ -1,21 +1,26 @@
 package amazingme.activities.app;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.amazingme.activities.R;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import amazingme.activities.util.Formatter;
 import amazingme.app.EnumeratedActivity;
-import amazingme.controller.ActivityManager;
 import amazingme.model.Skill;
+import amazingme.util.AverageCalculator;
+import amazingme.util.SeriesCalculator;
 
 public class PerformanceMainActivity extends NavigationBarActivity {
     public PerformanceMainActivity() { super(R.layout.activity_performance_main); }
@@ -42,9 +47,19 @@ public class PerformanceMainActivity extends NavigationBarActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(getResources().getString(R.string.key_skill), allSkills.get(position));
-                ActivityManager.getInstance().goTo(PerformanceMainActivity.this, EnumeratedActivity.PERFORMANCE_SKILL, bundle);
+                goTo(EnumeratedActivity.PERFORMANCE_SKILL, bundle);
             }
         });
+
+        // TODO -> look for NaN and replace with useful text
+        TextView overallScore = (TextView)findViewById(R.id.overall_score);
+        overallScore.setText(Formatter.getStringFormatterForScoreDisplay()
+                .format(AverageCalculator.calculateSkillAverageFor(this.getUserContext().currentChildUser(), allSkills)));
+
+        GraphView graph = (GraphView) findViewById(R.id.milestone_performance_graph);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(SeriesCalculator.calculateSeriesFor(this.getUserContext().currentChildUser(), allSkills));
+        new LineGraphSeries<>();
+        graph.addSeries(series);
 
     }
 

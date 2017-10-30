@@ -52,7 +52,6 @@ public class PrimaryCarePhysicianInformationActivity extends AmazingMeAppCompatA
                     parent.setPrimaryCarePhysicianEmail(email);
                     parent.setPrimaryCarePhysicianPhoneNumber(phoneNumber);
 
-                    getAppContext().saveUserContext();
                     goTo(EnumeratedActivity.CHILD_REGISTRATION);
                 } else {
                     showPCPFailedAlertDialog();
