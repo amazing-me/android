@@ -1,6 +1,5 @@
 package amazingme.activities.app;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -18,7 +17,7 @@ import amazingme.app.EnumeratedActivity;
 import amazingme.controller.ISessionLoginHandler;
 import amazingme.database.Session;
 
-import amazingme.model.AmazingMeAppCompatActivity;
+import amazingme.app.AmazingMeAppCompatActivity;
 
 public class LoginActivity extends AmazingMeAppCompatActivity implements ISessionLoginHandler {
 

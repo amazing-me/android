@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import amazingme.app.UserContext;
-import amazingme.model.AmazingMeGame;
+import amazingme.app.AmazingMeGame;
 
 public class Loader {
 

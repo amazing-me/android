@@ -1,6 +1,5 @@
 package amazingme.activities.app;
 
-import android.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,7 +7,7 @@ import android.widget.EditText;
 import com.amazingme.activities.R;
 
 import amazingme.app.EnumeratedActivity;
-import amazingme.model.AmazingMeAppCompatActivity;
+import amazingme.app.AmazingMeAppCompatActivity;
 import amazingme.model.Parent;
 
 public class UserProfileActivity extends AmazingMeAppCompatActivity {

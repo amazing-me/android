@@ -8,7 +8,7 @@ import com.amazingme.activities.R;
 
 import amazingme.app.EnumeratedActivity;
 import amazingme.controller.ISessionForgotPasswordHandler;
-import amazingme.model.AmazingMeAppCompatActivity;
+import amazingme.app.AmazingMeAppCompatActivity;
 
 public class ForgotPasswordActivity extends AmazingMeAppCompatActivity implements ISessionForgotPasswordHandler {
 

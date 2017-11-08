@@ -1,28 +1,30 @@
 package amazingme.activities.games;
 
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.amazingme.activities.R;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import amazingme.activities.util.GameTitle;
+import amazingme.activities.util.GameInfo;
 import amazingme.activities.util.Icon;
 import amazingme.app.EnumeratedActivity;
-import amazingme.model.AmazingMeGame;
+import amazingme.app.AmazingMeGame;
+import amazingme.app.GameLoopService;
+import amazingme.app.GameTimerService;
 import amazingme.model.GameResult;
 import amazingme.model.Milestone;
 import amazingme.model.Problem;
 
 //touch the screen three times within a minute to complete this.
 @Icon(R.drawable.amazingbackground)
-@GameTitle("Three Touch Game")
+@GameInfo(
+        value = "Three Touch Game",
+        instruction = "Touch the red button 3 times within one minute",
+        milestones = {Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_AND_UNDER}
+)
 public class ThreeTouchGame extends AmazingMeGame {
 
     private static final int TIME_SECS = 60;
@@ -35,12 +37,33 @@ public class ThreeTouchGame extends AmazingMeGame {
 
     public ThreeTouchGame() {
         super(R.layout.activity_game_three_touch);
-        this.relatedMilestones = new Milestone[] {Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_AND_UNDER};
     }
 
-    @Override
-    public void bindToUserInterface() {
+    public void initGame() {
         secondsText = (TextView)findViewById(R.id.game_three_touch_seconds_text);
+
+        getService(GameLoopService.class, new GameLoopService.Config(60,
+            new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("", "test");
+                }
+            },
+            new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            }
+        ));
+        getService(GameTimerService.class, new GameTimerService.Config(60, R.id.game_three_touch_seconds_text,
+            new Runnable() {
+                @Override
+                public void run() {
+                    resignGame(true);
+                }
+            }
+        ));
 
         final TextView timeText = (TextView)findViewById(R.id.game_three_touch_time_text);
         final Button redButton = (Button)findViewById(R.id.game_three_touch_red_button);
@@ -113,22 +136,9 @@ public class ThreeTouchGame extends AmazingMeGame {
                     }
                 });
 
-                startGame(1000);
+                startGame();
             }
         });
-    }
-
-    @Override
-    public void gameLogicUpdate() {
-        seconds--;
-        if(seconds == 0) {
-            resignGame(true);
-        }
-    }
-
-    @Override
-    public void gameUIUpdate() {
-        secondsText.setText(String.format("%d second%s", seconds, seconds == 1 ? "" : "s"));
     }
 
     @Override

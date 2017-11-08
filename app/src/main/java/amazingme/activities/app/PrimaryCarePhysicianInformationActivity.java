@@ -1,6 +1,5 @@
 package amazingme.activities.app;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -10,7 +9,7 @@ import android.widget.ToggleButton;
 import com.amazingme.activities.R;
 
 import amazingme.app.EnumeratedActivity;
-import amazingme.model.AmazingMeAppCompatActivity;
+import amazingme.app.AmazingMeAppCompatActivity;
 import amazingme.model.Parent;
 
 public class PrimaryCarePhysicianInformationActivity extends AmazingMeAppCompatActivity {

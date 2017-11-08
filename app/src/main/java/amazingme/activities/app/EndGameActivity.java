@@ -9,7 +9,7 @@ import com.amazingme.activities.R;
 
 import amazingme.app.EnumeratedActivity;
 
-import amazingme.model.AmazingMeAppCompatActivity;
+import amazingme.app.AmazingMeAppCompatActivity;
 
 public class EndGameActivity extends AmazingMeAppCompatActivity {
     private Button exitBtn, replayBtn, continueBtn;
