@@ -30,7 +30,6 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getAppContext().sessionInitialize(this);
     }
 

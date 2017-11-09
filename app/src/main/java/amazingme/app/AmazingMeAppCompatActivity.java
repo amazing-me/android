@@ -29,6 +29,10 @@ public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
         ActivityManager.getInstance().goTo(AmazingMeAppCompatActivity.this, activity);
     }
 
+    public final void goTo(final EnumeratedActivity activity, final Bundle bundle) {
+        ActivityManager.getInstance().goTo(AmazingMeAppCompatActivity.this, activity, bundle);
+    }
+
     public final void goToIfSignedIn(EnumeratedActivity activity) {
         if(getAppContext().hasSession()) {
             goTo(activity);

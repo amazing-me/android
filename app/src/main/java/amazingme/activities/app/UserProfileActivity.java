@@ -46,8 +46,6 @@ public class UserProfileActivity extends AmazingMeAppCompatActivity {
                     Parent parent = getUserContext().getParent();
                     parent.setFirstName(firstNameString);
                     parent.setLastName(lastNameString);
-
-                    getAppContext().saveUserContext();
                     goTo(EnumeratedActivity.PCP_INFORMATION);
                 } else {
                     showUserProfileSetupFailedAlertDialog();
