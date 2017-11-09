@@ -48,7 +48,7 @@ public class SampleQuizGame extends AmazingMeGame {
     public void updateGameResults() {
         GameResult canNameMostFamiliarThings = new GameResult();
 
-        canNameMostFamiliarThings.setRelatedMilestone(Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_AND_UNDER);
+        canNameMostFamiliarThings.setRelatedMilestone(Milestone.CAN_NAME_MOST_FAMILIAR_THINGS);
 
         canNameMostFamiliarThings.setScore(score);
 
