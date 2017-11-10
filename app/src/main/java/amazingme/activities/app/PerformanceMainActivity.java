@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.amazingme.activities.R;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -51,16 +52,28 @@ public class PerformanceMainActivity extends NavigationBarActivity {
             }
         });
 
-        // TODO -> look for NaN and replace with useful text
         TextView overallScore = (TextView)findViewById(R.id.overall_score);
-        overallScore.setText(Formatter.getStringFormatterForScoreDisplay()
-                .format(AverageCalculator.calculateSkillAverageFor(this.getUserContext().currentChildUser(), allSkills)));
+        double average = AverageCalculator.calculateSkillAverageFor(this.getUserContext().currentChildUser(), allSkills);
+        if (Double.isNaN(average)) {
+            overallScore.setText(R.string.no_data_to_display);
+        } else {
+            overallScore.setText(Formatter.getStringFormatterForScoreDisplay().format(average));
+        }
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(SeriesCalculator.calculateSeriesFor(this.getUserContext().currentChildUser(), allSkills));
+        series.setThickness(8);
+        series.setDataPointsRadius(12);
 
         GraphView graph = (GraphView) findViewById(R.id.milestone_performance_graph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(SeriesCalculator.calculateSeriesFor(this.getUserContext().currentChildUser(), allSkills));
-        new LineGraphSeries<>();
         graph.addSeries(series);
-
+        graph.getGridLabelRenderer().setNumHorizontalLabels(3);
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMaxY(100);
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(series.getLowestValueX());
+        graph.getViewport().setMaxX(series.getHighestValueX());
+        graph.getGridLabelRenderer().setHumanRounding(false);
     }
 
 

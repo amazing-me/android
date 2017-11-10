@@ -9,11 +9,10 @@ import com.amazingme.activities.R;
 import java.util.LinkedList;
 import java.util.List;
 
-import amazingme.activities.util.GameTitle;
+import amazingme.activities.util.GameInfo;
 import amazingme.activities.util.Icon;
 import amazingme.app.EnumeratedActivity;
-import amazingme.model.AmazingMeAppCompatActivity;
-import amazingme.model.AmazingMeGame;
+import amazingme.app.AmazingMeGame;
 
 public class GameMenuActivity extends NavigationBarActivity {
     private final String DEFAULT_GAME_TITLE = "Unnamed Game";
@@ -55,8 +54,8 @@ public class GameMenuActivity extends NavigationBarActivity {
             gameIconId = gameClass.isAnnotationPresent(Icon.class) ?
                     gameClass.getAnnotation(Icon.class).value() :
                     DEFAULT_GAME_ICON_ID;
-            gameTitle = gameClass.isAnnotationPresent(GameTitle.class) ?
-                    gameClass.getAnnotation(GameTitle.class).value() :
+            gameTitle = gameClass.isAnnotationPresent(GameInfo.class) ?
+                    gameClass.getAnnotation(GameInfo.class).value() :
                     DEFAULT_GAME_TITLE;
 
             gameIcons.add(gameIconId);

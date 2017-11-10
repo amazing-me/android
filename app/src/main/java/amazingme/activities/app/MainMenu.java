@@ -4,8 +4,6 @@ import android.os.Bundle;
 
 import com.amazingme.activities.R;
 
-import amazingme.controller.ISessionLogoutHandler;
-import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.app.EnumeratedActivity;
 
 public class MainMenu extends NavigationBarActivity {
