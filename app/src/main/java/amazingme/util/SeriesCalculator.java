@@ -9,6 +9,7 @@ import com.jjoe64.graphview.series.Series;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -41,7 +42,9 @@ public class SeriesCalculator {
         List<DataPoint> dataPoints = new LinkedList<>();
         if (child.getGameResults().get(milestone.toString()) != null) {
             for (GameResult gameResult : child.getGameResults().get(milestone.toString())) {
-                dataPoints.add(new DataPoint(gameResult.getTimestamp(), gameResult.getScore()));
+                long timestamp = gameResult.getTimestamp();
+                Date date = new Date(timestamp);
+                dataPoints.add(new DataPoint(date, gameResult.getScore()));
             }
         }
         return Arrays.copyOf(dataPoints.toArray(), dataPoints.size(), DataPoint[].class);
