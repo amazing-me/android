@@ -42,6 +42,18 @@ public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
         }
     }
 
+    public final void goToIfNotRegisteredUser(EnumeratedActivity activity) {
+        if (getUserContext().getParent().getFirstName().isEmpty() || getUserContext().getParent().getLastName().isEmpty()) {
+            goTo(activity);
+        }
+    }
+
+    public final void goToIfNotRegisteredChild(EnumeratedActivity activity) {
+        if (getUserContext().getChildren().isEmpty()) {
+            goTo(activity);
+        }
+    }
+
     public final void showInfoDialogBox(final String title, final String message, final Runnable fn) {
         DialogBoxShower.show(DialogBoxShower.DialogType.INFO_DIALOG, AmazingMeAppCompatActivity.this,
                 title, message, fn);
@@ -63,5 +75,11 @@ public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
     public abstract EnumeratedActivity activityName();
 
     public abstract void bindToUserInterface();
+
+    public void goToRegistrationProcessIfNotFinished() {
+        goToIfNotSignedIn(EnumeratedActivity.LOGIN);
+        //goToIfNotRegisteredUser(EnumeratedActivity.USER_PROFILE);
+        //goToIfNotRegisteredChild(EnumeratedActivity.CHILD_REGISTRATION);
+    }
 
 }
