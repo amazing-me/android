@@ -20,7 +20,7 @@ public class AverageCalculator {
                 numberOfItems++;
             }
         }
-        return total / numberOfItems;
+        return numberOfItems == 0 ? Double.NaN : total / numberOfItems;
     }
 
     public static double calculateSkillAverageFor(Child child, List<Skill> skills) {
@@ -36,7 +36,7 @@ public class AverageCalculator {
                 }
             }
         }
-        return total / numberOfItems;
+        return numberOfItems == 0 ? Double.NaN : total / numberOfItems;
     }
 
     public static double calculateMilestoneAverageFor(Child child, Milestone milestone) {
@@ -48,7 +48,7 @@ public class AverageCalculator {
                 numberOfItems++;
             }
         }
-        return total / numberOfItems;
+        return numberOfItems == 0 ? Double.NaN : total / numberOfItems;
     }
 
 }
