@@ -2,7 +2,7 @@ package amazingme.activities.app;
 
 import com.amazingme.activities.R;
 
-import amazingme.model.AmazingMeAppCompatActivity;
+import amazingme.app.AmazingMeAppCompatActivity;
 import amazingme.app.EnumeratedActivity;
 
 public class LandingPage extends AmazingMeAppCompatActivity {

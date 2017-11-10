@@ -15,7 +15,7 @@ import org.joda.time.LocalDate;
 import java.util.LinkedList;
 
 import amazingme.app.EnumeratedActivity;
-import amazingme.model.AmazingMeAppCompatActivity;
+import amazingme.app.AmazingMeAppCompatActivity;
 import amazingme.model.Child;
 import amazingme.model.KnownDevelopmentalDisabilities;
 

@@ -1,19 +1,22 @@
-package amazingme.model;
+package amazingme.app;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import amazingme.activities.util.DialogBoxShower;
-import amazingme.app.AmazingMeApplicationContext;
-import amazingme.app.EnumeratedActivity;
-import amazingme.app.UserContext;
 import amazingme.controller.ActivityManager;
 
 public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
 
     private int layout;
 
-    public AmazingMeAppCompatActivity(int layout) { this.layout = layout; }
+    public AmazingMeAppCompatActivity(int layout) {
+        this.layout = layout;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

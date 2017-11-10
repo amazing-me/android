@@ -14,7 +14,7 @@ import amazingme.app.EnumeratedActivity;
 import amazingme.controller.ISessionRegisterHandler;
 import amazingme.database.Session;
 
-import amazingme.model.AmazingMeAppCompatActivity;
+import amazingme.app.AmazingMeAppCompatActivity;
 
 public class RegisterActivity extends AmazingMeAppCompatActivity implements ISessionRegisterHandler {
 
