@@ -86,7 +86,7 @@ public class ChildRegistrationActivity extends AmazingMeAppCompatActivity {
     }
 
     private boolean fieldsAreValidated() {
-        return ((!firstName.isEmpty()) && (!lastName.isEmpty()) && (year != 0) && (month != 0) && (day != 0));
+        return ((!firstName.isEmpty()) && (!lastName.isEmpty()));
     }
 
     private void showChildRegistrationFailedAlertDialog() {
