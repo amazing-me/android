@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="180dp"
+            android:textSize="80dp"
             android:textStyle="bold"
             android:layout_marginTop="40dp"
             android:layout_below="@+id/milestone_header"
@@ -57,6 +57,8 @@
             android:id="@+id/milestone_performance_graph"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/milestone_score"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="40dp"/>
 
 

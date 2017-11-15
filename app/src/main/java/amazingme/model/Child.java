@@ -30,11 +30,14 @@ public class Child extends User {
     }
 
     public Child(String firstName, String lastName, Sex sex, LocalDate dob, List<KnownDevelopmentalDisabilities> knownDevelopmentalDisabilities) {
-        //TODO -> do we need a check here...??
+        this(firstName, lastName, sex, DateAdapter.convertLocalDateToMillis(dob), knownDevelopmentalDisabilities);
+    }
+
+    public Child(String firstName, String lastName, Sex sex, long dob, List<KnownDevelopmentalDisabilities> kdd) {
         super(firstName, lastName);
         this.sex = sex;
-        this.birthday = DateAdapter.convertLocalDateToMillis(dob);
-        this.knownDevelopmentalDisabilities = knownDevelopmentalDisabilities;
+        this.birthday = dob;
+        this.knownDevelopmentalDisabilities = kdd;
         this.initGameResultMap();
     }
 

@@ -1,19 +1,22 @@
-package amazingme.model;
+package amazingme.app;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import amazingme.activities.util.DialogBoxShower;
-import amazingme.app.AmazingMeApplicationContext;
-import amazingme.app.EnumeratedActivity;
-import amazingme.app.UserContext;
 import amazingme.controller.ActivityManager;
 
 public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
 
     private int layout;
 
-    public AmazingMeAppCompatActivity(int layout) { this.layout = layout; }
+    public AmazingMeAppCompatActivity(int layout) {
+        this.layout = layout;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,18 @@ public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
         }
     }
 
+    public final void goToIfNotRegisteredUser(EnumeratedActivity activity) {
+        if (getUserContext().getParent().getFirstName().isEmpty() || getUserContext().getParent().getLastName().isEmpty()) {
+            goTo(activity);
+        }
+    }
+
+    public final void goToIfNotRegisteredChild(EnumeratedActivity activity) {
+        if (getUserContext().getChildren().isEmpty()) {
+            goTo(activity);
+        }
+    }
+
     public final void showInfoDialogBox(final String title, final String message, final Runnable fn) {
         DialogBoxShower.show(DialogBoxShower.DialogType.INFO_DIALOG, AmazingMeAppCompatActivity.this,
                 title, message, fn);
@@ -63,5 +78,11 @@ public abstract class AmazingMeAppCompatActivity extends AppCompatActivity {
     public abstract EnumeratedActivity activityName();
 
     public abstract void bindToUserInterface();
+
+    public void goToRegistrationProcessIfNotFinished() {
+        goToIfNotSignedIn(EnumeratedActivity.LOGIN);
+        //goToIfNotRegisteredUser(EnumeratedActivity.USER_PROFILE);
+        //goToIfNotRegisteredChild(EnumeratedActivity.CHILD_REGISTRATION);
+    }
 
 }

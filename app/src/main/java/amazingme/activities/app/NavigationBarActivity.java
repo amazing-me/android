@@ -8,7 +8,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +17,7 @@ import com.amazingme.activities.R;
 
 import amazingme.app.EnumeratedActivity;
 import amazingme.controller.ISessionLogoutHandler;
-import amazingme.model.AmazingMeAppCompatActivity;
+import amazingme.app.AmazingMeAppCompatActivity;
 import amazingme.model.Parent;
 
 public abstract class NavigationBarActivity extends AmazingMeAppCompatActivity
@@ -33,7 +32,7 @@ public abstract class NavigationBarActivity extends AmazingMeAppCompatActivity
         super.onCreate(savedInstanceState);
         initializeNavigationBar();
 
-        goToIfNotSignedIn(EnumeratedActivity.LOGIN);
+        goToRegistrationProcessIfNotFinished();
         // Register games when app is launched
     }
 

@@ -18,9 +18,6 @@ import amazingme.activities.app.RegisterActivity;
 import amazingme.activities.app.UserProfileActivity;
 import amazingme.activities.games.SampleQuizGame;
 import amazingme.activities.games.ThreeTouchGame;
-import amazingme.model.AmazingMeAppCompatActivity;
-import amazingme.model.AmazingMeGame;
-import amazingme.model.Milestone;
 
 //TODO -> clean this up... surely there is a way to format it better
 public enum EnumeratedActivity {
