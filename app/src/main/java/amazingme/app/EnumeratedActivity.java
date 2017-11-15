@@ -16,8 +16,8 @@ import amazingme.activities.app.PerformanceSkillActivity;
 import amazingme.activities.app.PrimaryCarePhysicianInformationActivity;
 import amazingme.activities.app.RegisterActivity;
 import amazingme.activities.app.UserProfileActivity;
-import amazingme.activities.games.SampleQuizGame;
 import amazingme.activities.games.ThreeTouchGame;
+import amazingme.activities.games.SampleQuizGame;
 
 //TODO -> clean this up... surely there is a way to format it better
 public enum EnumeratedActivity {
@@ -35,7 +35,7 @@ public enum EnumeratedActivity {
     GAME_MENU(GameMenuActivity.class),
     END_GAME(EndGameActivity.class),
     THREE_TOUCH_GAME(ThreeTouchGame.class, true, true),
-    SAMPLE_QUIZ_GAME(SampleQuizGame.class, true,true);
+    SAMPLE_QUIZ_GAME(SampleQuizGame.class, true, true);
 
 
     private String className;
