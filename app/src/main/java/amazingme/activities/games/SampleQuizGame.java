@@ -56,9 +56,14 @@ public class SampleQuizGame extends AmazingMeGame {
     }
 
     @Override
+    public EnumeratedActivity activityName() {
+        return EnumeratedActivity.SAMPLE_QUIZ_GAME;
+    }
+
+    @Override
     public void bindToUserInterface() {
         TextView questionText = (TextView)findViewById(R.id.question);
-        TextView scoreText = (TextView)findViewById(R.id.answer);
+        TextView scoreText = (TextView)findViewById(R.id.score);
 
         Button answer1 = (Button)findViewById(R.id.answer1);
         Button answer2 = (Button) findViewById(R.id.answer2);

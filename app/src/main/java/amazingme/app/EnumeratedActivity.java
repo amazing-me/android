@@ -16,6 +16,7 @@ import amazingme.activities.app.PerformanceSkillActivity;
 import amazingme.activities.app.PrimaryCarePhysicianInformationActivity;
 import amazingme.activities.app.RegisterActivity;
 import amazingme.activities.app.UserProfileActivity;
+import amazingme.activities.games.SampleQuizGame;
 import amazingme.activities.games.ThreeTouchGame;
 import amazingme.model.AmazingMeAppCompatActivity;
 import amazingme.model.AmazingMeGame;
@@ -36,7 +37,8 @@ public enum EnumeratedActivity {
     PERFORMANCE_DETAIL(PerformanceDetailActivity.class),
     GAME_MENU(GameMenuActivity.class),
     END_GAME(EndGameActivity.class),
-    THREE_TOUCH_GAME(ThreeTouchGame.class, true, true);
+    THREE_TOUCH_GAME(ThreeTouchGame.class, true, true),
+    SAMPLE_QUIZ_GAME(SampleQuizGame.class, true,true);
 
 
     private String className;
