@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name="amazingme.activities.games.ThreeTouchGame" />
+        <activity android:name="amazingme.activities.games.SampleQuizGame" />
         <activity android:name="amazingme.activities.app.RegisterActivity" />
         <activity android:name="amazingme.activities.app.ForgotPasswordActivity" />
         <activity android:name="amazingme.activities.app.UserProfileActivity" />

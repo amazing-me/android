@@ -64,7 +64,8 @@ public class SampleQuizGame extends AmazingMeGame {
         answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(shapes_answers[currQuestion][0].equals(shapes_answers_correct)) {
+                if(shapes_answers[currQuestion][0].equals(shapes_answers_correct[currQuestion])) {
+                    score++;
                     resignGame(true);
                 } else {
                     resignGame(false);
@@ -75,7 +76,8 @@ public class SampleQuizGame extends AmazingMeGame {
         answer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(shapes_answers[currQuestion][1].equals(shapes_answers_correct)) {
+                if(shapes_answers[currQuestion][1].equals(shapes_answers_correct[currQuestion])) {
+                    score++;
                     resignGame(true);
                 } else {
                     resignGame(false);
@@ -86,7 +88,8 @@ public class SampleQuizGame extends AmazingMeGame {
         answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(shapes_answers[currQuestion][2].equals(shapes_answers_correct)) {
+                if(shapes_answers[currQuestion][2].equals(shapes_answers_correct[currQuestion])) {
+                    score++;
                     resignGame(true);
                 } else {
                     resignGame(false);
@@ -97,7 +100,8 @@ public class SampleQuizGame extends AmazingMeGame {
         answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(shapes_answers[currQuestion][3].equals(shapes_answers_correct)) {
+                if(shapes_answers[currQuestion][3].equals(shapes_answers_correct[currQuestion])) {
+                    score++;
                     resignGame(true);
                 } else {
                     resignGame(false);
@@ -106,7 +110,6 @@ public class SampleQuizGame extends AmazingMeGame {
         });
         questionText.setText(shapes_questions[currQuestion]);
         scoreText.setText(score);
-
         answer1.setText(shapes_answers[currQuestion][0]);
         answer2.setText(shapes_answers[currQuestion][1]);
         answer3.setText(shapes_answers[currQuestion][2]);
