@@ -1,97 +1,77 @@
 package amazingme.activities.games;
 
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.amazingme.activities.R;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-import amazingme.activities.util.GameTitle;
+import amazingme.activities.util.GameInfo;
 import amazingme.activities.util.Icon;
 import amazingme.app.EnumeratedActivity;
-import amazingme.model.AmazingMeGame;
+import amazingme.app.AmazingMeGame;
+import amazingme.app.GameLoopService;
+import amazingme.app.GameTimerService;
 import amazingme.model.GameResult;
 import amazingme.model.Milestone;
 import amazingme.model.Problem;
 
 //touch the screen three times within a minute to complete this.
 @Icon(R.drawable.amazingbackground)
-@GameTitle("Three Touch Game")
+@GameInfo(
+        value = "Three Touch Game",
+        instruction = "Touch the red button 3 times within one minute",
+        milestones = {Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_AND_UNDER}
+)
 public class ThreeTouchGame extends AmazingMeGame {
 
     private static final int TIME_SECS = 60;
 
     private int seconds = TIME_SECS;
-
-    private Timer timer;
-    private TimerTask gameTask;
-
     private int redCount;
     private int blueCount ;
 
+    private TextView secondsText;
+
     public ThreeTouchGame() {
         super(R.layout.activity_game_three_touch);
-        this.relatedMilestones = new Milestone[] {Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_AND_UNDER};
     }
 
-    @Override
-    public GameResult gameResults() {
-        GameResult result = new GameResult();
+    public void initGame() {
+        secondsText = (TextView)findViewById(R.id.game_three_touch_seconds_text);
 
-        if(redCount < 3 || blueCount > 0) {
-            result.addProblem(Problem.DID_NOT_FOLLOW_DIRECTIONS);
-        }
-        if(seconds == 0) {
-            result.addProblem(Problem.TIME_TOO_LONG);
-        }
-
-
-        int score = ((redCount == 3 && blueCount == 0) ? 40 : 0) + seconds;
-        result.setScore(score);
-
-        return result;
-    }
-
-    @Override
-    public EnumeratedActivity activityName() {
-        return EnumeratedActivity.THREE_TOUCH_GAME;
-    }
-
-    @Override
-    public void bindToUserInterface() {
-        final TextView timeText = (TextView)findViewById(R.id.game_three_touch_time_text);
-        final TextView secondsText = (TextView)findViewById(R.id.game_three_touch_seconds_text);
-
-        timer = new Timer();
-        gameTask = new TimerTask() {
-            @Override
-            public void run() {
-                seconds--;
-                if(seconds == 0) {
-                    timer.cancel();
-                    resign(true);
+        getService(GameLoopService.class, new GameLoopService.Config(60,
+            new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("", "test");
                 }
+            },
+            new Runnable() {
+                @Override
+                public void run() {
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        secondsText.setText(String.format("%d second%s", seconds, seconds == 1 ? "" : "s"));
-                    }
-                });
+                }
             }
-        };
+        ));
+        getService(GameTimerService.class, new GameTimerService.Config(60, R.id.game_three_touch_seconds_text,
+            new Runnable() {
+                @Override
+                public void run() {
+                    resignGame(true);
+                }
+            }
+        ));
 
+        final TextView timeText = (TextView)findViewById(R.id.game_three_touch_time_text);
         final Button redButton = (Button)findViewById(R.id.game_three_touch_red_button);
         redButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(++redCount == 3) {
-                    timer.cancel();
-                    resign(true);
+                if(!isPaused() && ++redCount == 3) {
+                    resignGame(true);
                 }
             }
         });
@@ -100,10 +80,41 @@ public class ThreeTouchGame extends AmazingMeGame {
         blueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(++blueCount == 3) {
-                    timer.cancel();
-                    resign(true);
+                if(!isPaused() && ++blueCount == 3) {
+                    resignGame(true);
                 }
+            }
+        });
+
+        final Button pauseButton = (Button)findViewById(R.id.game_three_touch_pause_button);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isPaused()) {
+                    unpauseGame();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pauseButton.setText("Pause");
+                        }
+                    });
+                } else {
+                    pauseGame();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            pauseButton.setText("Unpause");
+                        }
+                    });
+                }
+            }
+        });
+
+        final Button stopButton = (Button)findViewById(R.id.game_three_touch_stop_button);
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resignGame(false);
             }
         });
 
@@ -118,15 +129,40 @@ public class ThreeTouchGame extends AmazingMeGame {
                         blueButton.setVisibility(View.VISIBLE);
                         timeText.setVisibility(View.VISIBLE);
                         secondsText.setVisibility(View.VISIBLE);
+                        pauseButton.setVisibility(View.VISIBLE);
+                        stopButton.setVisibility(View.VISIBLE);
 
                         startButton.setVisibility(View.INVISIBLE);
                     }
                 });
 
-                timer.scheduleAtFixedRate(gameTask, 1000, 1000);
+                startGame();
             }
         });
+    }
 
+    @Override
+    public void updateGameResults() {
+        GameResult understandsWordsLikeInOnAndUnder = new GameResult();
+
+        understandsWordsLikeInOnAndUnder.setRelatedMilestone(Milestone.UNDERSTANDS_WORDS_LIKE_IN_ON_AND_UNDER);
+
+        if(redCount < 3 || blueCount > 0) {
+            understandsWordsLikeInOnAndUnder.addProblem(Problem.DID_NOT_FOLLOW_DIRECTIONS);
+        }
+        if(seconds == 0) {
+            understandsWordsLikeInOnAndUnder.addProblem(Problem.TIME_TOO_LONG);
+        }
+
+        int score = ((redCount == 3 && blueCount == 0) ? 40 : 0) + seconds;
+        understandsWordsLikeInOnAndUnder.setScore(score);
+
+        gameResults.add(understandsWordsLikeInOnAndUnder);
+    }
+
+    @Override
+    public EnumeratedActivity activityName() {
+        return EnumeratedActivity.THREE_TOUCH_GAME;
     }
 
 }

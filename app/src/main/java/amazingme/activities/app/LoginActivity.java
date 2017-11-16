@@ -1,6 +1,5 @@
 package amazingme.activities.app;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -14,24 +13,23 @@ import com.google.firebase.auth.FirebaseAuthEmailException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
-import amazingme.activities.util.DialogHelper;
 import amazingme.app.EnumeratedActivity;
 import amazingme.controller.ISessionLoginHandler;
 import amazingme.database.Session;
 
-import amazingme.model.AmazingMeAppCompatActivity;
+import amazingme.app.AmazingMeAppCompatActivity;
 
 public class LoginActivity extends AmazingMeAppCompatActivity implements ISessionLoginHandler {
 
     private EditText emailEditText, passwordEditText;
     private Button loginBtn, registerBtn;
     private TextView forgotPasswordTextBtn;
+    private String email, password;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getAppContext().sessionInitialize(this);
     }
 
@@ -60,11 +58,12 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String email = emailEditText.getText().toString();
-                final String password = passwordEditText.getText().toString();
-
-                if (!email.isEmpty() && !password.isEmpty()) {
+                email = emailEditText.getText().toString();
+                password = passwordEditText.getText().toString();
+                if (fieldsAreValidated()) {
                     getAppContext().sessionLogin(email, password, LoginActivity.this);
+                } else {
+                    onSessionLoginFailure(new InvalidFieldsException());
                 }
             }
         });
@@ -85,11 +84,9 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
     @Override
     public void onSessionLoginFailure(Exception e) {
         final String loginFailed = LoginActivity.this.getResources().getString(R.string.dialog_login_failed);
-        final AlertDialog.Builder alertDialog = DialogHelper.getAlertDialog(LoginActivity.this, loginFailed);
         final String exceptionMessage = getLoginExceptionMessage(e);
 
-        alertDialog.setMessage(exceptionMessage);
-        alertDialog.show();
+        this.showAlertDialogBox(loginFailed, exceptionMessage, null);
     }
 
     private String getLoginExceptionMessage(final Exception exception) {
@@ -100,7 +97,8 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
             throw exception;
         } catch (FirebaseAuthInvalidCredentialsException
                 | FirebaseAuthEmailException
-                | FirebaseAuthInvalidUserException e) {
+                | FirebaseAuthInvalidUserException
+                | InvalidFieldsException e) {
             exceptionMessage = this.getResources().getString(R.string.error_invalid_credentials);
         } catch (Exception e) {
             Log.e(loginTag, e.getMessage());
@@ -108,6 +106,14 @@ public class LoginActivity extends AmazingMeAppCompatActivity implements ISessio
         }
 
         return exceptionMessage;
+    }
+
+    private boolean fieldsAreValidated() {
+        return !email.isEmpty() && !password.isEmpty();
+    }
+
+    private class InvalidFieldsException extends Exception {
+
     }
 
 }

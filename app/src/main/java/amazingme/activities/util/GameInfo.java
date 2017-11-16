@@ -5,8 +5,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import amazingme.model.Milestone;
+
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface GameTitle {
+public @interface GameInfo {
     String value();
+    String instruction() default "";
+    Milestone[] milestones() default {};
 }

@@ -13,12 +13,11 @@ import java.util.List;
 import amazingme.database.Session;
 import amazingme.database.SessionManager;
 import amazingme.database.firebase.FirebaseSessionManager;
-import amazingme.model.AmazingMeGame;
 
 public class AmazingMeApplicationContext extends Application {
 
     private SessionManager<? extends Session> sessionManager;
-    private List<Class<? extends AmazingMeGame>> games;
+    private List<EnumeratedActivity> games;
 
     @Override
     public void onCreate() {
@@ -59,11 +58,11 @@ public class AmazingMeApplicationContext extends Application {
         return sessionManager.hasSession();
     }
 
-    public List<Class<? extends AmazingMeGame>> getGames() {
+    public List<EnumeratedActivity> getGames() {
         return games;
     }
 
-    public void setGames(List<Class<? extends AmazingMeGame>> games) {
+    public void setGames(List<EnumeratedActivity> games) {
         this.games = games;
     }
 

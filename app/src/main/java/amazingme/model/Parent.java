@@ -12,8 +12,7 @@ public class Parent extends User {
         startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null))); TODO -> this might be useful later and it'll be referenced here so i'm leaving it here.
     }*/
 
-    public Parent() {
-    }
+    public Parent() {}
 
     public Parent(String firstName, String lastName, String email, String pcpEmail, String pcpPhone) {
         //TODO -> do we need a check here...??

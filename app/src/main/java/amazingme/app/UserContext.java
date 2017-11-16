@@ -1,7 +1,8 @@
 package amazingme.app;
 
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import amazingme.model.Child;
 import amazingme.model.GameResult;
@@ -10,23 +11,22 @@ import amazingme.model.Parent;
 public class UserContext {
 
     private Parent parent;
-    private List<Child> children; //not setting this as final because it could change in a session of using the app
-    private List<GameResult> gameResults;
+    private Map<String, Child> children; //not setting this as final because it could change in a session of using the app
     private int currentChildUser;
+    private static final String childrenMapToken = "CHILD_";
 
     public UserContext() {
-        this(new Parent(), new LinkedList<Child>(), new LinkedList<GameResult>());
+        this(new Parent(), new HashMap<String, Child>());
     }
 
-    public UserContext(Parent parent, List<Child> children, List<GameResult> gameResults) {
+    public UserContext(Parent parent, Map<String, Child> children) {
         this.parent = parent;
         this.children = children;
-        this.gameResults = gameResults;
         this.currentChildUser = 0;
     }
 
     public void addChild(Child child) {
-        children.add(child);
+        children.put(childrenMapToken + String.valueOf(children.size()), child);
     }
 
     public Parent getParent() {
@@ -37,25 +37,21 @@ public class UserContext {
         this.parent = parent;
     }
 
-    public List<Child> getChildren() {
+    public Map<String, Child> getChildren() {
         return children;
     }
 
-
-
-    public List<GameResult> getGameResults() {
-        return gameResults;
-    }
-
-    public void setGameResults(List<GameResult> gameResults) {
-        this.gameResults = gameResults;
-    }
-
-    public int getCurrentChildUser() {
-        return currentChildUser;
-    }
+    public void setChildren(Map<String, Child> children) { this.children = children; }
 
     public void setCurrentChildUser(int currentChildUser) {
         this.currentChildUser = currentChildUser;
     }
+
+    public int getCurrentChildUser() {return this.currentChildUser; }
+
+    public void addGameResultsForCurrentChildUser(List<GameResult> newGameResults) {
+        this.currentChildUser().addToGameResults(newGameResults);
+    }
+
+    public Child currentChildUser() { return this.children.get(childrenMapToken + String.valueOf(currentChildUser)); }
 }

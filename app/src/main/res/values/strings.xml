@@ -42,11 +42,31 @@
         Login Failed
     </string>
 
+    <string name="child_registration_failed">
+        Child Registration Failed
+    </string>
+
+    <string name="child_registration_error_message">
+        Please fill out all fields before continuing.
+    </string>
+
+    <string name="user_profile_setup_failed">
+        User Profile Setup Failed
+    </string>
+
+    <string name="pcp_failed">
+        Primary Care Information Setup Failed
+    </string>
+
+    <string name="generic_empty_field_error_message">
+        Please fill out all fields before continuing.
+    </string>
+
     <string name="tag_registration">
         Login
     </string>
     <string name="dialog_registration_failed">
-        Login Failed
+        Registration Failed
     </string>
     <string name="dialog_forgot_password_success">
         Forgot Password
@@ -139,5 +159,20 @@
         <item>"Male"</item>
         <item>"Female"</item>
     </string-array>
+
+
+    <!-- KEYS -->
+    <string name="key_skill">
+        key_skill
+    </string>
+
+    <string name="key_milestone">
+         key_milestone
+    </string>
+
+    <!-- PERFORMANCE -->
+    <string name="no_data_to_display">
+        No data to display
+    </string>
 
 </resources>
