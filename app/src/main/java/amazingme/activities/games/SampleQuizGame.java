@@ -1,23 +1,18 @@
 package amazingme.activities.games;
 
+import android.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.amazingme.activities.R;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import amazingme.activities.util.GameInfo;
-import amazingme.activities.util.Icon;
-import amazingme.app.EnumeratedActivity;
 import amazingme.app.AmazingMeGame;
-import amazingme.app.GameLoopService;
-import amazingme.app.GameTimerService;
+import amazingme.app.EnumeratedActivity;
 import amazingme.model.GameResult;
 import amazingme.model.Milestone;
-import amazingme.model.Problem;
 
 @GameInfo(
         value = "Sample Quiz Game",
@@ -60,7 +55,7 @@ public class SampleQuizGame extends AmazingMeGame {
         TextView questionText = (TextView)findViewById(R.id.question);
         TextView scoreText = (TextView)findViewById(R.id.score);
 
-        Button answer1 = (Button)findViewById(R.id.answer1);
+        ImageButton answer1 = (ImageButton)findViewById(R.id.answer1);
         answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +67,7 @@ public class SampleQuizGame extends AmazingMeGame {
                 }
             }
         });
-        Button answer2 = (Button) findViewById(R.id.answer2);
+        ImageButton answer2 = (ImageButton) findViewById(R.id.answer2);
         answer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +79,7 @@ public class SampleQuizGame extends AmazingMeGame {
                 }
             }
         });
-        Button answer3 = (Button) findViewById(R.id.answer3);
+        ImageButton answer3 = (ImageButton) findViewById(R.id.answer3);
         answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +91,7 @@ public class SampleQuizGame extends AmazingMeGame {
                 }
             }
         });
-        Button answer4 = (Button) findViewById(R.id.answer4);
+        ImageButton answer4 = (ImageButton) findViewById(R.id.answer4);
         answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,10 +105,20 @@ public class SampleQuizGame extends AmazingMeGame {
         });
         questionText.setText(shapes_questions[currQuestion]);
         scoreText.setText(score);
-        answer1.setText(shapes_answers[currQuestion][0]);
-        answer2.setText(shapes_answers[currQuestion][1]);
-        answer3.setText(shapes_answers[currQuestion][2]);
-        answer4.setText(shapes_answers[currQuestion][3]);
+
+        Button submitBtn = (Button)findViewById(R.id.submitBtn);
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlert(v);
+            }
+        });
+
+
+//        answer1.setText(shapes_answers[currQuestion][0]);
+//        answer2.setText(shapes_answers[currQuestion][1]);
+//        answer3.setText(shapes_answers[currQuestion][2]);
+//        answer4.setText(shapes_answers[currQuestion][3]);
 
     }
 
@@ -125,5 +130,19 @@ public class SampleQuizGame extends AmazingMeGame {
     @Override
     public void bindToUserInterface() {
 
+    }
+
+    // This is just temporary for testing
+    // When you click images, this makes message to show up
+    public void showAlert(View v) {
+        AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+        myAlert.setMessage("You chose " + v.getResources().getResourceEntryName(v.getId()) + ".").create();
+        myAlert.show();
+    }
+
+    public void showAlert2(View v) {
+        AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+        myAlert.setMessage("You submitted !").create();
+        myAlert.show();
     }
 }

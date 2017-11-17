@@ -1,60 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <RelativeLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/question"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="27dp"
+            android:text="The Koala is on the table"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="60sp" />
 
-            <Button
-                android:id="@+id/answer4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/question"
+            android:text="Points : 0"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="30sp" />
 
-            <Button
-                android:id="@+id/answer3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/answer4"
-                android:layout_centerHorizontal="true"
-                android:text="Button" />
+        <ImageButton
+            android:id="@+id/answer1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/score"
+            android:layout_marginLeft="163dp"
+            android:layout_marginStart="163dp"
+            android:layout_marginTop="143dp"
+            android:onClick="showAlert"
+            app:srcCompat="@drawable/sample_game_image1" />
 
-            <Button
-                android:id="@+id/answer2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/answer3"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:text="Button" />
+        <ImageButton
+            android:id="@+id/answer2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/answer1"
+            android:layout_marginLeft="112dp"
+            android:layout_marginStart="112dp"
+            android:layout_toEndOf="@+id/answer1"
+            android:layout_toRightOf="@+id/answer1"
+            android:onClick="showAlert"
+            app:srcCompat="@drawable/sample_game_image2" />
 
-            <Button
-                android:id="@+id/answer1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/answer2"
-                android:layout_centerHorizontal="true"
-                android:text="Button" />
+        <ImageButton
+            android:id="@+id/answer3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/answer1"
+            android:layout_alignStart="@+id/answer1"
+            android:layout_below="@+id/answer1"
+            android:layout_marginTop="198dp"
+            android:onClick="showAlert"
+            app:srcCompat="@drawable/sample_game_image3" />
 
-            <TextView
-                android:id="@+id/score"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:text="TextView" />
+        <ImageButton
+            android:id="@+id/answer4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/answer2"
+            android:layout_alignStart="@+id/answer2"
+            android:layout_alignTop="@+id/answer3"
+            android:onClick="showAlert"
+            app:srcCompat="@drawable/sample_game_image4" />
 
-            <TextView
-                android:id="@+id/question"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/score"
-                android:layout_centerHorizontal="true"
-                android:text="TextView" />
+        <Button
+            android:id="@+id/submitBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="#e2fc7b"
+            android:onClick="showAlert2"
+            android:text="Submit" />
 
-        </RelativeLayout>
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
