@@ -30,8 +30,10 @@ public class AverageCalculator {
             for (Milestone milestone : skill.getCurrentlyMeasuredMilestonesRelatedToThisSkill()) {
                 if (child.getGameResults().get(milestone.toString()) != null) {
                     for (GameResult gameResult : child.getGameResults().get(milestone.toString())) {
-                        total += gameResult.getScore();
-                        numberOfItems++;
+                        if (gameResult != null) {
+                            total += gameResult.getScore();
+                            numberOfItems++;
+                        }
                     }
                 }
             }
