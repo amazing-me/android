@@ -20,7 +20,7 @@ import amazingme.model.Milestone;
 
 @GameInfo(
         value = "Sample Quiz Game",
-        instruction = "Answer the questions",
+        instruction = "Answer the questions based on the given picture",
         milestones = {Milestone.CAN_NAME_MOST_FAMILIAR_THINGS}
 )
 
@@ -30,25 +30,49 @@ public class SampleQuizGame extends AmazingMeGame {
             "The koala on the above picture is ...",
             "The koala on the above picture is ...",
             "The koala on the above picture is ...",
-            "The koala on the above picture is ..."
+            "The koala on the above picture is ...",
+            "The giraffe on the above picture is ...",
+            "The giraffe on the above picture is ...",
+            "The giraffe on the above picture is ...",
+            "The koala on the above picture is ...",
+            "The kangaroo on the above picture is ...",
+            "The koala on the above picture is ...",
+            "The giraffe on the above picture is ..."
     };
 
     private String mChoices[][] = {
             {"sitting on the floor", "sitting on the table", "playing with the duck", "playing with the penguin"},
-            {"playing with the duck", "sitting on the table", "playing with the penguin", "sitting on the floor"},
+            {"playing with the duck", "playing with the penguin", "sitting on the table", "sitting on the floor"},
             {"playing with the penguin", "sitting on the table", "sitting on the floor", "playing with the duck"},
-            {"sitting on the table", "sitting on the floor", "playing with the duck", "playing with the penguin"}
+            {"sitting on the table", "sitting on the floor", "playing with the duck", "playing with the penguin"},
+            {"eating a cake", "running at a park", "sitting next to the green table", "crying"},
+            {"sitting next to the green table", "playing with the duck", "cutting something", "eating a cake"},
+            {"with his three friends", "playing with the penguin", "crying", "drinking water"},
+            {"running", "under the table", "eating", "on the pillow"},
+            {"sleeping", "playing with the penguin", "jumping from the chair", "above the bed"},
+            {"with his friend Kangaroo", "eating the cake", "jumping from the chair", "with his two friends, Turtle and Snake"},
+            {"behind the yellow box", "drinking water", "having fight with his friend", "sleeping"}
     };
 
     public int mImages[] = {
             R.drawable.sample_game_image1,
             R.drawable.sample_game_image2,
             R.drawable.sample_game_image3,
-            R.drawable.sample_game_image4
+            R.drawable.sample_game_image4,
+            R.drawable.sample_game_image5,
+            R.drawable.sample_game_image6,
+            R.drawable.sample_game_image7,
+            R.drawable.sample_game_image8,
+            R.drawable.sample_game_image9,
+            R.drawable.sample_game_image10,
+            R.drawable.sample_game_image11
     };
 
     private String mCorrectAnswers[] = {
-            "sitting on the floor", "sitting on the table", "playing with the duck", "playing with the penguin"
+            "sitting on the floor", "sitting on the table", "playing with the duck",
+            "playing with the penguin", "sitting next to the green table", "cutting something",
+            "with his three friends", "on the pillow", "jumping from the chair", "with his two friends, Turtle and Snake",
+            "behind the yellow box"
     };
 
     Button answer1, answer2, answer3, answer4;
@@ -64,7 +88,6 @@ public class SampleQuizGame extends AmazingMeGame {
     int currRand = 0;
     int prevRand = 0;
     int questionNum = 1;
-    int earnedScore;
 
     public SampleQuizGame(){
         super(R.layout.activity_game_sample_quiz);
@@ -168,7 +191,8 @@ public class SampleQuizGame extends AmazingMeGame {
 
         canNameMostFamiliarThings.setRelatedMilestone(Milestone.CAN_NAME_MOST_FAMILIAR_THINGS);
 
-        canNameMostFamiliarThings.setScore(earnedScore);
+        int earnedScore = mScore;
+        canNameMostFamiliarThings.setScore(mScore);
 
         gameResults.add(canNameMostFamiliarThings);
     }
