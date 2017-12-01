@@ -1,12 +1,16 @@
 package amazingme.activities.games;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amazingme.activities.R;
+
+import java.util.Random;
 
 import amazingme.activities.util.GameInfo;
 import amazingme.app.AmazingMeGame;
@@ -22,104 +26,193 @@ import amazingme.model.Milestone;
 
 public class SampleQuizGame extends AmazingMeGame {
 
-    private String shapes_questions[] = {
-            "Which shape has four sides?",
+    public String mQuestions[] = {
+            "The koala on the above picture is ...",
+            "The koala on the above picture is ...",
+            "The koala on the above picture is ...",
+            "The koala on the above picture is ..."
     };
 
-    private String shapes_answers[][] = {
-            {"circle","square","triangle","star"},
+    private String mChoices[][] = {
+            {"sitting on the floor", "sitting on the table", "playing with the duck", "playing with the penguin"},
+            {"playing with the duck", "sitting on the table", "playing with the penguin", "sitting on the floor"},
+            {"playing with the penguin", "sitting on the table", "sitting on the floor", "playing with the duck"},
+            {"sitting on the table", "sitting on the floor", "playing with the duck", "playing with the penguin"}
     };
 
-    private String shapes_answers_correct[] = {
-            "circle", "square"
+    public int mImages[] = {
+            R.drawable.sample_game_image1,
+            R.drawable.sample_game_image2,
+            R.drawable.sample_game_image3,
+            R.drawable.sample_game_image4
     };
-    private int score;
+
+    private String mCorrectAnswers[] = {
+            "sitting on the floor", "sitting on the table", "playing with the duck", "playing with the penguin"
+    };
+
+    Button answer1, answer2, answer3, answer4;
+    TextView score, question, title;
+    ImageView image;
+
+    private String mAnswer;
+    private int mScore = 0;
+    private int mQuestionsLength = mQuestions.length;
+
+    Random r;
+
+    int currRand = 0;
+    int prevRand = 0;
+    int questionNum = 1;
+    int earnedScore;
 
     public SampleQuizGame(){
         super(R.layout.activity_game_sample_quiz);
     }
-    private int currQuestion = 0;
+
+    @Override
+    public void initGame() {
+
+        r = new Random();
+
+        answer1 = (Button) findViewById(R.id.answer1);
+        answer2 = (Button) findViewById(R.id.answer2);
+        answer3 = (Button) findViewById(R.id.answer3);
+        answer4 = (Button) findViewById(R.id.answer4);
+
+        score = (TextView) findViewById(R.id.score);
+        title = (TextView) findViewById(R.id.title);
+        question = (TextView) findViewById(R.id.question);
+
+        image = (ImageView) findViewById(R.id.image);
+
+        currRand = r.nextInt(mQuestionsLength);
+        while (prevRand == currRand) {
+            currRand = r.nextInt(mQuestionsLength);
+        }
+        updateQuestion(currRand);
+        prevRand = currRand;
+
+
+        score.setText("Score: " + mScore);
+        title.setText("Question # : " + questionNum);
+
+        answer1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(answer1.getText() == mAnswer) {
+                    nextQuestion();
+                    mScore++;
+                    questionNum++;
+                    score.setText("Score: " + mScore);
+                    title.setText("Question # : " + questionNum);
+                    updateQuestion(r.nextInt(mQuestionsLength));
+                } else {
+                    gameOver();
+                }
+            }
+        });
+
+        answer2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(answer2.getText() == mAnswer) {
+                    nextQuestion();
+                    mScore++;
+                    questionNum++;
+                    score.setText("Score: " + mScore);
+                    title.setText("Question # : " + questionNum);
+                    updateQuestion(r.nextInt(mQuestionsLength));
+                } else {
+                    gameOver();
+                }
+            }
+        });
+
+        answer3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(answer3.getText() == mAnswer) {
+                    nextQuestion();
+                    mScore++;
+                    questionNum++;
+                    score.setText("Score: " + mScore);
+                    title.setText("Question # : " + questionNum);
+                    updateQuestion(r.nextInt(mQuestionsLength));
+                } else {
+                    gameOver();
+                }
+            }
+        });
+
+        answer4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(answer4.getText() == mAnswer) {
+                    nextQuestion();
+                    mScore++;
+                    questionNum++;
+                    score.setText("Score: " + mScore);
+                    title.setText("Question # : " + questionNum);
+                    updateQuestion(r.nextInt(mQuestionsLength));
+                } else {
+                    gameOver();
+                }
+            }
+        });
+    }
+
     @Override
     public void updateGameResults() {
         GameResult canNameMostFamiliarThings = new GameResult();
 
         canNameMostFamiliarThings.setRelatedMilestone(Milestone.CAN_NAME_MOST_FAMILIAR_THINGS);
 
-        canNameMostFamiliarThings.setScore(score);
+        canNameMostFamiliarThings.setScore(earnedScore);
 
         gameResults.add(canNameMostFamiliarThings);
     }
 
-    @Override
-    public void initGame() {
-        TextView questionText = (TextView)findViewById(R.id.question);
-        TextView scoreText = (TextView)findViewById(R.id.score);
+    private void updateQuestion(int num) {
+        question.setText(getQuestion(num));
 
-        ImageButton answer1 = (ImageButton)findViewById(R.id.answer1);
-        answer1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(shapes_answers[currQuestion][0].equals(shapes_answers_correct[currQuestion])) {
-                    score++;
-                    resignGame(true);
-                } else {
-                    resignGame(false);
-                }
-            }
-        });
-        ImageButton answer2 = (ImageButton) findViewById(R.id.answer2);
-        answer2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(shapes_answers[currQuestion][1].equals(shapes_answers_correct[currQuestion])) {
-                    score++;
-                    resignGame(true);
-                } else {
-                    resignGame(false);
-                }
-            }
-        });
-        ImageButton answer3 = (ImageButton) findViewById(R.id.answer3);
-        answer1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(shapes_answers[currQuestion][2].equals(shapes_answers_correct[currQuestion])) {
-                    score++;
-                    resignGame(true);
-                } else {
-                    resignGame(false);
-                }
-            }
-        });
-        ImageButton answer4 = (ImageButton) findViewById(R.id.answer4);
-        answer1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(shapes_answers[currQuestion][3].equals(shapes_answers_correct[currQuestion])) {
-                    score++;
-                    resignGame(true);
-                } else {
-                    resignGame(false);
-                }
-            }
-        });
-        questionText.setText(shapes_questions[currQuestion]);
-        scoreText.setText(score);
+        answer1.setText(getChoice1(num));
+        answer2.setText(getChoice2(num));
+        answer3.setText(getChoice3(num));
+        answer4.setText(getChoice4(num));
 
-        Button submitBtn = (Button)findViewById(R.id.submitBtn);
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAlert(v);
-            }
-        });
+        image.setImageResource(getImage(num));
+        mAnswer = getCorrectAnswer(num);
+    }
 
+    private void gameOver() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SampleQuizGame.this);
+        alertDialogBuilder
+                .setMessage("Game Over! Your score is " + mScore + " points.")
+                .setCancelable(false)
+                .setPositiveButton("NEW GAME", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        startActivity(new Intent(getApplicationContext(), SampleQuizGame.class));
+                        finish();
+                    }
+                })
+                .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
 
-//        answer1.setText(shapes_answers[currQuestion][0]);
-//        answer2.setText(shapes_answers[currQuestion][1]);
-//        answer3.setText(shapes_answers[currQuestion][2]);
-//        answer4.setText(shapes_answers[currQuestion][3]);
-
+    private void nextQuestion() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SampleQuizGame.this);
+        alertDialogBuilder
+                .setMessage("Great! Let's go for the next question!.");
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     @Override
@@ -127,22 +220,38 @@ public class SampleQuizGame extends AmazingMeGame {
         return EnumeratedActivity.SAMPLE_QUIZ_GAME;
     }
 
-    @Override
-    public void bindToUserInterface() {
-
+    public int getImage(int a) {
+        int image = mImages[a];
+        return image;
     }
 
-    // This is just temporary for testing
-    // When you click images, this makes message to show up
-    public void showAlert(View v) {
-        AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-        myAlert.setMessage("You chose " + v.getResources().getResourceEntryName(v.getId()) + ".").create();
-        myAlert.show();
+    public String getQuestion(int a) {
+        String question = mQuestions[a];
+        return question;
     }
 
-    public void showAlert2(View v) {
-        AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
-        myAlert.setMessage("You submitted !").create();
-        myAlert.show();
+    public String getChoice1(int a) {
+        String choice = mChoices[a][0];
+        return choice;
+    }
+
+    public String getChoice2(int a) {
+        String choice = mChoices[a][1];
+        return choice;
+    }
+
+    public String getChoice3(int a) {
+        String choice = mChoices[a][2];
+        return choice;
+    }
+
+    public String getChoice4(int a) {
+        String choice = mChoices[a][3];
+        return choice;
+    }
+
+    public String getCorrectAnswer(int a) {
+        String answer = mCorrectAnswers[a];
+        return answer;
     }
 }
