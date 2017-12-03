@@ -3,6 +3,14 @@
 Interactive Book Game is a game that is intended to help parents of very young kids (2-5 years old) to measure their children's progress in terms of their brain development. This game is also based on the "Amazing Me" book, which can be found on the CDC website.
 
 
+# Release Notes for Amazing Me v1.0
+## New Features
+
+
+
+
+
+
 # Amazing Me Game Integration
 
 Integrating existing game activities is simple when using the Amazing Me framework. The step-by-step instructions to do so are below! The instructions assume you are starting from scratch, but the necessary steps should follow closely even if you have already started designing your Activity class. 
@@ -20,15 +28,15 @@ Add a class to the package "amazingme.activities.game". The class should follow 
 
 ## 3
 In the app/src/main folder, you'll find an XML file labeled "AndroidManifest.xml". Under the "application" tag, add an activity, following the conventions already in the file. Roughly
-
+```
   <activity android:name="amazingme.activities.games.MyNewGame"/>
-
+```
 
 ## 3b
 Now, go back to your layout file in the R.layout folder and add your newly created class as the context for the layout. You might have to import some other things, but it will roughly read
-
+```
   tools:context="amazingme.activities.game.MyNewGame"
-
+```
 within the top-level tag of the XML.
 
 
@@ -41,23 +49,16 @@ Now, back in the class you made implement the activityName() method. This should
 
 ## 4
 Next, import the following classes (they are all required for setup)::
-
+```
 import com.amazingme.activities.R;
-
 import amazingme.activities.util.GameInfo;
-
 import amazingme.activities.util.Icon;
-
 import amazingme.app.EnumeratedActivity;
-
 import amazingme.app.AmazingMeGame;
-
 import amazingme.model.GameResult;
-
 import amazingme.model.Milestone;
-
 import amazingme.model.Problem;
-
+```
 
 ## 5
 Add the two necessary annotations just above the name of the class. The first, @Icon, is a reference to the preview the framework will use for displaying your game. It should reference a "drawable" in the R.drawable package (something like "R.drawable.mynewgamebackground"). 
