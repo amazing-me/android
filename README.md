@@ -11,14 +11,15 @@ Interactive Book Game is a game that is intended to help parents of very young k
 * Login/Registration/Forgot password implementations (you can have an account now!)
 * Navigation bar to move quickly and easily throughout the application  
 
-
 ## Bug Fixes
-### Fixed problem where navigation bar was unclickable
-### Fixed display on performance graphs to show correct dates
-### Fixed problem where some accounts were not loaded correctly
-### Fixed problem where some games were not loaded and caused the app to crash
-## Known Bugs
+* Fixed problem where navigation bar was unclickable
+* Fixed display on performance graphs to show correct dates
+* Fixed problem where some accounts were not loaded correctly
+* Fixed problem where some games were not loaded and caused the app to crash
 
+## Known Bugs
+* Finishing a game can throw an exception and cause the app to crash
+* Older accounts can have problems loading and can cause the app to crash
 
 
 
