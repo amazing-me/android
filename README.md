@@ -5,7 +5,12 @@ Interactive Book Game is a game that is intended to help parents of very young k
 
 # Release Notes for Amazing Me v1.0
 ## New Features
+### item 1
+### item 2
 
+
+## Bug Fixes
+## Known Bugs
 
 
 
