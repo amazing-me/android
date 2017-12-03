@@ -5,11 +5,11 @@ Interactive Book Game is a game that is intended to help parents of very young k
 
 # Release Notes for Amazing Me v1.0
 ## New Features
-### "Game Selection Page" that dynamically loads games as they are added to the codebase
-### "Performance Page" with breakdown of performance for each skill and each milestone 
-### Google Firebase integration and design of database schema
-### Login/Registration/Forgot password implementations (you can have an account now!)
-### Navigation bar to move quickly and easily throughout the application  
+* "Game Selection Page" that dynamically loads games as they are added to the codebase
+* "Performance Page" with breakdown of performance for each skill and each milestone 
+* Google Firebase integration and design of database schema
+* Login/Registration/Forgot password implementations (you can have an account now!)
+* Navigation bar to move quickly and easily throughout the application  
 
 
 ## Bug Fixes
