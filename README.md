@@ -37,6 +37,9 @@ Interactive Book Game is a game that is intended to help parents of very young k
 ## Running the app
 * Click on the icon for the game after it has finished installing, and have fun!
 
+
+
+
 # Amazing Me Game Integration
 
 Integrating existing game activities is simple when using the Amazing Me framework. The step-by-step instructions to do so are below! The instructions assume you are starting from scratch, but the necessary steps should follow closely even if you have already started designing your Activity class. 
