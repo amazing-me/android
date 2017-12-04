@@ -19,25 +19,25 @@ import amazingme.model.GameResult;
 import amazingme.model.Milestone;
 
 @GameInfo(
-        value = "Sample Quiz Game",
+        value = "Animal Picture Game",
         instruction = "Answer the questions based on the given picture",
         milestones = {Milestone.CAN_NAME_MOST_FAMILIAR_THINGS}
 )
 
-public class SampleQuizGame extends AmazingMeGame {
+public class AnimalPictureGame extends AmazingMeGame {
 
     public String mQuestions[] = {
-            "The koala on the above picture is ...",
-            "The koala on the above picture is ...",
-            "The koala on the above picture is ...",
-            "The koala on the above picture is ...",
-            "The giraffe on the above picture is ...",
-            "The giraffe on the above picture is ...",
-            "The giraffe on the above picture is ...",
-            "The koala on the above picture is ...",
-            "The kangaroo on the above picture is ...",
-            "The koala on the above picture is ...",
-            "The giraffe on the above picture is ..."
+            "The koala in the above picture is ...",
+            "The koala in the above picture is ...",
+            "The koala in the above picture is ...",
+            "The koala in the above picture is ...",
+            "The giraffe in the above picture is ...",
+            "The giraffe in the above picture is ...",
+            "The giraffe in the above picture is ...",
+            "The koala in the above picture is ...",
+            "The kangaroo in the above picture is ...",
+            "The koala in the above picture is ...",
+            "The giraffe in the above picture is ..."
     };
 
     private String mChoices[][] = {
@@ -50,8 +50,8 @@ public class SampleQuizGame extends AmazingMeGame {
             {"with his three friends", "playing with the penguin", "crying", "drinking water"},
             {"running", "under the table", "eating", "on the pillow"},
             {"sleeping", "playing with the penguin", "jumping from the chair", "above the bed"},
-            {"with his friend Kangaroo", "eating the cake", "jumping from the chair", "with his two friends, Turtle and Snake"},
-            {"behind the yellow box", "drinking water", "having fight with his friend", "sleeping"}
+            {"with his friend, Kangaroo", "eating the cake", "jumping from the chair", "with his two friends, Turtle and Snake"},
+            {"behind the yellow box", "drinking water", "having a fight with his friend", "sleeping"}
     };
 
     public int mImages[] = {
@@ -89,8 +89,8 @@ public class SampleQuizGame extends AmazingMeGame {
     int prevRand = 0;
     int questionNum = 1;
 
-    public SampleQuizGame(){
-        super(R.layout.activity_game_sample_quiz);
+    public AnimalPictureGame(){
+        super(R.layout.activity_game_animal_picture);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class SampleQuizGame extends AmazingMeGame {
         answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(answer1.getText() == mAnswer) {
+                if(answer1.getText() == mAnswer || questionNum <= mQuestionsLength) {
                     nextQuestion();
                     mScore++;
                     questionNum++;
@@ -133,7 +133,7 @@ public class SampleQuizGame extends AmazingMeGame {
         answer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(answer2.getText() == mAnswer) {
+                if(answer2.getText() == mAnswer || questionNum <= mQuestionsLength) {
                     nextQuestion();
                     mScore++;
                     questionNum++;
@@ -149,7 +149,7 @@ public class SampleQuizGame extends AmazingMeGame {
         answer3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(answer3.getText() == mAnswer) {
+                if(answer3.getText() == mAnswer || questionNum <= mQuestionsLength) {
                     nextQuestion();
                     mScore++;
                     questionNum++;
@@ -165,7 +165,7 @@ public class SampleQuizGame extends AmazingMeGame {
         answer4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(answer4.getText() == mAnswer) {
+                if(answer4.getText() == mAnswer || questionNum <= mQuestionsLength) {
                     nextQuestion();
                     mScore++;
                     questionNum++;
@@ -204,14 +204,14 @@ public class SampleQuizGame extends AmazingMeGame {
     }
 
     private void gameOver() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SampleQuizGame.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AnimalPictureGame.this);
         alertDialogBuilder
                 .setMessage("Game Over! Your score is " + mScore + " points.")
                 .setCancelable(false)
                 .setPositiveButton("NEW GAME", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        startActivity(new Intent(getApplicationContext(), SampleQuizGame.class));
+                        startActivity(new Intent(getApplicationContext(), AnimalPictureGame.class));
                         finish();
                     }
                 })
@@ -226,7 +226,7 @@ public class SampleQuizGame extends AmazingMeGame {
     }
 
     private void nextQuestion() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SampleQuizGame.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AnimalPictureGame.this);
         alertDialogBuilder
                 .setMessage("Great! Let's go for the next question!.");
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -235,7 +235,7 @@ public class SampleQuizGame extends AmazingMeGame {
 
     @Override
     public EnumeratedActivity activityName() {
-        return EnumeratedActivity.SAMPLE_QUIZ_GAME;
+        return EnumeratedActivity.ANIMAL_PICTURE_GAME;
     }
 
     public int getImage(int a) {
