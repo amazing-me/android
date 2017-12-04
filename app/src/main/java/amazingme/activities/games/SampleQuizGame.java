@@ -109,13 +109,7 @@ public class SampleQuizGame extends AmazingMeGame {
 
         image = (ImageView) findViewById(R.id.image);
 
-        currRand = r.nextInt(mQuestionsLength);
-        while (prevRand == currRand) {
-            currRand = r.nextInt(mQuestionsLength);
-        }
-        updateQuestion(currRand);
-        prevRand = currRand;
-
+        avoidOverlapQuestion();
 
         score.setText("Score: " + mScore);
         title.setText("Question # : " + questionNum);
@@ -129,7 +123,7 @@ public class SampleQuizGame extends AmazingMeGame {
                     questionNum++;
                     score.setText("Score: " + mScore);
                     title.setText("Question # : " + questionNum);
-                    updateQuestion(r.nextInt(mQuestionsLength));
+                    avoidOverlapQuestion();
                 } else {
                     gameOver();
                 }
@@ -145,7 +139,7 @@ public class SampleQuizGame extends AmazingMeGame {
                     questionNum++;
                     score.setText("Score: " + mScore);
                     title.setText("Question # : " + questionNum);
-                    updateQuestion(r.nextInt(mQuestionsLength));
+                    avoidOverlapQuestion();
                 } else {
                     gameOver();
                 }
@@ -161,7 +155,7 @@ public class SampleQuizGame extends AmazingMeGame {
                     questionNum++;
                     score.setText("Score: " + mScore);
                     title.setText("Question # : " + questionNum);
-                    updateQuestion(r.nextInt(mQuestionsLength));
+                    avoidOverlapQuestion();
                 } else {
                     gameOver();
                 }
@@ -177,7 +171,7 @@ public class SampleQuizGame extends AmazingMeGame {
                     questionNum++;
                     score.setText("Score: " + mScore);
                     title.setText("Question # : " + questionNum);
-                    updateQuestion(r.nextInt(mQuestionsLength));
+                    avoidOverlapQuestion();
                 } else {
                     gameOver();
                 }
@@ -277,5 +271,15 @@ public class SampleQuizGame extends AmazingMeGame {
     public String getCorrectAnswer(int a) {
         String answer = mCorrectAnswers[a];
         return answer;
+    }
+
+    // Avoid the same question to show up in a row
+    public void avoidOverlapQuestion() {
+        currRand = r.nextInt(mQuestionsLength);
+        while (prevRand == currRand) {
+            currRand = r.nextInt(mQuestionsLength);
+        }
+        updateQuestion(currRand);
+        prevRand = currRand;
     }
 }
