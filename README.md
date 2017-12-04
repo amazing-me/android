@@ -3,6 +3,43 @@
 Interactive Book Game is a game that is intended to help parents of very young kids (2-5 years old) to measure their children's progress in terms of their brain development. This game is also based on the "Amazing Me" book, which can be found on the CDC website.
 
 
+# Release Notes for Amazing Me v0.1
+## New Features
+* "Game Selection Page" that dynamically loads games as they are added to the codebase
+* "Performance Page" with breakdown of performance for each skill and each milestone 
+* Google Firebase integration and design of database schema
+* Login/Registration/Forgot password implementations (you can have an account now!)
+* Navigation bar to move quickly and easily throughout the application  
+
+## Bug Fixes
+* Fixed problem where navigation bar was unclickable
+* Fixed display on performance graphs to show correct dates
+* Fixed problem where some accounts were not loaded correctly
+* Fixed problem where some games were not loaded and caused the app to crash
+
+## Known Bugs
+* Finishing a game can throw an exception and cause the app to crash
+* Older accounts can have problems loading and can cause the app to crash
+
+
+# Installation Guide
+## Pre-requisites
+* The device must be an Android device running version 5.1.1 or later 
+* Preferrably run on an Android tablet 
+
+## Download Instructions
+* Currently the APK is available by request from the development team or Dr. Rosa Arriaga
+* When the app is ready for public consumption, it will be available on the Google Play Store
+
+## Installation
+* Download the APK and click install (like any other non-default application on the phone)
+
+## Running the app
+* Click on the icon for the game after it has finished installing, and have fun!
+
+
+
+
 # Amazing Me Game Integration
 
 Integrating existing game activities is simple when using the Amazing Me framework. The step-by-step instructions to do so are below! The instructions assume you are starting from scratch, but the necessary steps should follow closely even if you have already started designing your Activity class. 
@@ -20,15 +57,15 @@ Add a class to the package "amazingme.activities.game". The class should follow 
 
 ## 3
 In the app/src/main folder, you'll find an XML file labeled "AndroidManifest.xml". Under the "application" tag, add an activity, following the conventions already in the file. Roughly
-
+```
   <activity android:name="amazingme.activities.games.MyNewGame"/>
-
+```
 
 ## 3b
 Now, go back to your layout file in the R.layout folder and add your newly created class as the context for the layout. You might have to import some other things, but it will roughly read
-
+```
   tools:context="amazingme.activities.game.MyNewGame"
-
+```
 within the top-level tag of the XML.
 
 
@@ -41,23 +78,16 @@ Now, back in the class you made implement the activityName() method. This should
 
 ## 4
 Next, import the following classes (they are all required for setup)::
-
+```
 import com.amazingme.activities.R;
-
 import amazingme.activities.util.GameInfo;
-
 import amazingme.activities.util.Icon;
-
 import amazingme.app.EnumeratedActivity;
-
 import amazingme.app.AmazingMeGame;
-
 import amazingme.model.GameResult;
-
 import amazingme.model.Milestone;
-
 import amazingme.model.Problem;
-
+```
 
 ## 5
 Add the two necessary annotations just above the name of the class. The first, @Icon, is a reference to the preview the framework will use for displaying your game. It should reference a "drawable" in the R.drawable package (something like "R.drawable.mynewgamebackground"). 
