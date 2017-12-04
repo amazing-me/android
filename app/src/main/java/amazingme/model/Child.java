@@ -91,7 +91,6 @@ public class Child extends User {
     public void addToGameResults(@NonNull final List<GameResult> results) {
         for (GameResult result : results) {
             if (this.gameResults.get(result.getRelatedMilestone().toString()) == null) {
-                Log.e("add to game results", "game results map not instantiated for milestone");
                 this.gameResults.put(result.getRelatedMilestone().toString(), new LinkedList<GameResult>());
             }
             this.gameResults.get(result.getRelatedMilestone().toString()).add(result);
