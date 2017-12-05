@@ -100,10 +100,10 @@ public class AnimalPictureGame extends AmazingMeGame {
     };
 
     Button answer1, answer2, answer3, answer4;
-    TextView score, question, title, secondsText;
+    TextView score, question, title, secondsText, titleText1, titleText2, titleText3, timerText;
     ImageView image;
 
-    private static final int TIME_SECS = 60;
+    private static final int TIME_SECS = 600;
 
     private int seconds = TIME_SECS;
     public Set<Integer> set;
@@ -127,6 +127,35 @@ public class AnimalPictureGame extends AmazingMeGame {
         r = new Random();
         set = new HashSet<>();
 
+        final Button startButton = (Button)findViewById(R.id.startBtn);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        secondsText.setVisibility(View.VISIBLE);
+                        answer1.setVisibility(View.VISIBLE);
+                        answer2.setVisibility(View.VISIBLE);
+                        answer3.setVisibility(View.VISIBLE);
+                        answer4.setVisibility(View.VISIBLE);
+                        score.setVisibility(View.VISIBLE);
+                        title.setVisibility(View.VISIBLE);
+                        question.setVisibility(View.VISIBLE);
+                        image.setVisibility(View.VISIBLE);
+                        timerText.setVisibility(View.VISIBLE);
+
+                        titleText1.setVisibility(View.INVISIBLE);
+                        titleText2.setVisibility(View.INVISIBLE);
+                        titleText3.setVisibility(View.INVISIBLE);
+                        startButton.setVisibility(View.INVISIBLE);
+                    }
+                });
+
+                startGame();
+            }
+        });
+
         answer1 = (Button) findViewById(R.id.answer1);
         answer2 = (Button) findViewById(R.id.answer2);
         answer3 = (Button) findViewById(R.id.answer3);
@@ -136,6 +165,11 @@ public class AnimalPictureGame extends AmazingMeGame {
         title = (TextView) findViewById(R.id.title);
         question = (TextView) findViewById(R.id.question);
 
+        titleText1 = (TextView) findViewById(R.id.title_text1);
+        titleText2 = (TextView) findViewById(R.id.title_text2);
+        titleText3 = (TextView) findViewById(R.id.title_text3);
+        timerText = (TextView) findViewById(R.id.timer_text);
+
         image = (ImageView) findViewById(R.id.image);
 
         avoidOverlapQuestion();
@@ -143,11 +177,9 @@ public class AnimalPictureGame extends AmazingMeGame {
         score.setText("Score: " + mScore);
         title.setText("Question # : " + questionNum);
 
-        startGame();
+        secondsText = (TextView) findViewById(R.id.timer);
 
-        secondsText = (TextView) findViewById(R.id.game_three_touch_seconds_text);
-
-        getService(GameLoopService.class, new GameLoopService.Config(60,
+        getService(GameLoopService.class, new GameLoopService.Config(600,
                 new Runnable() {
                     @Override
                     public void run() {
@@ -161,7 +193,7 @@ public class AnimalPictureGame extends AmazingMeGame {
                     }
                 }
         ));
-        getService(GameTimerService.class, new GameTimerService.Config(60, R.id.game_three_touch_seconds_text,
+        getService(GameTimerService.class, new GameTimerService.Config(600, R.id.timer,
                 new Runnable() {
                     @Override
                     public void run() {
@@ -246,7 +278,8 @@ public class AnimalPictureGame extends AmazingMeGame {
             canNameMostFamiliarThings.addProblem(Problem.TIME_TOO_LONG);
         }
 
-        canNameMostFamiliarThings.setScore(mScore);
+        int score = ((mScore * 2) + (seconds / 10));
+        canNameMostFamiliarThings.setScore(score);
 
         gameResults.add(canNameMostFamiliarThings);
     }
