@@ -33,34 +33,37 @@ public class PerformanceMainActivity extends NavigationBarActivity {
 
     @Override
     public void bindToUserInterface() {
-        final List<Skill> allSkills = new ArrayList<>(Arrays.asList(Skill.values()));
-        final List<String> allSkillsString = new ArrayList<>();
-        for (Skill skill : allSkills) {
-            allSkillsString.add(skill.toString());
+        final List<Skill> skillsWithResults = new ArrayList<>();
+        final List<String> skillsWithResultsStrings = new ArrayList<>();
+        for (Skill skill : Skill.values()) {
+            if (!Double.isNaN(AverageCalculator.calculateSkillAverageFor(this.getUserContext().currentChildUser(), skill))) {
+                skillsWithResultsStrings.add(skill.toString());
+                skillsWithResults.add(skill);
+            }
         }
 
         ListView listView = (ListView) findViewById(R.id.performance_skill_list);
         ArrayAdapter<String> skillsArrayAdapter =
-                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allSkillsString);
+                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, skillsWithResultsStrings);
         listView.setAdapter(skillsArrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(getResources().getString(R.string.key_skill), allSkills.get(position));
+                bundle.putSerializable(getResources().getString(R.string.key_skill), skillsWithResults.get(position));
                 goTo(EnumeratedActivity.PERFORMANCE_SKILL, bundle);
             }
         });
 
         TextView overallScore = (TextView)findViewById(R.id.overall_score);
-        double average = AverageCalculator.calculateSkillAverageFor(this.getUserContext().currentChildUser(), allSkills);
+        double average = AverageCalculator.calculateSkillAverageFor(this.getUserContext().currentChildUser(), skillsWithResults);
         if (Double.isNaN(average)) {
             overallScore.setText(R.string.no_data_to_display);
         } else {
             overallScore.setText(Formatter.getStringFormatterForScoreDisplay().format(average));
         }
 
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(SeriesCalculator.calculateSeriesFor(this.getUserContext().currentChildUser(), allSkills));
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(SeriesCalculator.calculateSeriesFor(this.getUserContext().currentChildUser(), skillsWithResults));
         series.setThickness(8);
         series.setDataPointsRadius(12);
 
