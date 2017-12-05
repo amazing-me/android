@@ -42,9 +42,11 @@ public class SeriesCalculator {
         List<DataPoint> dataPoints = new LinkedList<>();
         if (child.getGameResults().get(milestone.toString()) != null) {
             for (GameResult gameResult : child.getGameResults().get(milestone.toString())) {
-                long timestamp = gameResult.getTimestamp();
-                Date date = new Date(timestamp);
-                dataPoints.add(new DataPoint(date, gameResult.getScore()));
+                if (gameResult != null) {
+                    long timestamp = gameResult.getTimestamp();
+                    Date date = new Date(timestamp);
+                    dataPoints.add(new DataPoint(date, gameResult.getScore()));
+                }
             }
         }
         return Arrays.copyOf(dataPoints.toArray(), dataPoints.size(), DataPoint[].class);

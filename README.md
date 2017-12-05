@@ -3,7 +3,11 @@
 Interactive Book Game is a game that is intended to help parents of very young kids (2-5 years old) to measure their children's progress in terms of their brain development. This game is also based on the "Amazing Me" book, which can be found on the CDC website.
 
 
+<<<<<<< HEAD
 # Release Notes for Amazing Me v1.0
+=======
+# Release Notes for Amazing Me v0.1
+>>>>>>> master
 ## New Features
 * "Game Selection Page" that dynamically loads games as they are added to the codebase
 * "Performance Page" with breakdown of performance for each skill and each milestone 
@@ -22,6 +26,25 @@ Interactive Book Game is a game that is intended to help parents of very young k
 * Older accounts can have problems loading and can cause the app to crash
 
 
+<<<<<<< HEAD
+=======
+# Installation Guide
+## Pre-requisites
+* The device must be an Android device running version 5.1.1 or later 
+* Preferrably run on an Android tablet 
+
+## Download Instructions
+* Currently the APK is available by request from the development team or Dr. Rosa Arriaga
+* When the app is ready for public consumption, it will be available on the Google Play Store
+
+## Installation
+* Download the APK and click install (like any other non-default application on the phone)
+
+## Running the app
+* Click on the icon for the game after it has finished installing, and have fun!
+
+
+>>>>>>> master
 
 
 # Amazing Me Game Integration
