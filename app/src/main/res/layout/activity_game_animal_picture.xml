@@ -89,15 +89,40 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:layout_width="400dp"
             android:layout_height="50dp"
-            android:layout_above="@+id/image"
-            android:layout_marginBottom="17dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="64dp"
+            android:layout_marginRight="64dp"
+            android:layout_toLeftOf="@+id/secondsTitle"
+            android:layout_toStartOf="@+id/secondsTitle"
             android:gravity="center"
             android:text="TextView"
             android:textSize="40dp"
             tools:layout_editor_absoluteX="421dp"
             tools:layout_editor_absoluteY="dp" />
+
+        <TextView
+            android:id="@+id/secondsTitle"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
+            android:layout_toLeftOf="@+id/game_three_touch_seconds_text"
+            android:layout_toStartOf="@+id/game_three_touch_seconds_text"
+            android:text="Time"
+            android:textSize="40dp" />
+
+        <TextView
+            android:id="@+id/game_three_touch_seconds_text"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="60 seconds"
+            android:textSize="40dp" />
 
     </RelativeLayout>
 

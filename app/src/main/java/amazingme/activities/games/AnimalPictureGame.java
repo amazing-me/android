@@ -3,6 +3,7 @@ package amazingme.activities.games;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,13 +11,18 @@ import android.widget.TextView;
 
 import com.amazingme.activities.R;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import amazingme.activities.util.GameInfo;
 import amazingme.app.AmazingMeGame;
 import amazingme.app.EnumeratedActivity;
+import amazingme.app.GameLoopService;
+import amazingme.app.GameTimerService;
 import amazingme.model.GameResult;
 import amazingme.model.Milestone;
+import amazingme.model.Problem;
 
 @GameInfo(
         value = "Animal Picture Game",
@@ -37,7 +43,13 @@ public class AnimalPictureGame extends AmazingMeGame {
             "The koala in the above picture is ...",
             "The kangaroo in the above picture is ...",
             "The koala in the above picture is ...",
-            "The giraffe in the above picture is ..."
+            "The giraffe in the above picture is ...",
+            "What is the color of the chair where the elephant is sitting on?",
+            "What is the shape on the shirt that the kangaroo is wearing?",
+            "What is the kangaroo tying to do?",
+            "What is the color of the scissors the penguin is using?",
+            "Who is the pig hanging out with?",
+            "What is the alphabet written on the blue box at the back?"
     };
 
     private String mChoices[][] = {
@@ -51,7 +63,13 @@ public class AnimalPictureGame extends AmazingMeGame {
             {"running", "under the table", "eating", "on the pillow"},
             {"sleeping", "playing with the penguin", "jumping from the chair", "above the bed"},
             {"with his friend, Kangaroo", "eating the cake", "jumping from the chair", "with his two friends, Turtle and Snake"},
-            {"behind the yellow box", "drinking water", "having a fight with his friend", "sleeping"}
+            {"behind the yellow box", "drinking water", "having a fight with his friend", "sleeping"},
+            {"Black", "Gray", "Red", "Purple"},
+            {"Triangle", "Star", "Circle", "Rectangle"},
+            {"Brushing his teeth", "Taking a shower", "Washing his hands", "Cleaning the sink"},
+            {"Blue", "Pink", "Green", "Blue"},
+            {"Kangaroo", "Turtle", "Koala", "Duck"},
+            {"A", "B", "C", "D"}
     };
 
     public int mImages[] = {
@@ -65,28 +83,38 @@ public class AnimalPictureGame extends AmazingMeGame {
             R.drawable.sample_game_image8,
             R.drawable.sample_game_image9,
             R.drawable.sample_game_image10,
-            R.drawable.sample_game_image11
+            R.drawable.sample_game_image11,
+            R.drawable.sample_game_image12,
+            R.drawable.sample_game_image13,
+            R.drawable.sample_game_image14,
+            R.drawable.sample_game_image15,
+            R.drawable.sample_game_image16,
+            R.drawable.sample_game_image17
     };
 
     private String mCorrectAnswers[] = {
             "sitting on the floor", "sitting on the table", "playing with the duck",
             "playing with the penguin", "sitting next to the green table", "cutting something",
             "with his three friends", "on the pillow", "jumping from the chair", "with his two friends, Turtle and Snake",
-            "behind the yellow box"
+            "behind the yellow box", "Purple", "Star", "Brushing his teeth", "Green", "Duck", "B"
     };
 
     Button answer1, answer2, answer3, answer4;
-    TextView score, question, title;
+    TextView score, question, title, secondsText;
     ImageView image;
 
+    private static final int TIME_SECS = 60;
+
+    private int seconds = TIME_SECS;
+    public Set<Integer> set;
     private String mAnswer;
     private int mScore = 0;
     private int mQuestionsLength = mQuestions.length;
+    private boolean isGameComplete = false;
 
     Random r;
 
     int currRand = 0;
-    int prevRand = 0;
     int questionNum = 1;
 
     public AnimalPictureGame(){
@@ -97,6 +125,7 @@ public class AnimalPictureGame extends AmazingMeGame {
     public void initGame() {
 
         r = new Random();
+        set = new HashSet<>();
 
         answer1 = (Button) findViewById(R.id.answer1);
         answer2 = (Button) findViewById(R.id.answer2);
@@ -114,10 +143,37 @@ public class AnimalPictureGame extends AmazingMeGame {
         score.setText("Score: " + mScore);
         title.setText("Question # : " + questionNum);
 
+        startGame();
+
+        secondsText = (TextView) findViewById(R.id.game_three_touch_seconds_text);
+
+        getService(GameLoopService.class, new GameLoopService.Config(60,
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("", "test");
+                    }
+                },
+                new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                }
+        ));
+        getService(GameTimerService.class, new GameTimerService.Config(60, R.id.game_three_touch_seconds_text,
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        resignGame(true);
+                    }
+                }
+        ));
+
         answer1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(answer1.getText() == mAnswer || questionNum <= mQuestionsLength) {
+                if(answer1.getText() == mAnswer) {
                     nextQuestion();
                     mScore++;
                     questionNum++;
@@ -133,7 +189,7 @@ public class AnimalPictureGame extends AmazingMeGame {
         answer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(answer2.getText() == mAnswer || questionNum <= mQuestionsLength) {
+                if(answer2.getText() == mAnswer) {
                     nextQuestion();
                     mScore++;
                     questionNum++;
@@ -149,7 +205,7 @@ public class AnimalPictureGame extends AmazingMeGame {
         answer3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(answer3.getText() == mAnswer || questionNum <= mQuestionsLength) {
+                if(answer3.getText() == mAnswer) {
                     nextQuestion();
                     mScore++;
                     questionNum++;
@@ -165,7 +221,7 @@ public class AnimalPictureGame extends AmazingMeGame {
         answer4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(answer4.getText() == mAnswer || questionNum <= mQuestionsLength) {
+                if(answer4.getText() == mAnswer) {
                     nextQuestion();
                     mScore++;
                     questionNum++;
@@ -173,6 +229,7 @@ public class AnimalPictureGame extends AmazingMeGame {
                     title.setText("Question # : " + questionNum);
                     avoidOverlapQuestion();
                 } else {
+                    resignGame(true);
                     gameOver();
                 }
             }
@@ -185,7 +242,10 @@ public class AnimalPictureGame extends AmazingMeGame {
 
         canNameMostFamiliarThings.setRelatedMilestone(Milestone.CAN_NAME_MOST_FAMILIAR_THINGS);
 
-        int earnedScore = mScore;
+        if(seconds == 0) {
+            canNameMostFamiliarThings.addProblem(Problem.TIME_TOO_LONG);
+        }
+
         canNameMostFamiliarThings.setScore(mScore);
 
         gameResults.add(canNameMostFamiliarThings);
@@ -204,13 +264,20 @@ public class AnimalPictureGame extends AmazingMeGame {
     }
 
     private void gameOver() {
+        String msg;
+        if (isGameComplete) {
+            msg = "Perfect! You finished all the questions! Your score is " + mScore + " points.";
+        } else {
+            msg = "Game Over! Your score is " + mScore + " points.";
+        }
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AnimalPictureGame.this);
         alertDialogBuilder
-                .setMessage("Game Over! Your score is " + mScore + " points.")
+                .setMessage(msg)
                 .setCancelable(false)
                 .setPositiveButton("NEW GAME", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        resignGame(true);
                         startActivity(new Intent(getApplicationContext(), AnimalPictureGame.class));
                         finish();
                     }
@@ -218,6 +285,7 @@ public class AnimalPictureGame extends AmazingMeGame {
                 .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        resignGame(true);
                         finish();
                     }
                 });
@@ -275,11 +343,17 @@ public class AnimalPictureGame extends AmazingMeGame {
 
     // Avoid the same question to show up in a row
     public void avoidOverlapQuestion() {
-        currRand = r.nextInt(mQuestionsLength);
-        while (prevRand == currRand) {
+        if (questionNum <= mQuestionsLength) {
             currRand = r.nextInt(mQuestionsLength);
+            while (set.contains(currRand)) {
+                currRand = r.nextInt(mQuestionsLength);
+            }
+            updateQuestion(currRand);
+            set.add(currRand);
+        } else {
+            isGameComplete = true;
+            gameOver();
         }
-        updateQuestion(currRand);
-        prevRand = currRand;
+
     }
 }
