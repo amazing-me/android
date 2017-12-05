@@ -1,6 +1,7 @@
 package amazingme.util;
 
 
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.jjoe64.graphview.series.DataPoint;
@@ -9,12 +10,15 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.Series;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import amazingme.model.Child;
 import amazingme.model.GameResult;
@@ -34,16 +38,27 @@ public class SeriesCalculator {
     }
 
     public static DataPoint[] calculateSeriesFor(Child child, Skill skill) {
-        List<DataPoint> dataPoints = new LinkedList<>();
-        for (Milestone milestone : skill.getCurrentlyMeasuredMilestonesRelatedToThisSkill()) {
-            dataPoints.addAll(Arrays.asList(calculateSeriesFor(child, milestone)));
-        }
-        return Arrays.copyOf(dataPoints.toArray(), dataPoints.size(), DataPoint[].class);
+        return calculateSeriesFor(child, skill.getCurrentlyMeasuredMilestonesRelatedToThisSkill());
     }
 
     public static DataPoint[] calculateSeriesFor(Child child, Milestone milestone) {
+        Set<Milestone> milestoneSet = new HashSet<>();
+        milestoneSet.add(milestone);
+        return calculateSeriesFor(child, milestoneSet);
+    }
+
+    public static DataPoint[] calculateSeriesFor(Child child, Set<Milestone> milestones) {
+        List<GameResult> results = new ArrayList<>();
+        for (Milestone milestone: milestones) {
+            if (child.getGameResultsCorrespondingTo(milestone) != null) {
+                results.addAll(child.getGameResultsCorrespondingTo(milestone));
+            }
+        }
+        return calculateSeriesFor(results);
+    }
+
+    private static DataPoint[] calculateSeriesFor(List<GameResult> gameResults) {
         List<DataPoint> dataPoints = new LinkedList<>();
-        List<GameResult> gameResults = child.getGameResultsCorrespondingTo(milestone);
         if (gameResults == null) {
             return Arrays.copyOf(dataPoints.toArray(), dataPoints.size(), DataPoint[].class);
         }
@@ -67,7 +82,6 @@ public class SeriesCalculator {
                         numOfScoresUpToAndIncludingGameResult++;
                     }
                 }
-                Log.e("datapoints", "adding " + gameResultsAsArray[i].getTimestamp() + " and " + totalOfScoresUpToAndIncludingGameResult / numOfScoresUpToAndIncludingGameResult);
                 long timestamp = gameResultsAsArray[i].getTimestamp();
                 Date date = new Date(timestamp);
 
