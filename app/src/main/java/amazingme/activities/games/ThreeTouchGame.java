@@ -34,6 +34,7 @@ public class ThreeTouchGame extends AmazingMeGame {
     private int blueCount ;
 
     private TextView secondsText;
+    private GameTimerService timer;
 
     public ThreeTouchGame() {
         super(R.layout.activity_game_three_touch);
@@ -46,7 +47,7 @@ public class ThreeTouchGame extends AmazingMeGame {
             new Runnable() {
                 @Override
                 public void run() {
-                    Log.d("", "test");
+
                 }
             },
             new Runnable() {
@@ -56,7 +57,7 @@ public class ThreeTouchGame extends AmazingMeGame {
                 }
             }
         ));
-        getService(GameTimerService.class, new GameTimerService.Config(60, R.id.game_three_touch_seconds_text,
+        timer = getService(GameTimerService.class, new GameTimerService.Config(60, R.id.game_three_touch_seconds_text,
             new Runnable() {
                 @Override
                 public void run() {
@@ -150,11 +151,11 @@ public class ThreeTouchGame extends AmazingMeGame {
         if(redCount < 3 || blueCount > 0) {
             understandsWordsLikeInOnAndUnder.addProblem(Problem.DID_NOT_FOLLOW_DIRECTIONS);
         }
-        if(seconds == 0) {
+        if(timer.getSeconds() == 0) {
             understandsWordsLikeInOnAndUnder.addProblem(Problem.TIME_TOO_LONG);
         }
 
-        int score = ((redCount == 3 && blueCount == 0) ? 40 : 0) + seconds;
+        int score = ((redCount == 3 && blueCount == 0) ? 40 : 0) + timer.getSeconds();
         understandsWordsLikeInOnAndUnder.setScore(score);
 
         gameResults.add(understandsWordsLikeInOnAndUnder);

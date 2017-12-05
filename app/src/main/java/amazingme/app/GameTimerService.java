@@ -78,4 +78,8 @@ public class GameTimerService extends GameService<GameTimerService.Config> {
         timer.cancel();
     }
 
+    public int getSeconds() {
+        return seconds;
+    }
+
 }
