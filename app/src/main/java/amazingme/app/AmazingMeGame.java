@@ -2,6 +2,7 @@ package amazingme.app;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,7 +15,7 @@ import amazingme.model.GameResult;
 public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
 
     protected List<GameResult> gameResults;
-    private Map<Class<?>, GameService> services;
+    private List<GameService> services;
 
     private boolean started;
     private boolean paused;
@@ -23,28 +24,23 @@ public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
         super(layout);
 
         this.gameResults = new LinkedList<>();
-        this.services = new HashMap<>();
+        this.services = new ArrayList<>();
     }
 
     @Override
     public void bindToUserInterface() {
         initGame();
 
-        for(GameService service : services.values()) {
+        for(GameService service : services) {
             service.onGameInit();
         }
     }
 
     // Java generics make me cry
     public <C extends GameService.Config, S extends GameService<C>> S getService(Class<S> clazz, C config) {
-        if(services.containsKey(clazz)) {
-            Log.e(getClass().getName(), "tried to add service more than once");
-            return null;
-        }
-
         try {
             S service = clazz.getConstructor(config.getClass(), AmazingMeGame.class).newInstance(config, this);
-            services.put(clazz, service);
+            services.add(service);
 
             return service;
         } catch(Exception e) {
@@ -61,13 +57,13 @@ public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
 
         this.started = true;
 
-        for(GameService service : services.values()) {
+        for(GameService service : services) {
             service.onGameStart();
         }
     }
 
     public final void resignGame(boolean gameWasCompleted) {
-        for(GameService service : services.values()) {
+        for(GameService service : services) {
             service.onGameResign();
         }
 
@@ -87,7 +83,7 @@ public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
 
         paused = true;
 
-        for(GameService service : services.values()) {
+        for(GameService service : services) {
             service.onGamePause();
         }
     }
@@ -99,7 +95,7 @@ public abstract class AmazingMeGame extends AmazingMeAppCompatActivity {
 
         paused = false;
 
-        for(GameService service : services.values()) {
+        for(GameService service : services) {
             service.onGamePause();
         }
     }
