@@ -1,6 +1,7 @@
 package amazingme.activities.app;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.amazingme.activities.R;
@@ -18,6 +19,8 @@ import amazingme.util.SeriesCalculator;
 public class PerformanceDetailActivity extends NavigationBarActivity {
     public PerformanceDetailActivity() { super(R.layout.activity_performance_detail); }
 
+    private TextView relatedGamesBtn;
+
     @Override
     public EnumeratedActivity activityName() {
         return EnumeratedActivity.PERFORMANCE_DETAIL;
@@ -25,6 +28,8 @@ public class PerformanceDetailActivity extends NavigationBarActivity {
 
     @Override
     public void bindToUserInterface() {
+        relatedGamesBtn = (TextView) findViewById(R.id.activity_performance_detail_forgot_password_button);
+
         final Milestone milestone = getMilestoneFromBundle();
         if (milestone == null) {
             Log.e("PERFORMANCE DETAIL", "Internal application error. Milestone should not be null");
@@ -55,6 +60,13 @@ public class PerformanceDetailActivity extends NavigationBarActivity {
         graph.getViewport().setMinX(series.getLowestValueX());
         graph.getViewport().setMaxX(series.getHighestValueX());
         graph.getGridLabelRenderer().setHumanRounding(false);
+
+        relatedGamesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goTo(EnumeratedActivity.GAME_MENU);
+            }
+        });
     }
 
     private Milestone getMilestoneFromBundle() {

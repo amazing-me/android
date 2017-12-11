@@ -1,5 +1,7 @@
 package amazingme.util;
 
+import android.util.Log;
+
 import java.util.List;
 
 import amazingme.model.Child;
@@ -15,9 +17,14 @@ public class AverageCalculator {
         double total = 0;
         int numberOfItems = 0;
         for (Milestone milestone : skill.getCurrentlyMeasuredMilestonesRelatedToThisSkill()) {
-            for (GameResult gameResult : child.getGameResults().get(milestone.toString())) {
-                total += gameResult.getScore();
-                numberOfItems++;
+            List<GameResult> gameResultsForMilestone = child.getGameResultsCorrespondingTo(milestone);
+            if (gameResultsForMilestone != null) {
+                for (GameResult gameResult : gameResultsForMilestone) {
+                    //if (gameResult != null) {
+                        total += gameResult.getScore();
+                        numberOfItems++;
+                    //}
+                }
             }
         }
         return numberOfItems == 0 ? Double.NaN : total / numberOfItems;
@@ -28,12 +35,13 @@ public class AverageCalculator {
         int numberOfItems = 0;
         for (Skill skill : skills) {
             for (Milestone milestone : skill.getCurrentlyMeasuredMilestonesRelatedToThisSkill()) {
-                if (child.getGameResults().get(milestone.toString()) != null) {
-                    for (GameResult gameResult : child.getGameResults().get(milestone.toString())) {
-                        if (gameResult != null) {
+                List<GameResult> gameResultsForMilestone = child.getGameResultsCorrespondingTo(milestone);
+                if (gameResultsForMilestone != null) {
+                    for (GameResult gameResult : gameResultsForMilestone) {
+                        //if (gameResult != null) {
                             total += gameResult.getScore();
                             numberOfItems++;
-                        }
+                        //}
                     }
                 }
             }
@@ -44,10 +52,13 @@ public class AverageCalculator {
     public static double calculateMilestoneAverageFor(Child child, Milestone milestone) {
         double total = 0;
         int numberOfItems = 0;
-        if (child.getGameResults().get(milestone.toString()) != null) {
-            for (GameResult gameResult : child.getGameResults().get(milestone.toString())) {
-                total += gameResult.getScore();
-                numberOfItems++;
+        List<GameResult> gameResults = child.getGameResultsCorrespondingTo(milestone);
+        if (gameResults != null) {
+            for (GameResult gameResult : gameResults) {
+                //if (gameResult != null) {
+                    total += gameResult.getScore();
+                    numberOfItems++;
+                //}
             }
         }
         return numberOfItems == 0 ? Double.NaN : total / numberOfItems;

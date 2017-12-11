@@ -16,6 +16,7 @@ import java.util.Random;
 import java.util.Set;
 
 import amazingme.activities.util.GameInfo;
+import amazingme.activities.util.Icon;
 import amazingme.app.AmazingMeGame;
 import amazingme.app.EnumeratedActivity;
 import amazingme.app.GameLoopService;
@@ -24,6 +25,7 @@ import amazingme.model.GameResult;
 import amazingme.model.Milestone;
 import amazingme.model.Problem;
 
+@Icon(R.drawable.amazingbackground)
 @GameInfo(
         value = "Animal Picture Game",
         instruction = "Answer the questions based on the given picture",
@@ -34,27 +36,27 @@ public class AnimalPictureGame extends AmazingMeGame {
 
     public String mQuestions[] = {
             // 1
-            "How many is the number of pieces around the koala?",
-            "How many is the number of ORANGE pieces around the koala?",
+            "How many pieces are around the koala?",
+            "How many ORANGE pieces are around the koala?",
 
             // 2
             "Where is the koala in the picture?",
             "What is the color of the table under the koala?",
 
             // 3
-            "What is the alphabet written on the blue box at the back?",
+            "What letter is written on the blue box in the back?",
             "Who is the turtle looking at?",
 
             // 4
-            "Who is the penguin pushing down?",
+            "Whose head is the penguin patting?",
             "What is the color of the ribbon on the penguin's head?",
 
             // 5
             "Where is the giraffe in the picture?",
-            "What is the color of the glasses on the snake?",
+            "What color is the snake's glasses?",
 
-            // 6
-            "What is on the giraffe's left hand?",
+            // 6 this question is confusing, we are reffering to the right side of the image, not the giraffe's actual right hand
+            "What is the giraffe holding in his right hand?",
             "How many brown spots on the giraffe's forehead?",
 
             // 7
@@ -67,19 +69,19 @@ public class AnimalPictureGame extends AmazingMeGame {
 
             // 9
             "What is the koala leaning against?",
-            "What color of the chair is the kangaroo jumping from?",
+            "What color is the chair that the kangaroo is on?",
 
             // 10
             "Who is the shortest in the picture?",
-            "Where is the snake from the koala?",
+            "What direction is the snake from the koala?",
 
             // 11
-            "Where is the giraffe based on the yellow box?",
+            "What direction is the girrafe from the box?",
             "What shape is drawn on the yellow box?",
 
             // 12
             "What is the elephant doing with the chair?",
-            "What color of clothes is the elephant wearing under the white coat?",
+            "What color are the clothes the elephant is wearing under the white coat?",
 
             // 13
             "What shape is on the kangaroo's shirt?",
@@ -89,9 +91,9 @@ public class AnimalPictureGame extends AmazingMeGame {
             "Who is the one cutting the purple paper?",
             "What color is the paper that the pig is grabbing?",
 
-            // 15
+            // 15 this is similar to the girrafe question, we are referring to the left/right from the viewer's perspective
             "Which hand is the penguin grabbing the scissors with?",
-            "Where is the pink ribbon based on the penguin?"
+            "What direction is the pink bow from the penguin?"
     };
 
     private String mChoices[][] = {
@@ -112,7 +114,7 @@ public class AnimalPictureGame extends AmazingMeGame {
             {"Black", "White", "Pink", "Green"},
 
             // 5
-            {"Above the table", "Next to the table", "Behind the table", "Under the table"},
+            {"Above the table", "Next to the table", "To the right of the table", "Under the table"},
             {"Black", "Brown", "Orange", "Red"},
 
             // 6
@@ -125,7 +127,7 @@ public class AnimalPictureGame extends AmazingMeGame {
 
             // 8
             {"Yellow", "Blue", "Green", "White"},
-            {"Lying on it", "Sitting on it", "Leaning against it", "Carrying it"},
+            {"Thorwing it", "Sitting on it", "Leaning against it", "Carrying it"},
 
             // 9
             {"Computer", "Desk", "Trash Can", "Refrigerator"},
@@ -133,7 +135,7 @@ public class AnimalPictureGame extends AmazingMeGame {
 
             // 10
             {"Koala", "Snake", "Turtle", "Pig"},
-            {"In front", "At the back", "Alongside", "Diagonally"},
+            {"In front", "Behind", "Alongside", "Over"},
 
             // 11
             {"On the box", "Under the box", "Next to the box", "Behind the box"},
@@ -152,8 +154,8 @@ public class AnimalPictureGame extends AmazingMeGame {
             {"Black", "Green", "Red", "Blue"},
 
             // 15
-            {"Left", "Right", "Both of them", "No one"},
-            {"Under the nose", "On the head", "On the left hand", "On the stomach"},
+            {"Right", "Left", "Both of them", "No one"},
+            {"Under the nose", "On the head", "On the left hand", "On the stomach"}
     };
 
     private String mCorrectAnswers[] = {
@@ -185,7 +187,7 @@ public class AnimalPictureGame extends AmazingMeGame {
             "Refrigerator", "Pink",
 
             // 10
-            "Koala", "At the back",
+            "Koala", "Behind",
 
             // 11
             "Behind the box", "Star",
@@ -200,7 +202,7 @@ public class AnimalPictureGame extends AmazingMeGame {
             "Duck", "Blue",
 
             // 15
-            "Right", "On the head"
+            "Left", "On the head"
     };
 
     public int mImages[] = {
@@ -208,8 +210,8 @@ public class AnimalPictureGame extends AmazingMeGame {
             R.drawable.sample_game_image1,
             R.drawable.sample_game_image2,
             R.drawable.sample_game_image2,
-            R.drawable.sample_game_image3,
-            R.drawable.sample_game_image3,
+            R.drawable.sample_game_image17,
+            R.drawable.sample_game_image17,
             R.drawable.sample_game_image4,
             R.drawable.sample_game_image4,
             R.drawable.sample_game_image5,
@@ -230,8 +232,8 @@ public class AnimalPictureGame extends AmazingMeGame {
             R.drawable.sample_game_image12,
             R.drawable.sample_game_image13,
             R.drawable.sample_game_image13,
-            R.drawable.sample_game_image14,
-            R.drawable.sample_game_image14,
+            R.drawable.sample_game_image16,
+            R.drawable.sample_game_image16,
             R.drawable.sample_game_image15,
             R.drawable.sample_game_image15
     };
