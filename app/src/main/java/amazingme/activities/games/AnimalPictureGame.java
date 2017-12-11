@@ -33,74 +33,211 @@ import amazingme.model.Problem;
 public class AnimalPictureGame extends AmazingMeGame {
 
     public String mQuestions[] = {
-            "The koala in the above picture is ...",
-            "The koala in the above picture is ...",
-            "The koala in the above picture is ...",
-            "The koala in the above picture is ...",
-            "The giraffe in the above picture is ...",
-            "The giraffe in the above picture is ...",
-            "The giraffe in the above picture is ...",
-            "The koala in the above picture is ...",
-            "The kangaroo in the above picture is ...",
-            "The koala in the above picture is ...",
-            "The giraffe in the above picture is ...",
-            "What is the color of the chair where the elephant is sitting on?",
-            "What is the shape on the shirt that the kangaroo is wearing?",
-            "What is the kangaroo tying to do?",
-            "What is the color of the scissors the penguin is using?",
-            "Who is the pig hanging out with?",
-            "What is the alphabet written on the blue box at the back?"
+            // 1
+            "How many is the number of pieces around the koala?",
+            "How many is the number of ORANGE pieces around the koala?",
+
+            // 2
+            "Where is the koala in the picture?",
+            "What is the color of the table under the koala?",
+
+            // 3
+            "What is the alphabet written on the blue box at the back?",
+            "Who is the turtle looking at?",
+
+            // 4
+            "Who is the penguin pushing down?",
+            "What is the color of the ribbon on the penguin's head?",
+
+            // 5
+            "Where is the giraffe in the picture?",
+            "What is the color of the glasses on the snake?",
+
+            // 6
+            "What is on the giraffe's left hand?",
+            "How many brown spots on the giraffe's forehead?",
+
+            // 7
+            "Who is the tallest one in the picture?",
+            "How many of them have blue eyes?",
+
+            // 8
+            "What is the color of the pillow?",
+            "What is the koala doing with the pillow?",
+
+            // 9
+            "What is the koala leaning against?",
+            "What color of the chair is the kangaroo jumping from?",
+
+            // 10
+            "Who is the shortest in the picture?",
+            "Where is the snake from the koala?",
+
+            // 11
+            "Where is the giraffe based on the yellow box?",
+            "What shape is drawn on the yellow box?",
+
+            // 12
+            "What is the elephant doing with the chair?",
+            "What color of clothes is the elephant wearing under the white coat?",
+
+            // 13
+            "What shape is on the kangaroo's shirt?",
+            "What is the kangaroo's doing with his hat?",
+
+            // 14
+            "Who is the one cutting the purple paper?",
+            "What color is the paper that the pig is grabbing?",
+
+            // 15
+            "Which hand is the penguin grabbing the scissors with?",
+            "Where is the pink ribbon based on the penguin?"
     };
 
     private String mChoices[][] = {
-            {"sitting on the floor", "sitting on the table", "playing with the duck", "playing with the penguin"},
-            {"playing with the duck", "playing with the penguin", "sitting on the table", "sitting on the floor"},
-            {"playing with the penguin", "sitting on the table", "sitting on the floor", "playing with the duck"},
-            {"sitting on the table", "sitting on the floor", "playing with the duck", "playing with the penguin"},
-            {"eating a cake", "running at a park", "sitting next to the green table", "crying"},
-            {"sitting next to the green table", "playing with the duck", "cutting something", "eating a cake"},
-            {"with his three friends", "playing with the penguin", "crying", "drinking water"},
-            {"running", "under the table", "eating", "on the pillow"},
-            {"sleeping", "playing with the penguin", "jumping from the chair", "above the bed"},
-            {"with his friend, Kangaroo", "eating the cake", "jumping from the chair", "with his two friends, Turtle and Snake"},
-            {"behind the yellow box", "drinking water", "having a fight with his friend", "sleeping"},
-            {"Black", "Gray", "Red", "Purple"},
-            {"Triangle", "Star", "Circle", "Rectangle"},
-            {"Brushing his teeth", "Taking a shower", "Washing his hands", "Cleaning the sink"},
-            {"Blue", "Pink", "Green", "Blue"},
-            {"Kangaroo", "Turtle", "Koala", "Duck"},
-            {"A", "B", "C", "D"}
+            // 1
+            {"4", "8", "14", "10"},
+            {"8", "4", "5", "3"},
+
+            // 2
+            {"Under the table", "On the table", "In front of the table", "Behind the table"},
+            {"Pink", "Black", "Yellow", "Purple"},
+
+            // 3
+            {"A", "B", "C", "D"},
+            {"Elephant", "Koala", "Duck", "Giraffe"},
+
+            // 4
+            {"Duck", "Pig", "Elephant", "Koala"},
+            {"Black", "White", "Pink", "Green"},
+
+            // 5
+            {"Above the table", "Next to the table", "Behind the table", "Under the table"},
+            {"Black", "Brown", "Orange", "Red"},
+
+            // 6
+            {"Chopsticks", "A pencil", "A cellphone", "Scissors"},
+            {"5", "3", "4", "6"},
+
+            // 7
+            {"Elephant", "Giraffe", "Penguin", "Pig"},
+            {"1", "2", "3", "4"},
+
+            // 8
+            {"Yellow", "Blue", "Green", "White"},
+            {"Lying on it", "Sitting on it", "Leaning against it", "Carrying it"},
+
+            // 9
+            {"Computer", "Desk", "Trash Can", "Refrigerator"},
+            {"Green", "White", "Pink", "Blue"},
+
+            // 10
+            {"Koala", "Snake", "Turtle", "Pig"},
+            {"In front", "At the back", "Alongside", "Diagonally"},
+
+            // 11
+            {"On the box", "Under the box", "Next to the box", "Behind the box"},
+            {"Triangle", "Rectangle", "Star", "Circle"},
+
+            // 12
+            {"Carrying it", "Pulling it", "Sitting on it", "Pushing it"},
+            {"Brown", "Black", "Yellow", "Pink"},
+
+            // 13
+            {"Rectangle", "Star", "Circle", "Triangle"},
+            {"Putting on", "Taking off", "Throwing", "Tearing off"},
+
+            // 14
+            {"Pig", "Duck", "Both of them", "No one"},
+            {"Black", "Green", "Red", "Blue"},
+
+            // 15
+            {"Left", "Right", "Both of them", "No one"},
+            {"Under the nose", "On the head", "On the left hand", "On the stomach"},
+    };
+
+    private String mCorrectAnswers[] = {
+            // 1
+            "14", "4",
+
+            // 2
+            "On the table", "Pink",
+
+            // 3
+            "B", "Duck",
+
+            // 4
+            "Koala", "Pink",
+
+            // 5
+            "Next to the table", "Black",
+
+            // 6
+            "Scissors", "6",
+
+            // 7
+            "Giraffe", "3",
+
+            // 8
+            "Green", "Leaning against it",
+
+            // 9
+            "Refrigerator", "Pink",
+
+            // 10
+            "Koala", "At the back",
+
+            // 11
+            "Behind the box", "Star",
+
+            // 12
+            "Sitting on it", "Pink",
+
+            // 13
+            "Star", "Putting on",
+
+            // 14
+            "Duck", "Blue",
+
+            // 15
+            "Right", "On the head"
     };
 
     public int mImages[] = {
             R.drawable.sample_game_image1,
+            R.drawable.sample_game_image1,
+            R.drawable.sample_game_image2,
             R.drawable.sample_game_image2,
             R.drawable.sample_game_image3,
+            R.drawable.sample_game_image3,
+            R.drawable.sample_game_image4,
             R.drawable.sample_game_image4,
             R.drawable.sample_game_image5,
+            R.drawable.sample_game_image5,
+            R.drawable.sample_game_image6,
             R.drawable.sample_game_image6,
             R.drawable.sample_game_image7,
+            R.drawable.sample_game_image7,
+            R.drawable.sample_game_image8,
             R.drawable.sample_game_image8,
             R.drawable.sample_game_image9,
+            R.drawable.sample_game_image9,
+            R.drawable.sample_game_image10,
             R.drawable.sample_game_image10,
             R.drawable.sample_game_image11,
+            R.drawable.sample_game_image11,
+            R.drawable.sample_game_image12,
             R.drawable.sample_game_image12,
             R.drawable.sample_game_image13,
+            R.drawable.sample_game_image13,
+            R.drawable.sample_game_image14,
             R.drawable.sample_game_image14,
             R.drawable.sample_game_image15,
-            R.drawable.sample_game_image16,
-            R.drawable.sample_game_image17
-    };
-
-    private String mCorrectAnswers[] = {
-            "sitting on the floor", "sitting on the table", "playing with the duck",
-            "playing with the penguin", "sitting next to the green table", "cutting something",
-            "with his three friends", "on the pillow", "jumping from the chair", "with his two friends, Turtle and Snake",
-            "behind the yellow box", "Purple", "Star", "Brushing his teeth", "Green", "Duck", "B"
+            R.drawable.sample_game_image15
     };
 
     Button answer1, answer2, answer3, answer4;
-    TextView score, question, title, secondsText, titleText1, titleText2, titleText3, timerText;
+    TextView score, question, title, secondsText, titleText, titleText1, titleText2, titleText3, timerText;
     ImageView image;
 
     private static final int TIME_SECS = 600;
@@ -145,6 +282,7 @@ public class AnimalPictureGame extends AmazingMeGame {
                         image.setVisibility(View.VISIBLE);
                         timerText.setVisibility(View.VISIBLE);
 
+                        titleText.setVisibility(View.INVISIBLE);
                         titleText1.setVisibility(View.INVISIBLE);
                         titleText2.setVisibility(View.INVISIBLE);
                         titleText3.setVisibility(View.INVISIBLE);
@@ -165,6 +303,7 @@ public class AnimalPictureGame extends AmazingMeGame {
         title = (TextView) findViewById(R.id.title);
         question = (TextView) findViewById(R.id.question);
 
+        titleText = (TextView) findViewById(R.id.title_text);
         titleText1 = (TextView) findViewById(R.id.title_text1);
         titleText2 = (TextView) findViewById(R.id.title_text2);
         titleText3 = (TextView) findViewById(R.id.title_text3);
@@ -387,6 +526,5 @@ public class AnimalPictureGame extends AmazingMeGame {
             isGameComplete = true;
             gameOver();
         }
-
     }
 }
